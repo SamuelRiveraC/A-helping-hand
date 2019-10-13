@@ -35,7 +35,7 @@ class Cregistropersonal extends CI_Controller
         $param['Edad']= $this->input->post('Edad');
 
 
-        $this->mregistropersonal->guardar($param);
+        $this->Mregistropersonal->guardar($param);
         $this->load->view('layout/header');
         $this->load->view('layout/menu');
         $this->load->view("vregistropersonal");
@@ -58,7 +58,7 @@ class Cregistropersonal extends CI_Controller
         $paramact['Tipo_pers']= $this->input->post('Tipo_pers');
         $paramact['Edad']= $this->input->post('Edad');
 
-        $this->mregistropersonal->actualizarDatos($paramact);
+        $this->Mregistropersonal->actualizarDatos($paramact);
         $this->load->view('layout/header');
         $this->load->view('layout/menu');
         $this->load->view('vmenuprincipal');
@@ -70,7 +70,7 @@ class Cregistropersonal extends CI_Controller
       public function eliminarDatos(){
 
         $ci = $this->input->post('C_I');
-        $this->mregistropersonal->eliminarDatos($ci);
+        $this->Mregistropersonal->eliminarDatos($ci);
         $this->load->view('layout/header');
         $this->load->view('layout/menu');
         $this->load->view("vmenuprincipal");
@@ -80,7 +80,7 @@ class Cregistropersonal extends CI_Controller
 
         public function getDatos(){
 
-       echo json_encode($this->mregistropersonal->getDatos());
+       echo json_encode($this->Mregistropersonal->getDatos());
 
 
 

@@ -41,7 +41,7 @@
 
         <div class="form-group">
          <label for="text" class="col-sm-4 control-label">Sexo</label>
-        <select class="form-control" id="cboSexo">
+        <select class="form-control" id="cboSexo" name='Sexo'>
             <div class="col-sm-10">
             <option value ="">Escoga una opción</option>
             <option value="Femenino">Femenino</option>
@@ -59,8 +59,8 @@
 
          <div class="form-group">
          <label for="text" class="col-sm-4 control-label">Estado Civil</label>
-        <select class="form-control">
-            <div class="col-sm-10">
+         <div class="col-sm-10">
+        <select class="form-control" name='Estado_civil'>
             <option value ="">Escoga una opción</option>
             <option value="Soltero">Soltero/a</option>
             <option value="Casado">Casado/a</option>
@@ -79,8 +79,8 @@
 
          <div class="form-group">
          <label for="text" class="col-sm-4 control-label">Tipo de Personal</label>
-        <select class="form-control">
-            <div class="col-sm-10">
+         <div class="col-sm-10" >
+        <select class="form-control" name='Tipo_pers'>
             <option value ="">Escoga una opción</option>
             <option value="Administrativo">Administrativo</option>
             <option value="Docente">Docente</option>
