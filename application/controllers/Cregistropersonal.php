@@ -20,62 +20,62 @@ class Cregistropersonal extends CI_Controller
 
     }
 
-    public function guardar(){
+		public function listar($id=null)
+		{
+			$res = $this->Mregistropersonal->listar($id);
+			$this->output->set_content_type('application/json')
+			->set_output(json_encode($res));
+		}
 
-        $param['P_nombre']= $this->input->post('P_nombre');
-        $param['S_nombre']= $this->input->post('S_nombre');
-        $param['P_apellido']= $this->input->post('P_apellido');
-        $param['S_apellido']= $this->input->post('S_apellido');
-        $param['C_I']= $this->input->post('C_I');
-        $param['Sexo']= $this->input->post('Sexo');
-        $param['Nacionalidad']= $this->input->post('Nacionalidad');
-        $param['Estado_civil']= $this->input->post('Estado_civil');
-        $param['Fecha_n']= $this->input->post('datFecha_n');
-        $param['Tipo_pers']= $this->input->post('Tipo_pers');
-        $param['Edad']= $this->input->post('Edad');
+    public function ins(){
 
+			$param = array(
+				'P_nombre' => $this->input->post('P_nombre'),
+				'S_nombre' => $this->input->post('S_nombre'),
+				'P_apellido' => $this->input->post('P_apellido'),
+				'S_apellido' => $this->input->post('S_apellido'),
+				'C_I' => $this->input->post('C_I'),
+				'Sexo' => $this->input->post('Sexo'),
+				'Nacionalidad' => $this->input->post('Nacionalidad'),
+				'Estado_civil' => $this->input->post('Estado_civil'),
+				'Fecha_n' => $this->input->post('Fecha_n'),
+				'Tipo_pers' => $this->input->post('Tipo_pers'),
+				'Edad' => $this->input->post('Edad'),
+			);
 
-        $this->Mregistropersonal->guardar($param);
-        $this->load->view('layout/header');
-        $this->load->view('layout/menu');
-        $this->load->view("vregistropersonal");
-        $this->load->view('layout/footer');
-
+        $res = $this->Mregistropersonal->guardar($param);
+				$this->output->set_content_type('application/json')
+				->set_output(json_encode($res));
 
      }
 
 
        public function actualizarDatos(){
 
-        $paramact['P_nombre']= $this->input->post('P_nombre');
-        $paramact['S_nombre']= $this->input->post('S_nombre');
-        $paramact['P_apellido']= $this->input->post('P_apellido');
-        $paramact['S_apellido']= $this->input->post('S_apellido');
-        $paramact['Sexo']= $this->input->post('Sexo');
-        $paramact['Nacionalidad']= $this->input->post('Nacionalidad');
-        $paramact['Estado_civil']= $this->input->post('Estado_civil');
-        $paramact['Fecha_n']= $this->input->post('datFecha_n');
-        $paramact['Tipo_pers']= $this->input->post('Tipo_pers');
-        $paramact['Edad']= $this->input->post('Edad');
-
-        $this->Mregistropersonal->actualizarDatos($paramact);
-        $this->load->view('layout/header');
-        $this->load->view('layout/menu');
-        $this->load->view('vmenuprincipal');
-        $this->load->view('layout/footer');
+				 $paramact = array(
+	 				'P_nombre' => $this->input->post('P_nombre'),
+	 				'S_nombre' => $this->input->post('S_nombre'),
+	 				'P_apellido' => $this->input->post('P_apellido'),
+	 				'S_apellido' => $this->input->post('S_apellido'),
+	 				'C_I' => $this->input->post('C_I'),
+	 				'Sexo' => $this->input->post('Sexo'),
+	 				'Nacionalidad' => $this->input->post('Nacionalidad'),
+	 				'Estado_civil' => $this->input->post('Estado_civil'),
+	 				'Fecha_n' => $this->input->post('Fecha_n'),
+	 				'Tipo_pers' => $this->input->post('Tipo_pers'),
+	 				'Edad' => $this->input->post('Edad'),
+	 			);
+        $res = $this->Mregistropersonal->actualizarDatos($paramact,$this->input->post('idr'));
+				$this->output->set_content_type('application/json')
+				->set_output(json_encode($res));
 
 
        }
 
       public function eliminarDatos(){
-
-        $ci = $this->input->post('C_I');
-        $this->Mregistropersonal->eliminarDatos($ci);
-        $this->load->view('layout/header');
-        $this->load->view('layout/menu');
-        $this->load->view("vmenuprincipal");
-        $this->load->view('layout/footer');
-
+				$res = $this->Mregistropersonal->eliminarDatos($this->input->post('idr'));
+				$this->output->set_content_type('application/json')
+				->set_output(json_encode($res));
       }
 
         public function getDatos(){

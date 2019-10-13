@@ -66,7 +66,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="<?= base_url() ?>Cregistropersonal" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registro Asistencia Diario</p>
                 </a>
