@@ -8,64 +8,51 @@ class Mregistropersonal extends CI_Model
 	    parent::__construct();
 	}
 
+	public function listar($id)
+	{
+		if ($id != null) {
+			$this->db->where('C_I',$id);
+		}
+		$this->db->select('*');
+		$this->db->from('personal');
+		$res = $this->db->get();
+		if ($res) {
+			return $res->result();
+		} else {
+			return false;
+		}
+	}
+
+
 	public function guardar($param){
-		$campos = array(
-		'P_nombre' => $param['P_nombre'],
-		'S_nombre' => $param['S_nombre'],
-		'P_apellido'=> $param['P_apellido'],
-		'S_apellido' => $param['S_apellido'],
-		'C_I'=> $param['C_I'],
-        'Sexo'=> $param ['Sexo'],
-        'Nacionalidad'=> $param['Nacionalidad'],
-        'Estado_civil'=> $param['Estado_civil'],
-        'Fecha_n'=> date('d-m-y', strtotime(str_replace('/', '-',$param ['Fecha_n']))),
-        'Tipo_pers'=> $param ['Tipo_pers'],
-        'Edad'=> $param ['Edad']
-		);
-
-		$this->db->insert('personal', $campos);
-
+		if ($this->db->insert('personal', $param)) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
-	   public function actualizarDatos($paramact){
+	   public function actualizarDatos($paramact,$id){
 
-	   	$paramact = array(
-	   	'P_nombre' => $paramact['P_nombre'],
-		'S_nombre' => $paramact['S_nombre'],
-		'P_apellido'=> $paramact['P_apellido'],
-		'S_apellido' => $paramact['S_apellido'],
-        'Sexo'=> $paramact ['Sexo'],
-        'Nacionalidad'=> $paramact['Nacionalidad'],
-        'Estado_civil'=> $paramact['Estado_civil'],
-        'Fecha_n'=> date('d-m-y', strtotime(str_replace('/', '-',$paramact ['Fecha_n']))),
-        'Tipo_pers'=> $paramact ['Tipo_pers'],
-        'Edad'=> $paramact ['Edad']
-		);
-
-		$this->db->update('personal', $paramact);
+			$this->db->where('C_I',$id);
+			if ($this->db->update('personal', $paramact)) {
+				return true;
+			} else {
+				return false;
+			}
 
 
 	   }
 
 	   public function eliminarDatos($ci){
+			 $this->db->where('C_I',$ci);
+			 if ($this->db->delete('personal')) {
+				 return true;
+			 } else {
+				 return false;
+			 }
 
-	   	$ci = array(
-	   	'C_I' => $ci
-	   	);
 
-	   	$this->db->delete('personal', $ci);
-
-	   }
-
-	   public function getDatos(){
-
-	  	 $this->db->select('*');
-	  	 $this->db->from('personal');
-	  	 $this->db->where('C_I', '$ver');
-
-	  	 $r = $this->db->get();
-
-	  	 return $r->result();
 
 
 

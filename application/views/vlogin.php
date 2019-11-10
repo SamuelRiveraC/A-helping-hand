@@ -35,9 +35,9 @@
        <form action="<?php echo base_url();?>clogin/ingresar" method="POST">
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="Nom_usuario" placeholder="Ingrese su Usuario">
+          <input type="text" class="form-control" id="NomUsuario" name="Nom_usuario" placeholder="Ingrese su Usuario">
           <div class="input-group-append input-group-text">
-              <span class="fas fa-envelope"></span>
+              <span class="fas fa-user"></span>
           </div>
         </div>
         <div class="input-group mb-3">
@@ -65,27 +65,108 @@
 
 
       <p class="mb-1">
-        <a href="#">¿Ha olvidado su contraseña?</a><br>
-        <a href="<?php echo base_url();?>cregistrousuario">Registrate</a><br>
+        <a href="#" id='lost_pas'>¿Ha olvidado su contraseña?</a><br>
+        
       </p>
       <p class="mb-0">
         <a href="register.html" class="text-center"></a>
       </p>
           <?php echo $mensaje;?>
-        
-       
+
+
     </div>
     <!-- /.login-card-body -->
   </div>
 </div>
+
+
+
+
+
+
+      <div class="modal fade" id="modal-overlay">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Recuperando contraseña</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id='form1'>
+                <div class="form-group">
+                  <label  class="col-sm-4 control-label" id='Pregunta_1'>Pregunta 1</label>
+
+                  <div class="col-sm-10">
+                    <input type="input" class="form-control" id="preg1" placeholder="Respuesta">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-4 control-label" id='Pregunta_2'>Preguntas 2</label>
+
+                  <div class="col-sm-10">
+                    <input type="input" class="form-control" id="preg2" placeholder="Respuesta">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-4 control-label" id='Pregunta_3'>Preguntas 3</label>
+
+                  <div class="col-sm-10">
+                    <input type="input" class="form-control" id="preg3" placeholder="Respuesta">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id='recu'>Recuperar</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
+
+
+      <div class="modal fade" id="modal-overlay-last">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Contraseña Generada</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h2 id='clavImp'></h2>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary" id='recu'>Recuperar</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+
+
+
 <!-- /.login-box -->
   </div>
   <!-- /.content-wrapper -->
  <footer class="login-footer">
     <strong>Copyright &copy; 2019 SISCA.PP by MMSS</a>.</strong>
-    All rights reserved. 
-  
- 
+    All rights reserved.
+
+
     </div>
   </footer>
 
@@ -93,6 +174,9 @@
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url();?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<script type="text/javascript">
+  const BASE_URL = '<?= base_url() ?>';
+</script>
+<script src="<?php echo base_url(); ?>js/login.js" charset="utf-8"></script>
 </body>
 </html>

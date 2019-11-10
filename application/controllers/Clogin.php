@@ -4,13 +4,13 @@ class Clogin extends CI_controller
 {
 
     function __construct()
-   {
+    {
        parent::__construct();
        $this->load->model("Mlogin");
     }
 
       public function index(){
-      // $mensaje['mensaje'] = '';
+      $mensaje['mensaje'] = '';
 
       $this->load->view('vlogin', $mensaje);
       }
@@ -19,12 +19,12 @@ class Clogin extends CI_controller
           $usu= $this->input->post('Nom_usuario');
           $pass= $this->input->post('Password');
 
-          $res= $this->mlogin->ingresar($usu,$pass);
-
+          $res= $this->Mlogin->ingresar($usu,$pass);
           if ($res == 1) {
+            // print_r($res);
               $this->load->view('layout/header');
               $this->load->view('layout/menu');
-              $this->load->view('vmenuprincipal');
+              $this->load->view('vhome');
               $this->load->view('layout/footer');
 
           }else{
@@ -35,25 +35,27 @@ class Clogin extends CI_controller
 
 
     }
-
-
-    public function recuperar_contra($nom)
+    public function obtener_preg($nombre)
     {
-      $preguntas = array(
-        'preg1' => $this->input->post('input1'),
-        'preg2' => $this->input->post('input1'),
-        'preg3' => $this->input->post('input1'),
+      $res = $this->Mlogin->obtener_preg($nombre);
+      $this->output->set_content_type('application/json')
+      ->set_output(json_encode($res));
+    }
 
-      );
-      $res = $this->Mlogin->recuperar($preguntas,$nom);
+    public function recuperar_contra($id)
+    {
+        $clave_pro = rand(15678,32767);
+        $datos = array('Password' => $clave_pro);
+        $this->Mlogin->upd($id, $datos);
+        $this->output->set_content_type('application/json')
+        ->set_output(json_encode($clave_pro));
+    }
 
-      if ($res) {
-        $clave_pro = rand('');
-        $this->Mlogin->upd($nom, $clave_pro);
-      } else {
-        // code...
-      }
 
+    public function session_close()
+    {
+      $this->session->sess_destroy();
+      redirect('Clogin','refresh');
     }
 
 }
