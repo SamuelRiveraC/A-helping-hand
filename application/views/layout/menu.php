@@ -23,8 +23,8 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <?php if ($this->session->userdata("Login")['session_Tipo'] == "Administrador"): ?>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+          <li class="nav-item has-treeview <?= $datos['menu'] == 'Configuracion' ? 'menu-open' : ''?>">
+            <a href="#" class="nav-link <?= $datos['submenu'] == 'Cusuario' ? 'active' : ''?>">
               <i class="fa fa-cog"></i>
               <p>
                 Configuracion
@@ -38,8 +38,26 @@
                   <p>Usuarios</p>
                 </a>
               </li>
+            </ul>
+          </li>
+          <?php endif; ?>
+          <li class="nav-item has-treeview <?= $datos['menu'] == 'Personal' ? 'menu-open' : ''?>">
+            <a href="#" class="nav-link <?= $datos['submenu'] == 'Cregistropersonal' ? 'active' : ''?>">
+             <i class="fa fa-user"></i>
+             <p>
+                Personal
+               <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" >
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="<?= base_url() ?>cregistropersonal"class="nav-link">
+                  <i class="fa fa-user-plus"></i>
+                  <p>Nuevo Personal</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url() ?>Cjustificacion" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Justificacion</p>
                 </a>
@@ -58,28 +76,11 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-             <i class="fa fa-user"></i>
-             <p>
-                Personal
-               <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= base_url() ?>cregistropersonal"class="nav-link">
-                  <i class="fa fa-user-plus"></i>
-                  <p>Nuevo Personal</p>
-                </a>
-              </li>
-            </ul>
-          </li>
 
-        <?php endif; ?>
+        
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          <li class="nav-item has-treeview <?= $datos['menu'] == 'Asistencia' ? 'menu-open' : ''?>">
+            <a href="#" class="nav-link <?= $datos['submenu'] == 'Casistencia' ? 'active' : ''?>">
              <i class="fa fa-check"></i>
                 <p>
                 Asistencia
@@ -101,8 +102,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <!-- <li class="nav-item">
+            <a href="<?= base_url() ?>Creportes" class="nav-link">
               <i class="fa fa-print"></i>
               <p>
                 Reportes
@@ -116,7 +117,7 @@
                 Acerca de
               </p>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
 

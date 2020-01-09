@@ -120,10 +120,21 @@
       })
       $('#dataTables-table').html(content)
       $('#usuario').DataTable({
-                  "responsive": true,
-                  oLanguage:{
-                    sSearch: 'Buscar:'
-                  },
+        "responsive": true,
+        "language": {
+          "sSearch": 'Buscar:',
+          "lengthMenu": 'Mostrando _MENU_ datos por pagina',
+          "zeroRecords": 'No hay datos',
+          "info": 'Mostrando _PAGE_ paginas de _PAGES_',
+          "infoEmpty": 'No hay datos disponibles',
+          "infoFiltered": '(Filtrando desde _MAX_ respuestas totales)',
+          "paginate": {
+            first: 'Primero',
+            previous: 'Anterior',
+            next: 'Siguiente',
+            last: 'Ultima'
+          }
+        },
       });
     })
   }

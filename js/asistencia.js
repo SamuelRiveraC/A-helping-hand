@@ -70,15 +70,26 @@ function jalar_data() {
       <td>${item.P_nombre + ' ' + item.P_apellido}</td>
       <td>${item.C_I}</td>
       <td>${item.Tipo_pers}</td>
-      <td class="asistencia" idr="${item.C_I}"> <i class="fa fa-search"></i> </td>
+      <td class="asistencia" idr="${item.C_I}"> <i class="fa fa-cog"></i> </td>
       </tr>
       `
     })
     $('#dataTables-table').html(content)
     $('#personal').DataTable({
       "responsive": true,
-      oLanguage:{
-        sSearch: 'Buscar:'
+      "language": {
+        "sSearch": 'Buscar:',
+        "lengthMenu": 'Mostrando _MENU_ datos por pagina',
+        "zeroRecords": 'No hay datos',
+        "info": 'Mostrando _PAGE_ paginas de _PAGES_',
+        "infoEmpty": 'No hay datos disponibles',
+        "infoFiltered": '(Filtrando desde _MAX_ respuestas totales)',
+        "paginate": {
+          first: 'Primero',
+          previous: 'Anterior',
+          next: 'Siguiente',
+          last: 'Ultima'
+        }
       },
     });
   })

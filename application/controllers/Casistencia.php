@@ -12,9 +12,14 @@ class Casistencia extends CI_Controller
 
   public function index()
   {
+      $menu = array();
+      $datos = array();
+      $datos['menu'] = 'Asistencia';
+      $datos['submenu'] = 'Casistencia';
+      $menu = array('datos' => $datos);
     if ($this->session->userdata("Login")) {
       $this->load->view('layout/header');
-      $this->load->view('layout/menu');
+      $this->load->view('layout/menu',$menu);
       $this->load->view('vasistencia');
       $this->load->view('layout/footer');
     } else {
@@ -24,9 +29,14 @@ class Casistencia extends CI_Controller
 
   public function controlAsistencia()
   {
+      $menu = array();
+      $datos = array();
+      $datos['menu'] = 'Asistencia';
+      $datos['submenu'] = 'Casistencia';
+      $menu = array('datos' => $datos);
     if ($this->session->userdata("Login")) {
       $this->load->view('layout/header');
-      $this->load->view('layout/menu');
+      $this->load->view('layout/menu',$menu);
       $this->load->view('vcontrolasistencia');
       $this->load->view('layout/footer');
     } else {
@@ -62,25 +72,24 @@ class Casistencia extends CI_Controller
     $turno = $this->input->post('turno');
     $asistencia = $this->input->post('asistencia');
     $datos = "";
+    $C_I = $this->input->post('C_I');
     $fecha = date("Y-m-d");
     $res = false;
+    $horario_id = $this->Masistencia->getIdHorario($C_I);
     if ($asistencia == "Asistente") {
-      //tabla horario asistencia
-      $datos = array(
-        'Hora_e' => $this->input->post('hora_entrada'),
-        'Hora_s' => $this->input->post('hora_salida'),
-        'Turno_asist' => $turno,
-        'Fecha_asist' => date("Y-m-d"),
-        'Total_asist' => 1,
+      //tabla n:n asistencia
+      $data_extra = array(
+        'horario_id' => $horario_id,
       );
-      $id_asistencia = $this->Masistencia->ins_datos_asistencia($datos);
-      if ($id_asistencia) {
-        //tabla n:n asistencia
-        $data_extra = array(
-          'C_I' => $this->input->post('C_I'),
-          'Cod_hor_asist' => $id_asistencia,
+      $Cod_hor_asist = $this->Masistencia->ins_personal_lleva_horario($data_extra);
+      if ($Cod_hor_asist) {
+        //tabla horario asistencia
+        $datos = array(
+          'Fecha' => date("Y-m-d"),
+          'Cod_hor_asist' => $Cod_hor_asist,
+          'total' => 1,
         );
-      $res = $this->Masistencia->ins_personal_lleva_horario($data_extra);
+        $res = $this->Masistencia->ins_datos_asistencia($datos);
       }
     } else {
 
@@ -97,22 +106,22 @@ class Casistencia extends CI_Controller
             'C_I' => $this->input->post('C_I'),
             'Cod_just' => $id_justificacion,
           );
-          $this->Masistencia->ins_extraJustificacion($justificacion_extra);
+          $res = $this->Masistencia->ins_extraJustificacion($justificacion_extra);
         }
       } else {
+          $data_extra = array(
+            'horario_id' => $horario_id,
+          );
+          $Cod_inasist = $this->Masistencia->ins_personal_cumple_inasistecia($data_extra);
+        if ($Cod_inasist) {
         //tabla inasistencia
         $datos = array(
-          'Fecha_inasist' => date("Y-m-d"),
-          'Num_inasist' => 1,
-          'Tipo_inasist' => $this->input->post('tipo_inasistencia'),
+          'Cod_inasist' => $Cod_inasist,
+          'fecha_inasist' => date("Y-m-d"),
+          'total_inasist' => 1,
+          'tipo_inasist' => $this->input->post('tipo_inasistencia'),
         );
-        $id_inasistencia = $this->Masistencia->ins_datos_inasistencia($datos);
-        if ($id_inasistencia) {
-          $data_extra = array(
-            'C_I' => $this->input->post('C_I'),
-            'Cod_inasist' => $id_inasistencia,
-          );
-          $res = $this->Masistencia->ins_personal_cumple_inasistecia($data_extra);
+        $res = $this->Masistencia->ins_datos_inasistencia($datos);
         }
       }
     }
@@ -123,8 +132,14 @@ class Casistencia extends CI_Controller
 
   public function count_list_personal()
   {
-    $res['asistencia'] = $this->Masistencia->listar_asistencia_cuenta();
-    $res['inasistencia'] = $this->Masistencia->listar_inasistencia_cuenta();
+    $fecha = $this->input->post('rangofecha');
+    $fecha1 = $this->input->post('rangofecha1');
+    $fech1= explode("/",$fecha);
+    $fech2= explode("/",$fecha1);
+    $fech2 = $fech2[2]."-".$fech2[1]."-".$fech2[0];
+    $fech1 = $fech1[2]."-".$fech1[1]."-".$fech1[0];
+    $res['asistencia'] = $this->Masistencia->listar_asistencia_cuenta($fech1,$fech2);
+    $res['inasistencia'] = $this->Masistencia->listar_inasistencia_cuenta($fech1,$fech2);
     $this->output->set_content_type('application/json')
     ->set_output(json_encode($res));
   }

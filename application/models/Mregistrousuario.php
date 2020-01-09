@@ -47,7 +47,18 @@ class Mregistrousuario extends CI_Model
              }
         }
 
-
+        public function getLike_($data)
+		{ 
+            
+				$sql = "SELECT C_I,P_nombre FROM personal WHERE (C_I LIKE '%$data%' OR P_nombre LIKE '%$data%') LIMIT 0,10"; 
+				$res = $this->db->query($sql);
+				if ($res) {
+					return $res->result();
+				} else {
+					return false;
+				}
+				
+		}
 
 
 }

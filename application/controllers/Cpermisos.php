@@ -12,9 +12,14 @@ class Cpermisos extends CI_Controller
 
   public function index()
   {
+		$menu = array();
+		$datos = array();
+		$datos['menu'] = 'Personal';
+		$datos['submenu'] = 'Cregistropersonal';
+		$menu = array('datos' => $datos);
     if ($this->session->userdata('Login')) {
       $this->load->view('layout/header');
-      $this->load->view('layout/menu');
+      $this->load->view('layout/menu',$menu);
       $this->load->view('vpermisos');
       $this->load->view('layout/footer');
     } else {

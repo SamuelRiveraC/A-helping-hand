@@ -6,16 +6,13 @@ class Masistencia extends CI_Model
   public function listar()
   {
     $hoy = date("Y-m-d");
-    $sql = "SELECT * FROM personal t1 WHERE t1.C_I
-    NOT IN(SELECT (SELECT t2.C_I FROM personal_cumple_inasistencia t2 WHERE t2.Cod_inasist = t3.Cod_inasist )
-    as C_I_inasistencia FROM inasistencia t3 WHERE t3.Fecha_inasist = '$hoy')
-    AND t1.C_I
-    NOT IN(SELECT (SELECT t5.C_I FROM personal_lleva_horario t5 WHERE t5.Cod_hor_asist = t4.Cod_hor_asist )
-    as C_I FROM horario_asistencia t4 WHERE t4.Fecha_asist = '$hoy')
+    $sql = "SELECT t1.* FROM personal t1 INNER JOIN horario t2 WHERE t2.horario_id NOT IN(SELECT (SELECT t5.horario_id FROM personal_cumple_inasistencia t5 WHERE t5.Cod_inasist = t4.Cod_inasist) as horario_id_inasistencia FROM inasistencia t4 WHERE t4.Fecha_inasist = '$hoy') AND t2.horario_id NOT IN(SELECT (SELECT t6.horario_id FROM personal_lleva_horario t6 WHERE t6.Cod_hor_asist = t7.Cod_hor_asist )
+    as horario_id FROM asistencia t7 WHERE t7.Fecha = '$hoy') 
     AND t1.C_I NOT IN(SELECT (SELECT t6.C_I FROM personal_tiene_justificacion t6 WHERE t6.Cod_just = t7.Cod_just)
     as C_I_justificacion FROM justificacion t7 WHERE t7.Fecha_just = '$hoy') AND t1.C_I
 	  NOT IN(SELECT (SELECT t8.C_I FROM personal_solicita_permiso t8 WHERE t8.Cod_perm = t9.Cod_perm) as C_permiso
-    FROM permiso t9 WHERE '$hoy' BETWEEN t9.fecha_inicio AND t9.fecha_culm )";
+    FROM permiso t9 WHERE '$hoy' BETWEEN t9.fecha_inicio AND t9.fecha_culm )
+     AND t1.C_I = t2.C_I"; 
     $res = $this->db->query($sql);
     if ($res) {
       return $res->result();
@@ -39,9 +36,9 @@ class Masistencia extends CI_Model
   public function listar_inasistentes()
   {
     $fecha = date('Y-m-d');
-    $sql = "SELECT *,(SELECT CONCAT(P_nombre,' ',P_apellido) FROM personal t3 WHERE t3.C_I = t1.C_I ) as Nombre FROM personal_cumple_inasistencia t1
-    WHERE t1.Cod_inasist IN(
-    SELECT t2.Cod_inasist FROM inasistencia t2 WHERE Fecha_inasist = '$fecha'  AND t2.Cod_inasist = t1.Cod_inasist)";
+    $sql = "SELECT *,(SELECT CONCAT(P_nombre,' ',P_apellido) FROM personal t3 WHERE t3.C_I = t1.C_I ) as Nombre FROM horario t1 INNER JOIN personal_cumple_inasistencia t2
+    WHERE t2.Cod_inasist IN(
+    SELECT t4.Cod_inasist FROM inasistencia t4 WHERE Fecha_inasist = '$fecha'  AND t2.Cod_inasist = t4.Cod_inasist)";
     $res = $this->db->query($sql);
     if ($res) {
       return $res->result();
@@ -54,9 +51,9 @@ class Masistencia extends CI_Model
   {
 
       $fecha = date('Y-m-d');
-      $sql = "SELECT *,(SELECT CONCAT(P_nombre,' ',P_apellido) FROM personal t3 WHERE t3.C_I = t1.C_I ) as Nombre FROM personal_lleva_horario t1
-      WHERE t1.Cod_hor_asist IN(
-      SELECT t2.Cod_hor_asist FROM horario_asistencia t2 WHERE t2.Fecha_asist = '$fecha'  AND t2.Cod_hor_asist = t1.Cod_hor_asist)";
+      $sql = "SELECT *,(SELECT CONCAT(P_nombre,' ',P_apellido) FROM personal t3 WHERE t3.C_I = t1.C_I ) as Nombre FROM horario t1 INNER JOIN personal_lleva_horario t2
+      WHERE t2.Cod_hor_asist IN(
+      SELECT t4.Cod_hor_asist FROM asistencia t4 WHERE t4.Fecha = '$fecha'  AND t2.Cod_hor_asist = t4.Cod_hor_asist)";
       $res = $this->db->query($sql);
       if ($res) {
         return $res->result();
@@ -67,7 +64,7 @@ class Masistencia extends CI_Model
 
   public function ins_datos_asistencia($datos)
   {
-    if ($this->db->insert('horario_asistencia',$datos)) {
+    if ($this->db->insert('asistencia',$datos)) {
       return $this->db->insert_id();
     } else {
       return false;
@@ -77,7 +74,7 @@ class Masistencia extends CI_Model
   public function ins_personal_lleva_horario($datos)
   {
     if ($this->db->insert('personal_lleva_horario',$datos)) {
-      return true;
+      return $this->db->insert_id();
     } else {
       return false;
     }
@@ -95,6 +92,19 @@ class Masistencia extends CI_Model
   {
     if ($this->db->insert('personal_cumple_inasistencia',$datos)) {
       return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function getIdHorario($ci)
+  {
+    $this->db->where('C_I',$ci);
+    $this->db->select('horario_id');
+    $this->db->from('horario');
+    $res = $this->db->get()->result();
+    if ($res) {
+      return $res[0]->horario_id;
     } else {
       return false;
     }
@@ -118,9 +128,9 @@ class Masistencia extends CI_Model
     }
   }
 
-  public function listar_asistencia_cuenta()
+  public function listar_asistencia_cuenta($fecha1,$fecha2)
   {
-    $sql = "SELECT COUNT(t1.C_I) as cuenta,t1.C_I,(SELECT t2.P_nombre FROM personal t2 WHERE t1.C_I = t2.C_I) as P_nombre FROM personal_lleva_horario t1 GROUP BY C_I";
+    $sql = "SELECT COUNT(t1.horario_id) as cuenta,t1.horario_id,(SELECT t3.P_nombre FROM personal t3 WHERE t2.C_I = t3.C_I) as P_nombre,t2.C_I FROM personal_lleva_horario t1 INNER JOIN horario t2 INNER JOIN asistencia t3 WHERE t1.horario_id = t2.horario_id AND t1.Cod_hor_asist = t3.Cod_hor_asist AND t3.Fecha BETWEEN '$fecha1 00:00:00' AND '$fecha2 23:59:59' GROUP BY t1.horario_id";
     $res = $this->db->query($sql);
     if ($res) {
       return $res->result();
@@ -129,9 +139,9 @@ class Masistencia extends CI_Model
     }
   }
 
-  public function listar_inasistencia_cuenta()
+  public function listar_inasistencia_cuenta($fecha1,$fecha2)
   {
-    $sql = "SELECT COUNT(t1.C_I) as cuenta,t1.C_I,(SELECT t2.P_nombre FROM personal t2 WHERE t1.C_I = t2.C_I) as P_nombre FROM personal_cumple_inasistencia t1 GROUP BY C_I";
+    $sql = "SELECT COUNT(t1.horario_id) as cuenta,t1.horario_id,(SELECT t3.P_nombre FROM personal t3 WHERE t2.C_I = t3.C_I) as P_nombre,t2.C_I FROM personal_cumple_inasistencia t1 INNER JOIN horario t2 INNER JOIN inasistencia t3 WHERE t1.horario_id = t2.horario_id AND t1.Cod_inasist = t3.Cod_inasist AND t3.fecha_inasist BETWEEN '$fecha1 00:00:00' AND '$fecha2 23:59:59' GROUP BY t1.horario_id";
     $res = $this->db->query($sql);
     if ($res) {
       return $res->result();

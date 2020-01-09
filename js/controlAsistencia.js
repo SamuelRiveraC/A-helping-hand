@@ -1,11 +1,31 @@
 $(function() {
-  jalar_data()
+  $('#Buscar').click(function() {
+    jalar_data($('#rangofecha').val(), $('#rangofecha1').val())
+  })
 
   $('#dataTables-table').on('click','.asistencia',function() {
     var idr = $(this).attr('idr');
     $('#C_I').val(idr);
     $('#modal-overlay').modal('show');
   })
+
+  $('#rangofecha').daterangepicker({
+    opens: 'left',
+    singleDatePicker: true,
+    showDropdowns: true,
+    startDate: formatFirstDate(new Date()),
+    locale: {
+      format: 'DD/MM/YYYY',
+    }
+  });
+  $('#rangofecha1').daterangepicker({
+    opens: 'left',
+    singleDatePicker: true,
+    showDropdowns: true,
+    locale: {
+      format: 'DD/MM/YYYY',
+    }
+  });
 
   $('#form1').submit(function(e) {
       e.preventDefault()
@@ -32,12 +52,32 @@ $(function() {
 
 })
 
-function jalar_data() {
+function formatFirstDate(date) {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var monthNumber = [
+    "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"
+  ];
+
+  var day = "01";
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + '-' + monthNumber[monthIndex] + '-' + year;
+}
+
+
+function jalar_data(rangofecha,rangofecha1) {
   var content_asistentes = '', content_inasistencia = ''
   $('#inasistencia').DataTable().destroy();
   $('#asistencia').DataTable().destroy();
-  $.getJSON(base_url+'Casistencia/count_list_personal',function(data) {
-    $.each(data.asistentes, function(i,item) {
+  $.post(base_url+'Casistencia/count_list_personal',{rangofecha:rangofecha,rangofecha1:rangofecha1},function(data) {
+    $.each(data.asistencia, function(i,item) {
       content_asistentes += `
       <tr>
       <td>${item.P_nombre}</td>
@@ -59,14 +99,36 @@ function jalar_data() {
     $('#dataTables-asistencia').html(content_asistentes)
     $('#inasistencia').DataTable({
       "responsive": true,
-      oLanguage:{
-        sSearch: 'Buscar:'
+      "language": {
+        "sSearch": 'Buscar:',
+        "lengthMenu": 'Mostrando _MENU_ datos por pagina',
+        "zeroRecords": 'No hay datos',
+        "info": 'Mostrando _PAGE_ paginas de _PAGES_',
+        "infoEmpty": 'No hay datos disponibles',
+        "infoFiltered": '(Filtrando desde _MAX_ respuestas totales)',
+        "paginate": {
+          first: 'Primero',
+          previous: 'Anterior',
+          next: 'Siguiente',
+          last: 'Ultima'
+        }
       },
     });
     $('#asistencia').DataTable({
       "responsive": true,
-      oLanguage:{
-        sSearch: 'Buscar:'
+      "language": {
+        "sSearch": 'Buscar:',
+        "lengthMenu": 'Mostrando _MENU_ datos por pagina',
+        "zeroRecords": 'No hay datos',
+        "info": 'Mostrando _PAGE_ paginas de _PAGES_',
+        "infoEmpty": 'No hay datos disponibles',
+        "infoFiltered": '(Filtrando desde _MAX_ respuestas totales)',
+        "paginate": {
+          first: 'Primero',
+          previous: 'Anterior',
+          next: 'Siguiente',
+          last: 'Ultima'
+        }
       },
     });
   })

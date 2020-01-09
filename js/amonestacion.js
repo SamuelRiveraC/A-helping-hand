@@ -37,6 +37,7 @@ function jalar_data() {
       <tr>
       <td>${item.Cod_amon}</td>
       <td>${item.Fecha_amon}</td>
+      <td>${item.Emisor_amon}</td>
       <td>${item.Motivo_amon}</td>
       <td>${item.Tipo_amon}</td>
       <td>${item.Cdula}</td>
@@ -46,8 +47,19 @@ function jalar_data() {
     $('#dataTables-table').html(content_asistentes)
     $('#amonestacion').DataTable({
       "responsive": true,
-      oLanguage:{
-        sSearch: 'Buscar:'
+      "language":{
+        "sSearch": 'Buscar:',
+        "lengthMenu": 'Mostrando _MENU_ datos por pagina',
+        "zeroRecords": 'No hay datos',
+        "info": 'Mostrando _PAGE_ paginas de _PAGES_',
+        "infoEmpty": 'No hay datos disponibles',
+        "infoFiltered": '(Filtrando desde _MAX_ respuestas totales)',
+        "paginate": {
+          first: 'Primero',
+          previous: 'Anterior',
+          next: 'Siguiente',
+          last: 'Ultima'
+        }
       },
     });
   })

@@ -1,5 +1,29 @@
  <div class="col-md-12">
   <!-- Horizontal Form -->
+<style media="screen">
+   .cli_li_list{
+   list-style: none;
+   border-left: solid 1px #c3c3c3;
+   border-right: solid 1px #c3c3c3;
+   border-bottom: solid 1px #c3c3c3;
+   padding:10px 4px 10px 10px;
+   cursor: pointer;
+   width: 90%;
+   }
+   .cli_li_list_no{
+   list-style: none;
+   border-left: solid 1px #c3c3c3;
+   border-right: solid 1px #c3c3c3;
+   border-bottom: solid 1px #c3c3c3;
+   padding:10px 4px 10px 10px;
+   cursor: pointer;
+   width: 90%;
+   }
+   .cli_li_list:hover{
+     background-color: #31127c78;
+     color:white;
+   }
+</style>
   <div class="col-md-2" style="padding-bottom:20px">
     <button type="button" class="btn btn-block btn-primary" id='btnNew'>Registrar Usuario</button>
   </div>
@@ -17,7 +41,6 @@
         <tr>
           <th>Nombre</th>
           <th>Nombre de usuario</th>
-          <th>Tipo de Cuenta</th>
           <th></th>
           <th></th>
           <th></th>
@@ -46,6 +69,15 @@
         <form id='form1'>
           <input type="hidden" name="ID_usuario" id="ID_usuario" value="">
           <input type="hidden" name="accion" id='accion' value="">
+          <input type="hidden" name="C_I" id="C_I" value="">
+          <div class="form-group">
+             <label for="text" class="col-sm-4 control-label">Cedula</label>
+              <div class="col-sm-10">
+                <input type="text" name="C_Isearch" class="form-control" id="C_Isearch">
+              </div>
+          </div>
+          <div id="listaUsuario">
+          </div>
           <div class="form-group">
              <label for="text" class="col-sm-4 control-label">Usuario</label>
             <div class="col-sm-10">
@@ -59,6 +91,12 @@
               <input type="Password" class="form-control" name="Password" id="Password" required placeholder="Contraseña">
             </div>
           </div>
+          <div class="form-group">
+             <label for="text" class="col-sm-4 control-label">Confirmar Contraseña</label>
+            <div class="col-sm-10">
+              <input type="Password" class="form-control" name="confir_pass" id="confir_pass" required placeholder="Confirmar contraseña">
+            </div>
+          </div>
 
 
           <div class="form-group">
@@ -66,8 +104,8 @@
               <div class="col-sm-10">
                <select class="form-control" id="Tipo_cuenta" name='Tipo_cuenta' required>
                  <option value ="">Escoga una opción</option>
-                 <option value="1">Administrativo</option>
-                 <option value="2">Usuario</option>
+                 <option value="Administrador">Administrativo</option>
+                 <option value="Usuario">Usuario</option>
                </select>
              </div>
 
@@ -82,7 +120,7 @@
              <div class="form-group">
                <label for="text" class="col-sm-4 control-label">Respuesta 1</label>
                <div class="col-sm-10">
-                 <input type="text"  class="form-control" name="Res_1" id="Res_1"  required placeholder="Respuesta de Seguridad 1">
+                 <input type="password"  class="form-control" name="Res_1" id="Res_1"  required placeholder="Respuesta de Seguridad 1">
                </div>
              </div>
 
@@ -96,7 +134,7 @@
              <div class="form-group">
                <label for="text" class="col-sm-4 control-label">Respuesta 2</label>
                <div class="col-sm-10">
-                 <input type="text"  class="form-control" name="Res_2" id="Res_2"  required placeholder="Respuesta de Seguridad 2">
+                 <input type="password"  class="form-control" name="Res_2" id="Res_2"  required placeholder="Respuesta de Seguridad 2">
                </div>
              </div>
              <div class="form-group">
@@ -108,16 +146,7 @@
              <div class="form-group">
                <label for="text" class="col-sm-4 control-label">Respuesta 3</label>
                <div class="col-sm-10">
-                 <input type="text"  class="form-control" name="Res_3" id="Res_3"  required placeholder="Respuesta de Seguridad 3">
-               </div>
-             </div>
-             <div class="form-group">
-               <label for="text" class="col-sm-4 control-label">Estado</label>
-               <div class="col-sm-10">
-                 <select class="form-control" name="estado" id="estado" required >
-                   <option value="Inactivo">Inactivo</option>
-                   <option value="Activo">Activo</option>
-                 </select>
+                 <input type="password"  class="form-control" name="Res_3" id="Res_3"  required placeholder="Respuesta de Seguridad 3">
                </div>
              </div>
 
@@ -171,14 +200,28 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title">Ver Usuario</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+            <h4 class="modal-title">Ver Usuario</h4>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+
       </div>
       <div class="modal-body">
         <table class="table table-striped">
             <tbody id="detalle_registro">
+
+            </tbody>
+        </table>
+        <?php if ($this->session->userdata('Login')['session_Tipo'] == 'Administrador'): ?>
+          <label>Mostrar respuestas</label>
+          <button type="button" class="btn btn-primary" id="ver_answer" style="margin-left:10px">
+            <span aria-hidden="true"><i class="fa fa-eye"></i></span>
+          </button>
+        <?php endif; ?>
+        <table class="table table-striped" id="tabla_respuestas" style="display:none">
+            <tbody id="respuestas_sec">
 
             </tbody>
         </table>

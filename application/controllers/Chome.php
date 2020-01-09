@@ -9,9 +9,14 @@ class Chome extends CI_controller
 
   public function index()
   {
+      $menu = array();
+      $datos = array();
+      $datos['menu'] = 'algo';
+      $datos['submenu'] = 'algo';
+      $menu = array('datos' => $datos);
     if ($this->session->userdata('Login')) {
       $this->load->view('layout/header');
-      $this->load->view('layout/menu');
+      $this->load->view('layout/menu',$menu);
       $this->load->view('vhome');
       $this->load->view('layout/footer');
     } else {

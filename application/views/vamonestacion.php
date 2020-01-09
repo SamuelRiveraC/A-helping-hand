@@ -17,6 +17,7 @@
         <tr>
           <th>Codigo amonestacion</th>
           <th>Fecha</th>
+          <th>Emisor</th>
           <th>Motivo</th>
           <th>Tipo</th>
           <th>Cedula</th>
@@ -54,18 +55,19 @@
             </div>
           </div>
           <div class="form-group">
-             <label for="text" class="col-sm-4 control-label">Motivo</label>
+             <label for="text" class="col-sm-4 control-label">Emitido</label>
             <div class="col-sm-10">
-              <textarea name="Motivo_amon" id="Motivo_amon" rows="5" cols="50"></textarea>
+              <select class="form-control" id="emitido" name="emitido">
+                <option value="">Seleccione emisor</option>
+                <option value="Coordinador">Coordinador</option>
+                <option value="Directivo">Directivo</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
-             <label for="text" class="col-sm-4 control-label">Tipo amonestacion</label>
+             <label for="text" class="col-sm-4 control-label">Motivo</label>
             <div class="col-sm-10">
-              <select class="form-control" id="Tipo_amon" name="Tipo_amon">
-                <option value="Verbal">Verbal</option>
-                <option value="Escrita">Escrita</option>
-              </select>
+              <textarea name="Motivo_amon" id="Motivo_amon" rows="5" cols="50"></textarea>
             </div>
           </div>
 

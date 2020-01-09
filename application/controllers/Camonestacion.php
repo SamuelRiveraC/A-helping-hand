@@ -12,9 +12,14 @@ class Camonestacion extends CI_Controller
 
   public function index()
   {
+    $menu = array();
+		$datos = array();
+		$datos['menu'] = 'Personal';
+		$datos['submenu'] = 'Cregistropersonal';
+		$menu = array('datos' => $datos);
     if ($this->session->userdata('Login')) {
       $this->load->view('layout/header');
-      $this->load->view('layout/menu');
+      $this->load->view('layout/menu',$menu);
       $this->load->view('vamonestacion');
       $this->load->view('layout/footer');
     } else {
@@ -35,7 +40,8 @@ class Camonestacion extends CI_Controller
       'Fecha_amon' => date('Y-m-d'),
       'Num_amon' => '1',
       'Motivo_amon' => $this->input->post('Motivo_amon'),
-      'Tipo_amon' => $this->input->post('Tipo_amon'),
+      'Tipo_amon' => 'Escrita',
+      'Emisor_amon' => $this->input->post('emitido'),
     );
     $id_amonestacion = $this->Mamonestacion->ins_Amonestacion($datos);
     if ($id_amonestacion) {

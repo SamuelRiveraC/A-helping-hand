@@ -55,29 +55,6 @@
               </select>
             </div>
           </div>
-          <div id="oculto_asistencia" style="display:none">
-            <div class="form-group" >
-              <label for="text" class="col-sm-4 control-label"> Turno</label>
-              <div class="col-sm-10">
-                <select class="form-control" name="turno" id="turno">
-                  <option value="0">Mañana</option>
-                  <option value="1">Tarde</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group" >
-              <label for="text" class="col-sm-4 control-label"> Hora de entrada</label>
-              <div class="col-sm-10">
-                <input type="datetime-local" class="form-control" name="hora_entrada" id="hora_entrada">
-              </div>
-            </div>
-            <div class="form-group" >
-              <label for="text" class="col-sm-4 control-label"> Hora de salida</label>
-              <div class="col-sm-10">
-                <input type="datetime-local" class="form-control" name="hora_salida" id="hora_salida">
-              </div>
-            </div>
-          </div>
           <div id="oculto_inasistencia" style="display:none">
             <div class="form-group">
                <label for="text" class="col-sm-4 control-label">Tipo inasistencia</label>
