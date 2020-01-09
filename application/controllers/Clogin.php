@@ -22,7 +22,14 @@ class Clogin extends CI_controller
           $res= $this->Mlogin->ingresar($usu,$pass);
           if ($res == 1) {
             // print_r($res);
+<<<<<<< HEAD
             redirect('Chome','redirect');
+=======
+              $this->load->view('layout/header');
+              $this->load->view('layout/menu');
+              $this->load->view('vhome');
+              $this->load->view('layout/footer');
+>>>>>>> 6f1f87fbe1997b7a09f8a7cc21bb4d5438c36b65
 
           }else{
              $mensaje['mensaje'] ="Usuario o contraseña incorrecta";
@@ -33,6 +40,7 @@ class Clogin extends CI_controller
 
     }
     public function obtener_preg($nombre)
+<<<<<<< HEAD
     {
       $res = $this->Mlogin->obtener_preg($nombre);
       $this->output->set_content_type('application/json')
@@ -53,6 +61,21 @@ class Clogin extends CI_controller
     {
       $this->session->sess_destroy();
       redirect('Clogin','refresh');
+=======
+    {
+      $res = $this->Mlogin->obtener_preg($nombre);
+      $this->output->set_content_type('application/json')
+      ->set_output(json_encode($res));
+    }
+
+    public function recuperar_contra($id)
+    {
+        $clave_pro = rand(15678,32767);
+        $datos = array('Password' => $clave_pro);
+        $this->Mlogin->upd($id, $datos);
+        $this->output->set_content_type('application/json')
+        ->set_output(json_encode($clave_pro));
+>>>>>>> 6f1f87fbe1997b7a09f8a7cc21bb4d5438c36b65
     }
 
 }
