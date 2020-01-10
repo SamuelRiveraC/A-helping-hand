@@ -313,7 +313,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <div class="row">
                                     
                                     <div class="col-4">
@@ -326,7 +326,7 @@
                                         <input type="number" class="form-control" name="Numero_celular" id="Numero_celular" placeholder="Ingrese su Numero de celular">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </div>
                         <div class="modal-footer justify-content-between">

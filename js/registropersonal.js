@@ -4,6 +4,8 @@ var contadorDetalle = 0;
     jalar_data();
     $('#btnNew').click(function() {
       contador = 0;
+      view(contador);
+      $("#C_I").attr('disabled', false)
       $('input').val('');
       $('#datosPer').show();
       $('#direccion').hide();
@@ -11,92 +13,53 @@ var contadorDetalle = 0;
       $('#modal-overlay').modal('show')
       $('#accion').val('creado');
     })
-
+  
     $('#sigPag').click(function() {
         contador += 1;
-      if (contador == 1) {
-        $('#antPag').show();
-        $('#datosPer').hide();
-        $('#direccion').show();
-        $('#sigPag').show();
-        $('#Guardar').hide();
-      } else if (contador == 2) {
-        $('#antPag').show();
-        $('#sigPag').hide();
-        $('#direccion').hide();
-        $('#formacionAca').show();
-        $('#Guardar').show();
-      } else if (contador == 0) {
-        $('#sigPag').show();
-        $('#Guardar').hide();
-        $('#antPag').hide();
-      }
+        view(contador);
 
     });
 
     $('#antPag').click(function() {
-      if (contador == 1) {
+      contador -= 1;
+      if (contador == 0) {
         $('#datosPer').show();
         $('#direccion').hide();
         $('#antPag').show();
         $('#sigPag').show();
         $('#Guardar').hide();
-      } else if (contador == 2) {
+        $('#antPag').hide();
+      } else if (contador == 1) {
         $('#direccion').show();
         $('#sigPag').show();
         $('#formacionAca').hide();
         $('#antPag').show();
         $('#Guardar').hide();
-      } else if (contador == 0) {
-        $('#sigPag').show();
-        $('#Guardar').hide();
-        $('#antPag').hide();
-      }
-      contador -= 1;
-
+      } 
     });
 
 
     $('#sigPagDet').click(function() {
         contadorDetalle += 1;
-      if (contadorDetalle == 1) {
-        $('#antPagDet').show();
-        $('#0detalles').hide();
-        $('#1detalles').show();
-        $('#sigPagDet').show();
-        $('#Guardar').hide();
-      } else if (contadorDetalle == 2) {
-        $('#antPagDet').show();
-        $('#sigPagDet').hide();
-        $('#1detalles').hide();
-        $('#2detalles').show();
-        $('#Guardar').show();
-      } else if (contadorDetalle == 0) {
-        $('#sigPagDet').show();
-        $('#antPagDet').hide();
-      }
-      console.log(contadorDetalle)
+        view_det(contadorDetalle); 
     });
-
+  
     $('#antPagDet').click(function() {
-      if (contadorDetalle == 1) {
+      contadorDetalle -= 1;
+      if (contadorDetalle == 0) {
         $('#0detalles').show();
         $('#1detalles').hide();
         $('#antPagDet').show();
         $('#sigPagDet').show();
         $('#Guardar').hide();
-      } else if (contadorDetalle == 2) {
+        $('#antPagDet').hide();
+      } else if (contadorDetalle == 1) {
         $('#1detalles').show();
         $('#sigPagDet').show();
         $('#2detalles').hide();
         $('#antPagDet').show();
         $('#Guardar').hide();
-      } else if (contadorDetalle == 0) {
-        $('#sigPagDet').show();
-        $('#antPagDet').hide();
       }
-      contadorDetalle -= 1;
-      console.log(contadorDetalle)
     });
 
     $('#seleccione').change(function(){
@@ -143,7 +106,7 @@ var contadorDetalle = 0;
 
     $('#dataTables-table').on('click','.edi_registro',function(e) {
       e.preventDefault()
-
+      $("#C_I").attr('disabled', true)
       var idr = $(this).attr('idr')
       $('#accion').val('editado')
       modalData(idr)
@@ -153,6 +116,7 @@ var contadorDetalle = 0;
     $('#dataTables-table').on('click','.ver_registro',function(e) {
       e.preventDefault()
       contadorDetalle = 0;
+      view_det(contadorDetalle);
       $('#0detalles').show();
       $('#1detalles').hide();
       $('#2detalles').hide();
@@ -240,7 +204,45 @@ var contadorDetalle = 0;
       direction: 'YYYY-MM-DD',
     }
   });
-
+  function view(contador) {
+    if (contador == 1) {
+      $('#antPag').show();
+      $('#datosPer').hide();
+      $('#direccion').show();
+      $('#sigPag').show();
+      $('#Guardar').hide();
+    } else if (contador == 2) {
+      $('#antPag').show();
+      $('#sigPag').hide();
+      $('#direccion').hide();
+      $('#formacionAca').show();
+      $('#Guardar').show();
+    } else if (contador == 0) {
+      $('#sigPag').show();
+      $('#Guardar').hide();
+      $('#antPag').hide();
+    }
+  }
+  function view_det(contadorDetalle) {
+    if (contadorDetalle == 1) {
+      $('#antPagDet').show();
+      $('#0detalles').hide();
+      $('#1detalles').show();
+      $('#sigPagDet').show();
+      $('#Guardar').hide();
+      
+    } else if (contadorDetalle == 2) {
+      $('#antPagDet').show();
+      $('#sigPagDet').hide();
+      $('#1detalles').hide();
+      $('#2detalles').show();
+      $('#Guardar').show();
+      
+    } else if (contadorDetalle == 0) {
+      $('#sigPagDet').show();
+      $('#antPagDet').hide();
+    }
+  }
   function modalData(idr) {
     var detalle = '';
     var detalle1 = "";
@@ -335,7 +337,7 @@ var contadorDetalle = 0;
       }
       detalle1 += `
       ${dato}
-      <tr><th>Codigo postal:</th><td>${data[0].Cod_postal}</td></tr>
+      
       <tr><th>Habilidades:</th><td>${data[0].habilidades}</td></tr>
       <tr><th>Ocupacion extra:</th><td>${data[0].ocupacion_2}</td></tr>
       ${exp_lab1}

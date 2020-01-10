@@ -176,7 +176,7 @@ function comboselect1(object,count) {
       $('#Res_2').val(data[0].Res_2)
       $('#Res_3').val(data[0].Res_3)
       $('#C_I').val(data[0].C_I);
-      $('#C_Isearch').val(data[0].C_I + '-' + data[0].Nom_usuario);
+      $('#C_Isearch').val(data[0].C_I);
 
       detalle += `
       <tr><th>Usuario:</th><td>${data[0].Nom_usuario}</td></tr>
