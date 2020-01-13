@@ -93,12 +93,17 @@ class Cregistropersonal extends CI_Controller
 					'Num_telf' => $this->input->post('Numero_casa'),
 					'C_I' => $this->input->post('C_I'),
 				);
-				$telefono1 = array(
-					'Tipo_telf' => 'Celular',
-					'Area_telf' => $this->input->post('Area_telf_celular'),
-					'Num_telf' => $this->input->post('Numero_celular'),
-					'C_I' => $this->input->post('C_I'),
-				);
+				if($this->input->post('Area_telf_celular')!='' && $this->input->post('Area_telf_celular')!=null){
+					$telefono1 = array(
+						'Tipo_telf' => 'Celular',
+						'Area_telf' => $this->input->post('Area_telf_celular'),
+						'Num_telf' => $this->input->post('Numero_celular'),
+						'C_I' => $this->input->post('C_I'),
+					);
+				}else{
+					$telefono1 = false;
+				}
+				
 				$correo = array('Tipo_correo' => $this->input->post('Tipo_correo'),'C_I' => $this->input->post('C_I'));
 				$instituto = array('Nombre_inst' => $this->input->post('Nombre_inst'),'Cod_dir' => $Cod_dir);
 				$horario = array(
@@ -114,6 +119,7 @@ class Cregistropersonal extends CI_Controller
 					'Grado_actual_instruc' => $this->input->post('Grado_actual_intruc'),
 					'titulo_fecha' => $this->input->post('titulo_fecha'),
 					'credencial_titulo' => $this->input->post('credencial_titulo'),
+					'nivel_curso' => $this->input->post('Nivel_curso'),
 				);
 				if ($this->input->post('Actual_instruct') != 'No') {
 					$datosformacion['Grado_actual_instruc'] = $this->input->post('Grado_actual_instruc');
@@ -121,7 +127,9 @@ class Cregistropersonal extends CI_Controller
 				$this->Mregistropersonal->instituto($instituto);
 				$this->Mregistropersonal->horario($horario);
 				$this->Mregistropersonal->telefono($telefono);
-				$this->Mregistropersonal->telefono($telefono1);
+				if($telefono1!=false){
+					$this->Mregistropersonal->telefono($telefono1);
+				}
 				$this->Mregistropersonal->correo($correo);
 				$res = $this->Mregistropersonal->datos_formacion($datosformacion);
 				$res = array(
@@ -182,11 +190,18 @@ class Cregistropersonal extends CI_Controller
 					'Area_telf' => $this->input->post('Area_telf_casa'),
 					'Num_telf' => $this->input->post('Numero_casa'),
 				);
-				$telefono1 = array(
-					'Tipo_telf' => 'Celular',
-					'Area_telf' => $this->input->post('Area_telf_celular'),
-					'Num_telf' => $this->input->post('Numero_celular'),
-				);
+				$tipo = 'Casa';
+				if($this->input->post('Area_telf_celular')!=null && $this->input->post('Area_telf_celular')!=''){
+					$telefono1 = array(
+						'Tipo_telf' => 'Celular',
+						'Area_telf' => $this->input->post('Area_telf_celular'),
+						'Num_telf' => $this->input->post('Numero_celular'),
+					);
+					$tipo_ = 'Celular';
+				}else{
+					$telefono1 = false;
+				}
+				
 				$correo = array('Tipo_correo' => $this->input->post('Tipo_correo'));
 				$instituto = array('Nombre_inst' => $this->input->post('Nombre_inst'));
 				$horario = array(
@@ -206,14 +221,17 @@ class Cregistropersonal extends CI_Controller
 				}
 				$this->Mregistropersonal->upd_instituto($instituto,$this->input->post('cod_dir'));
 				$this->Mregistropersonal->upd_horario($horario,$this->input->post('idr'));
-				$this->Mregistropersonal->upd_telefono($telefono,$this->input->post('idr'));
-				$this->Mregistropersonal->upd_telefono($telefono1,$this->input->post('idr'));
+				$this->Mregistropersonal->upd_telefono($telefono,$this->input->post('idr'), $tipo);
+				if($telefono1!=false){
+					$this->Mregistropersonal->upd_telefono($telefono1,$this->input->post('idr'),$tipo_);
+				}
+				
 				$this->Mregistropersonal->upd_correo($correo,$this->input->post('idr'));
 				$this->Mregistropersonal->upd_formacion_academica($datosformacion,$this->input->post('idr'));
 				$res = $this->Mregistropersonal->upd_guardar($paramact,$this->input->post('idr'));
 				$res = array(
 					'exito' => true,
-					'mensaje' => 'Exito al momento de registar al personal',
+					'mensaje' => 'Exito al momento de actualizar al personal',
 				);
 			} else {
 				$res = array(

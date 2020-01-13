@@ -59,8 +59,32 @@ class Mregistrousuario extends CI_Model
 				}
 				
 		}
-
-
+        public function getUsers($string)
+        {
+           $this->db->like('Nom_usuario',$string);
+           $this->db->select('*');
+           $this->db->from('usuario');
+           $r = $this->db->get();
+      
+           if($r->num_rows()>0){
+               return true;
+           }else{
+               return false;
+           }
+        }
+        public function getCI($string)
+        {
+           $this->db->like('C_I',$string);
+           $this->db->select('*');
+           $this->db->from('personal');
+           $r = $this->db->get();
+      
+           if($r->num_rows()>0){
+               return true;
+           }else{
+               return false;
+           }
+        }
 }
 
 ?>

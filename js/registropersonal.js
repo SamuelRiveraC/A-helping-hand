@@ -107,6 +107,9 @@ var contadorDetalle = 0;
     $('#dataTables-table').on('click','.edi_registro',function(e) {
       e.preventDefault()
       $("#C_I").attr('disabled', true)
+      
+      contador = 0;
+      reset_view();
       var idr = $(this).attr('idr')
       $('#accion').val('editado')
       modalData(idr)
@@ -223,6 +226,15 @@ var contadorDetalle = 0;
       $('#antPag').hide();
     }
   }
+
+  function reset_view() {
+      $('#datosPer').show();
+      $('#direccion').hide();
+      $('#formacionAca').hide();
+      $('#sigPag').show();
+      $('#Guardar').hide();
+      $('#antPag').hide();
+  }
   function view_det(contadorDetalle) {
     if (contadorDetalle == 1) {
       $('#antPagDet').show();
@@ -247,7 +259,11 @@ var contadorDetalle = 0;
     var detalle = '';
     var detalle1 = "";
     var detalle2 = "";
+    $('#detalles').html('')
+      $('#detalles1').html('')
+      $('#detalles2').html('')
     $.getJSON(base_url+'Cregistropersonal/listar/'+idr,function(data) {
+      console.log(data)
       $('#P_nombre').val(data[0].P_nombre)
       $('#S_nombre').val(data[0].S_nombre)
       $('#P_apellido').val(data[0].P_apellido)
@@ -260,7 +276,7 @@ var contadorDetalle = 0;
       $('#Edad').val(data[0].Edad)
       $('#est_civ').val(data[0].Estado_civil)
       $('#idr').val(data[0].C_I)
-      if (data[0].Num_calle != null) {
+      if (data[0].Num_calle != null && data[0].Num_calle != '') {
         $('#seleccione').val(1);
         $('#Num_calle').val(data[0].Num_calle)
         $('#Num_casa').val(data[0].Num_casa)
@@ -272,15 +288,21 @@ var contadorDetalle = 0;
         $('#Sector').val(data[0].Sector)
       }
 
-      $('#Nombre_inst').val(data[0].Nombre_inst)
+      $('#Nombre_inst').val(data[0].nombre_inst)
       $('#Titulo').val(data[0].Titulo)
       $('#Grado').val(data[0].Grado)
       $('#Año_for_a').val(data[0].Año_for_a)
       $('#Nivel_curso').val(data[0].Nivel_curso)
       $('#Tipo_correo').val(data[0].Tipo_correo)
-      $('#Area_telf').val(data[0].Area_telf)
+      tel = data[0].numero[0].numero.Num_telf.split("-");
+      if(data[0].numero[1]){
+        tele = data[0].numero[1].numero.Num_telf.split("-");
+        $('#Area_telf_celular').val(tele[0])
+        $('#Numero_celular').val(tele[1])
+      } 
+      $('#Numero_casa').val(tel[1])
+      $('#Area_telf_casa').val(tel[0])
       $('#Tipo_telf').val(data[0].Tipo_telf)
-      $('#Num_telf').val(data[0].Num_telf)
       $('#turno').val(data[0].turno)
       $('#horas_trab').val(data[0].horas_trab)
       $('#habilidades').val(data[0].habilidades)
@@ -288,7 +310,7 @@ var contadorDetalle = 0;
       $('#exp_lab').val(data[0].exp_lab)
       $('#oficial_exp_lab').val(data[0].oficial_exp_lab)
       $('#priv_exp_lab').val(data[0].priv_exp_lab)
-      $('#Nivel_curso').val(data[0].Nivel_curso)
+      $('#Nivel_curso').val(data[0].nivel_curso)
       $('#Actual_instruct').val(data[0].Actual_instruct)
       $('#Grado_actual_instruc').val(data[0].Grado_actual_instruc)
       $('#titulo_fecha').val(data[0].titulo_fecha)
@@ -331,8 +353,8 @@ var contadorDetalle = 0;
       } else {
         exp_lab1 = `
         <tr><th>Experiencia laboral:</th><td>Presenta</td></tr>
-        <tr><th>Tiempo Oficial:</th><td>No presenta</td></tr>
-        <tr><th>Tiempo Privada:</th><td>No presenta</td></tr>
+        <tr><th>Tiempo Oficial:</th><td>${data[0].oficial_exp_lab} años</td></tr>
+        <tr><th>Tiempo Privada:</th><td>${data[0].priv_exp_lab} años</td></tr>
         `;
       }
       detalle1 += `
@@ -352,6 +374,7 @@ var contadorDetalle = 0;
       var telefonos = '';
       $.each(data[0].numero,function(i,item){
         if (item.numero.Num_telf != '') {
+          i++
           telefonos += `
           <tr><th>Numero de telefono ${i}:</th><td>${item.numero.Num_telf}</td></tr>
           `;

@@ -170,14 +170,27 @@ class Mregistropersonal extends CI_Model
 					return false;
 				}
 			}
-			public function upd_telefono($datos,$C_I)
+			public function upd_telefono($datos,$C_I,$tipo)
 			{
 				$this->db->where('C_I',$C_I);
-				if ($this->db->update('telefono',$datos)) {
-					return true;
-				} else {
-					return false;
+				$this->db->where('Tipo_telf',$tipo);
+				$this->db->select('*');
+				$this->db->from('telefono');
+				$res = $this->db->get();
+				if($res->num_rows()==1){
+					$this->db->where('C_I',$C_I);
+					$this->db->where('Tipo_telf',$tipo);
+					$this->db->update('telefono',$datos);
+					if ($this->db->affected_rows()>0) {
+						return true;
+					} else {
+						return false;
+					}
+				}else{
+					$datos['C_I'] = $C_I;
+					 $this->db->insert('telefono', $datos);
 				}
+				
 			}
 			public function upd_correo($datos,$C_I)
 			{
