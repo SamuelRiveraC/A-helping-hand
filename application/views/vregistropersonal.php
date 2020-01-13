@@ -103,7 +103,7 @@
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Fecha de Nacimiento</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" name="Fecha_n" id="Fecha_n">
+                                    <input type="date" class="form-control" name="Fecha_n" id="Fecha_n" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -140,8 +140,8 @@
                                 <div class="col-sm-10">
                                     <select name="ExiHijos" class="form-control" id="ExiHijos">
                                         <option value="">Seleccione si presenta</option>
-                                        <option value="Presenta">Presenta</option>
-                                        <option value="No presenta">No presenta</option>
+                                        <option value="Presenta">Tiene</option>
+                                        <option value="No presenta">No tiene</option>
                                     </select>
                                 </div>
                             </div>

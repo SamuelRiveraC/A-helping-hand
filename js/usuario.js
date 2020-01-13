@@ -2,6 +2,8 @@ var ifshow = false;
   $(function () {
     jalar_data();
     $('#btnNew').click(function() {
+      $("input").val('')
+      $("#mess").html('Guardar');
       $('#Password').attr('required',true);
       $('#confir_pass').attr('required',true);
       $('#modal-overlay').modal('show')
@@ -10,6 +12,7 @@ var ifshow = false;
 
     $('#dataTables-table').on('click','.edi_registro',function(e) {
       e.preventDefault()
+      $("#mess").html('Actualizar');
       $('#Password').removeAttr('required');
       $('#confir_pass').removeAttr('required');
       var idr = $(this).attr('idr')
@@ -48,6 +51,33 @@ var ifshow = false;
         $('#tabla_respuestas').show();
       }
     });
+    $("#Nom_usuario").keyup(function () {
+      if($('#accion').val()=='creado'){
+        $("#Act").attr('disabled', true)
+       
+        $.ajax({
+          url: base_url+'Cusuarios/getUsers',
+          type:'POST',
+          data: {
+            string: $(this).val()
+          },
+          success: (data) => {
+            
+            if(data==false){
+              $("#Act").attr('disabled', false)
+            }else{
+              $("#Act").attr('disabled', true)
+            }
+          },
+          error: (e) => {
+            console.log('error'+e)
+            alert('error')
+          }
+        })
+      }
+      
+    })
+
 
     $('#form1').submit(function(e) {
         e.preventDefault()
@@ -97,6 +127,8 @@ var ifshow = false;
       if (input != '') {
         if (input.length > 1) {
           getInput(input);
+          
+          getCI(input);
         }
       }
     });
@@ -108,6 +140,8 @@ var ifshow = false;
       var datos = $(this).html();
       $('#form1 #C_I').val(id);
       $('#C_Isearch').val(datos);
+      string = datos.split('-');
+      getCI(string[0].trim());
     });
 
   });
@@ -123,7 +157,35 @@ function getInput(input) {
     comboselect1(objectFor,count);
   });
 }
+function getCI(input) {
 
+  if($('#accion').val()=='creado'){
+    $("#Act").attr('disabled', true)
+   
+    $.ajax({
+      url: base_url+'Cusuarios/getCI',
+      type:'POST',
+      data: {
+        string: input
+      },
+      success: (data) => {
+        
+        if(data==false){
+          $("#Act").attr('disabled', true)
+        }else{
+          if(input.length >= 7 && input.length <= 9){
+            $("#Act").attr('disabled', false)
+          }
+          
+        }
+      },
+      error: (e) => {
+        console.log('error'+e)
+        alert('error')
+      }
+    })
+  }
+}
 
 function comboselect1(object,count) {
   if (count > 0) {
@@ -176,7 +238,7 @@ function comboselect1(object,count) {
       $('#Res_2').val(data[0].Res_2)
       $('#Res_3').val(data[0].Res_3)
       $('#C_I').val(data[0].C_I);
-      $('#C_Isearch').val(data[0].C_I + '-' + data[0].Nom_usuario);
+      $('#C_Isearch').val(data[0].C_I);
 
       detalle += `
       <tr><th>Usuario:</th><td>${data[0].Nom_usuario}</td></tr>

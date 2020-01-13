@@ -4,6 +4,8 @@ var contadorDetalle = 0;
     jalar_data();
     $('#btnNew').click(function() {
       contador = 0;
+      view(contador);
+      $("#C_I").attr('disabled', false)
       $('input').val('');
       $('#datosPer').show();
       $('#direccion').hide();
@@ -11,92 +13,53 @@ var contadorDetalle = 0;
       $('#modal-overlay').modal('show')
       $('#accion').val('creado');
     })
-
+  
     $('#sigPag').click(function() {
         contador += 1;
-      if (contador == 1) {
-        $('#antPag').show();
-        $('#datosPer').hide();
-        $('#direccion').show();
-        $('#sigPag').show();
-        $('#Guardar').hide();
-      } else if (contador == 2) {
-        $('#antPag').show();
-        $('#sigPag').hide();
-        $('#direccion').hide();
-        $('#formacionAca').show();
-        $('#Guardar').show();
-      } else if (contador == 0) {
-        $('#sigPag').show();
-        $('#Guardar').hide();
-        $('#antPag').hide();
-      }
+        view(contador);
 
     });
 
     $('#antPag').click(function() {
-      if (contador == 1) {
+      contador -= 1;
+      if (contador == 0) {
         $('#datosPer').show();
         $('#direccion').hide();
         $('#antPag').show();
         $('#sigPag').show();
         $('#Guardar').hide();
-      } else if (contador == 2) {
+        $('#antPag').hide();
+      } else if (contador == 1) {
         $('#direccion').show();
         $('#sigPag').show();
         $('#formacionAca').hide();
         $('#antPag').show();
         $('#Guardar').hide();
-      } else if (contador == 0) {
-        $('#sigPag').show();
-        $('#Guardar').hide();
-        $('#antPag').hide();
-      }
-      contador -= 1;
-
+      } 
     });
 
 
     $('#sigPagDet').click(function() {
         contadorDetalle += 1;
-      if (contadorDetalle == 1) {
-        $('#antPagDet').show();
-        $('#0detalles').hide();
-        $('#1detalles').show();
-        $('#sigPagDet').show();
-        $('#Guardar').hide();
-      } else if (contadorDetalle == 2) {
-        $('#antPagDet').show();
-        $('#sigPagDet').hide();
-        $('#1detalles').hide();
-        $('#2detalles').show();
-        $('#Guardar').show();
-      } else if (contadorDetalle == 0) {
-        $('#sigPagDet').show();
-        $('#antPagDet').hide();
-      }
-      console.log(contadorDetalle)
+        view_det(contadorDetalle); 
     });
-
+  
     $('#antPagDet').click(function() {
-      if (contadorDetalle == 1) {
+      contadorDetalle -= 1;
+      if (contadorDetalle == 0) {
         $('#0detalles').show();
         $('#1detalles').hide();
         $('#antPagDet').show();
         $('#sigPagDet').show();
         $('#Guardar').hide();
-      } else if (contadorDetalle == 2) {
+        $('#antPagDet').hide();
+      } else if (contadorDetalle == 1) {
         $('#1detalles').show();
         $('#sigPagDet').show();
         $('#2detalles').hide();
         $('#antPagDet').show();
         $('#Guardar').hide();
-      } else if (contadorDetalle == 0) {
-        $('#sigPagDet').show();
-        $('#antPagDet').hide();
       }
-      contadorDetalle -= 1;
-      console.log(contadorDetalle)
     });
 
     $('#seleccione').change(function(){
@@ -143,7 +106,10 @@ var contadorDetalle = 0;
 
     $('#dataTables-table').on('click','.edi_registro',function(e) {
       e.preventDefault()
-
+      $("#C_I").attr('disabled', true)
+      
+      contador = 0;
+      reset_view();
       var idr = $(this).attr('idr')
       $('#accion').val('editado')
       modalData(idr)
@@ -153,6 +119,7 @@ var contadorDetalle = 0;
     $('#dataTables-table').on('click','.ver_registro',function(e) {
       e.preventDefault()
       contadorDetalle = 0;
+      view_det(contadorDetalle);
       $('#0detalles').show();
       $('#1detalles').hide();
       $('#2detalles').hide();
@@ -240,12 +207,63 @@ var contadorDetalle = 0;
       direction: 'YYYY-MM-DD',
     }
   });
+  function view(contador) {
+    if (contador == 1) {
+      $('#antPag').show();
+      $('#datosPer').hide();
+      $('#direccion').show();
+      $('#sigPag').show();
+      $('#Guardar').hide();
+    } else if (contador == 2) {
+      $('#antPag').show();
+      $('#sigPag').hide();
+      $('#direccion').hide();
+      $('#formacionAca').show();
+      $('#Guardar').show();
+    } else if (contador == 0) {
+      $('#sigPag').show();
+      $('#Guardar').hide();
+      $('#antPag').hide();
+    }
+  }
 
+  function reset_view() {
+      $('#datosPer').show();
+      $('#direccion').hide();
+      $('#formacionAca').hide();
+      $('#sigPag').show();
+      $('#Guardar').hide();
+      $('#antPag').hide();
+  }
+  function view_det(contadorDetalle) {
+    if (contadorDetalle == 1) {
+      $('#antPagDet').show();
+      $('#0detalles').hide();
+      $('#1detalles').show();
+      $('#sigPagDet').show();
+      $('#Guardar').hide();
+      
+    } else if (contadorDetalle == 2) {
+      $('#antPagDet').show();
+      $('#sigPagDet').hide();
+      $('#1detalles').hide();
+      $('#2detalles').show();
+      $('#Guardar').show();
+      
+    } else if (contadorDetalle == 0) {
+      $('#sigPagDet').show();
+      $('#antPagDet').hide();
+    }
+  }
   function modalData(idr) {
     var detalle = '';
     var detalle1 = "";
     var detalle2 = "";
+    $('#detalles').html('')
+      $('#detalles1').html('')
+      $('#detalles2').html('')
     $.getJSON(base_url+'Cregistropersonal/listar/'+idr,function(data) {
+      console.log(data)
       $('#P_nombre').val(data[0].P_nombre)
       $('#S_nombre').val(data[0].S_nombre)
       $('#P_apellido').val(data[0].P_apellido)
@@ -258,7 +276,7 @@ var contadorDetalle = 0;
       $('#Edad').val(data[0].Edad)
       $('#est_civ').val(data[0].Estado_civil)
       $('#idr').val(data[0].C_I)
-      if (data[0].Num_calle != null) {
+      if (data[0].Num_calle != null && data[0].Num_calle != '') {
         $('#seleccione').val(1);
         $('#Num_calle').val(data[0].Num_calle)
         $('#Num_casa').val(data[0].Num_casa)
@@ -270,15 +288,21 @@ var contadorDetalle = 0;
         $('#Sector').val(data[0].Sector)
       }
 
-      $('#Nombre_inst').val(data[0].Nombre_inst)
+      $('#Nombre_inst').val(data[0].nombre_inst)
       $('#Titulo').val(data[0].Titulo)
       $('#Grado').val(data[0].Grado)
       $('#Año_for_a').val(data[0].Año_for_a)
       $('#Nivel_curso').val(data[0].Nivel_curso)
       $('#Tipo_correo').val(data[0].Tipo_correo)
-      $('#Area_telf').val(data[0].Area_telf)
+      tel = data[0].numero[0].numero.Num_telf.split("-");
+      if(data[0].numero[1]){
+        tele = data[0].numero[1].numero.Num_telf.split("-");
+        $('#Area_telf_celular').val(tele[0])
+        $('#Numero_celular').val(tele[1])
+      } 
+      $('#Numero_casa').val(tel[1])
+      $('#Area_telf_casa').val(tel[0])
       $('#Tipo_telf').val(data[0].Tipo_telf)
-      $('#Num_telf').val(data[0].Num_telf)
       $('#turno').val(data[0].turno)
       $('#horas_trab').val(data[0].horas_trab)
       $('#habilidades').val(data[0].habilidades)
@@ -286,7 +310,7 @@ var contadorDetalle = 0;
       $('#exp_lab').val(data[0].exp_lab)
       $('#oficial_exp_lab').val(data[0].oficial_exp_lab)
       $('#priv_exp_lab').val(data[0].priv_exp_lab)
-      $('#Nivel_curso').val(data[0].Nivel_curso)
+      $('#Nivel_curso').val(data[0].nivel_curso)
       $('#Actual_instruct').val(data[0].Actual_instruct)
       $('#Grado_actual_instruc').val(data[0].Grado_actual_instruc)
       $('#titulo_fecha').val(data[0].titulo_fecha)
@@ -329,13 +353,13 @@ var contadorDetalle = 0;
       } else {
         exp_lab1 = `
         <tr><th>Experiencia laboral:</th><td>Presenta</td></tr>
-        <tr><th>Tiempo Oficial:</th><td>No presenta</td></tr>
-        <tr><th>Tiempo Privada:</th><td>No presenta</td></tr>
+        <tr><th>Tiempo Oficial:</th><td>${data[0].oficial_exp_lab} años</td></tr>
+        <tr><th>Tiempo Privada:</th><td>${data[0].priv_exp_lab} años</td></tr>
         `;
       }
       detalle1 += `
       ${dato}
-      <tr><th>Codigo postal:</th><td>${data[0].Cod_postal}</td></tr>
+      
       <tr><th>Habilidades:</th><td>${data[0].habilidades}</td></tr>
       <tr><th>Ocupacion extra:</th><td>${data[0].ocupacion_2}</td></tr>
       ${exp_lab1}
@@ -350,6 +374,7 @@ var contadorDetalle = 0;
       var telefonos = '';
       $.each(data[0].numero,function(i,item){
         if (item.numero.Num_telf != '') {
+          i++
           telefonos += `
           <tr><th>Numero de telefono ${i}:</th><td>${item.numero.Num_telf}</td></tr>
           `;

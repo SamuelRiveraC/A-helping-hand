@@ -82,7 +82,12 @@ class Cusuarios extends CI_Controller
 
 
        }
-
+      public function getUsers()
+      {
+       $res = $this->mregistrousuario->getUsers($this->input->post('string'));
+       $this->output->set_content_type('application/json')
+       ->set_output(json_encode($res));
+      }
       public function eliminarDatos(){
         $res = $this->mregistrousuario->eliminarDatos($this->input->post('ID_usuario'));
         $this->output->set_content_type('application/json')
@@ -95,6 +100,12 @@ class Cusuarios extends CI_Controller
         $data = str_replace(' ','%',$data);
 
         $res = $this->mregistrousuario->getLike_($data);
+        $this->output->set_content_type('application/json')
+        ->set_output(json_encode($res));
+       }
+       public function getCI()
+       {
+        $res = $this->mregistrousuario->getCI($this->input->post('string'));
         $this->output->set_content_type('application/json')
         ->set_output(json_encode($res));
        }
