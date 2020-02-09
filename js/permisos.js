@@ -1,6 +1,9 @@
   $(function () {
     jalar_data();
     $('#btnNew').click(function() {
+      $('#fecha_inicio').attr('disabled', false);
+      $('#fecha_culm').attr('disabled', false);
+      $("#form1 input").val("");
       comboselect(null, base_url+'Cpermisos/usuarios_select','Seleccione Personal', 'item.C_I','item.P_nombre','form1','C_I')
 
       $('#modal-overlay').modal('show')
@@ -114,7 +117,7 @@
           <td>${item.dias_perm}</td>
           <td>${item.fecha_inicio}</td>
           <td>${item.fecha_culm}</td>
-          <td class="edi_registro" idr="${item.Cod_perm}"> <i class="fa fa-pencil"></i> </td>
+          <td class="edi_registro" idr="${item.Cod_perm}"> <i class="fa fa-cog"></i> </td>
         </tr>
         `;
       })

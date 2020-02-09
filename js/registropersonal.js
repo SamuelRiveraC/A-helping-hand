@@ -357,11 +357,15 @@ var contadorDetalle = 0;
         <tr><th>Tiempo Privada:</th><td>${data[0].priv_exp_lab} años</td></tr>
         `;
       }
+      var ocup = "";
+      if (data[0].ocupacion_2 != "") {
+        ocup = `<tr><th>Ocupacion extra:</th><td>${data[0].ocupacion_2}</td></tr>`
+      }
       detalle1 += `
       ${dato}
       
       <tr><th>Habilidades:</th><td>${data[0].habilidades}</td></tr>
-      <tr><th>Ocupacion extra:</th><td>${data[0].ocupacion_2}</td></tr>
+      ${ocup}
       ${exp_lab1}
       `;
       var extra = '';

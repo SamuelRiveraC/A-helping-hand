@@ -1,5 +1,6 @@
 $(function () {
   $('#btnNew').click(function() {
+    $("#form1 input").val("");
       comboselect(null, base_url+'Cpermisos/usuarios_select','Seleccione Personal', 'item.C_I','item.P_nombre','form1','C_I')
     $('#modal-overlay').modal('show');
   })

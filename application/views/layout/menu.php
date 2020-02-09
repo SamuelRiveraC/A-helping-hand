@@ -88,7 +88,7 @@
                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <!-- <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?= base_url() ?>casistencia" class="nav-link">
                   <i class="fa fa-clipboard"></i>
@@ -101,7 +101,7 @@
                   <p>Control de Asistencia</p>
                 </a>
               </li>
-            </ul> -->
+            </ul>
           </li>
           <!-- <li class="nav-item">
             <a href="<?= base_url() ?>Creportes" class="nav-link">
