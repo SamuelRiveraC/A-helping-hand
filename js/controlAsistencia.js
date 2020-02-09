@@ -2,7 +2,13 @@ $(function() {
   $('#Buscar').click(function() {
     jalar_data($('#rangofecha').val(), $('#rangofecha1').val())
   })
-
+  $("#get_pdf").click(function () {
+    fecha1 = $('#rangofecha').val().split('/'), fecha2 = $('#rangofecha1').val().split('/');
+    fecha1 = fecha1[0]+'-'+fecha1[1]+'-'+fecha1[2]
+    fecha2 = fecha2[0]+'-'+fecha2[1]+'-'+fecha2[2]
+    // console.log(fecha1);
+    window.open(base_url+`Impresiones/imp_data/${fecha1}/${fecha2}`, '_blank')
+  })
   $('#dataTables-table').on('click','.asistencia',function() {
     var idr = $(this).attr('idr');
     $('#C_I').val(idr);

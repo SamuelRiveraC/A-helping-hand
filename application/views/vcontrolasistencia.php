@@ -9,9 +9,11 @@
         <div class="col-lg-3 col-12 mb-30">
           <input type="text" class="form-control" name="rangofecha1" id="rangofecha1" value="">
         </div>
-        <div class="col-lg-4 col-12">
+        <div class="col-lg-3 col-12">
           <button class="btn btn-primary" type="button" id="Buscar" name="button">Buscar</button>
+          <button style="margin-left:13px;" class="btn btn-default" id="get_pdf"><i class="far fa-file-pdf"></i></button>
         </div>
+
       </div>
     </div>
   </div>
