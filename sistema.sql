@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Dec 03, 2019 at 04:54 PM
--- Server version: 5.7.27-0ubuntu0.18.04.1
--- PHP Version: 7.2.19-0ubuntu0.18.04.2
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 09-02-2020 a las 19:44:27
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sistema`
+-- Base de datos: `sistema`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `amonestaciones`
+-- Estructura de tabla para la tabla `amonestaciones`
 --
 
 CREATE TABLE `amonestaciones` (
@@ -36,30 +38,36 @@ CREATE TABLE `amonestaciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `amonestaciones`
+-- Volcado de datos para la tabla `amonestaciones`
 --
 
 INSERT INTO `amonestaciones` (`Cod_amon`, `Fecha_amon`, `Num_amon`, `Motivo_amon`, `Tipo_amon`, `Emisor_amon`) VALUES
-(2, '2019-11-27', '1', 'Salud\r\n', 'Escrita', ''),
-(3, '2019-12-03', '1', 'ME cae mal', 'Escrita', 'Coordinador');
+(5, '2020-02-09', '1', 'Porque si', 'Escrita', 'Coordinador');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asistencia`
+-- Estructura de tabla para la tabla `asistencia`
 --
 
 CREATE TABLE `asistencia` (
   `asistencia_id` int(11) NOT NULL,
   `Cod_hor_asist` int(100) NOT NULL,
   `total` int(11) NOT NULL,
-  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `Fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `asistencia`
+--
+
+INSERT INTO `asistencia` (`asistencia_id`, `Cod_hor_asist`, `total`, `Fecha`) VALUES
+(3, 3, 1, '2020-02-09 04:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `correo`
+-- Estructura de tabla para la tabla `correo`
 --
 
 CREATE TABLE `correo` (
@@ -69,16 +77,17 @@ CREATE TABLE `correo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `correo`
+-- Volcado de datos para la tabla `correo`
 --
 
 INSERT INTO `correo` (`ID_correo`, `Tipo_correo`, `C_I`) VALUES
-(10, 'marielysaraujof@gmail.com', 27592227);
+(13, 'franciscomaneiro97@gmail.com', 22222222),
+(14, 'franciscomaneiro97@gmail.com', 26237838);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `direccion`
+-- Estructura de tabla para la tabla `direccion`
 --
 
 CREATE TABLE `direccion` (
@@ -93,16 +102,39 @@ CREATE TABLE `direccion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `direccion`
+-- Volcado de datos para la tabla `direccion`
 --
 
 INSERT INTO `direccion` (`Calle`, `Cod_dir`, `Cod_postal`, `Num_calle`, `Num_casa`, `Sector`, `Urb`, `C_I`) VALUES
-('calle', 12, 0, '', '', 'nose', '', 27592227);
+('', 17, 0, '55435', '34534', '', '', 22222222),
+('calle primera', 18, 6054, '', '', 'negro segundo', '', 26237838);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `formacion_academica`
+-- Estructura de tabla para la tabla `experiencia_laboral`
+--
+
+CREATE TABLE `experiencia_laboral` (
+  `id_exp` int(11) NOT NULL,
+  `C_I` int(100) NOT NULL,
+  `exp_lab` int(11) NOT NULL,
+  `oficial_exp_lab` varchar(200) NOT NULL,
+  `priv_exp_lab` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `experiencia_laboral`
+--
+
+INSERT INTO `experiencia_laboral` (`id_exp`, `C_I`, `exp_lab`, `oficial_exp_lab`, `priv_exp_lab`) VALUES
+(4, 22222222, 0, '', ''),
+(5, 26237838, 0, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `formacion_academica`
 --
 
 CREATE TABLE `formacion_academica` (
@@ -113,20 +145,43 @@ CREATE TABLE `formacion_academica` (
   `credencial_titulo` varchar(80) DEFAULT NULL,
   `Actual_instruct` varchar(20) DEFAULT NULL,
   `titulo_fecha` date NOT NULL DEFAULT '2011-01-01',
-  `C_I` int(100) NOT NULL
+  `C_I` int(100) NOT NULL,
+  `nivel_curso` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `formacion_academica`
+-- Volcado de datos para la tabla `formacion_academica`
 --
 
-INSERT INTO `formacion_academica` (`Cod_for_a`, `Titulo`, `Grado_actual_instruc`, `Año_for_a`, `credencial_titulo`, `Actual_instruct`, `titulo_fecha`, `C_I`) VALUES
-(6, 'Bachiller en Ciencia', NULL, '2016', 'EKFGRF4S345S', 'No', '0000-00-00', 27592227);
+INSERT INTO `formacion_academica` (`Cod_for_a`, `Titulo`, `Grado_actual_instruc`, `Año_for_a`, `credencial_titulo`, `Actual_instruct`, `titulo_fecha`, `C_I`, `nivel_curso`) VALUES
+(8, 'tsu', NULL, '1997', '6634534', 'No', '0000-00-00', 22222222, 'tsu'),
+(9, 'tsu', NULL, '1997', '6054879519', 'No', '0000-00-00', 26237838, 'tsu');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `horario`
+-- Estructura de tabla para la tabla `hijos_personal`
+--
+
+CREATE TABLE `hijos_personal` (
+  `id_hijos` int(11) NOT NULL,
+  `C_I` int(100) NOT NULL,
+  `exihijos` enum('No tiene','Tiene') NOT NULL,
+  `gradoCursoHijos` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `hijos_personal`
+--
+
+INSERT INTO `hijos_personal` (`id_hijos`, `C_I`, `exihijos`, `gradoCursoHijos`) VALUES
+(2, 22222222, '', ''),
+(3, 26237838, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `horario`
 --
 
 CREATE TABLE `horario` (
@@ -137,37 +192,31 @@ CREATE TABLE `horario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `horario`
+-- Volcado de datos para la tabla `horario`
 --
 
 INSERT INTO `horario` (`horario_id`, `horas_trab`, `C_I`, `turno`) VALUES
-(9, '8:00 AM - 12:00PM', 27592227, 'Mañana');
+(14, '8:00 AM - 5:00 PM', 22222222, 'Mañana'),
+(15, '8:00 AM - 11:00 PM', 26237838, 'Mañana');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `inasistencia`
+-- Estructura de tabla para la tabla `inasistencia`
 --
 
 CREATE TABLE `inasistencia` (
   `inasistencia_id` int(11) NOT NULL,
   `Cod_inasist` int(100) NOT NULL,
   `total_inasist` int(11) NOT NULL,
-  `fecha_inasist` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_inasist` timestamp NOT NULL DEFAULT current_timestamp(),
   `tipo_inasist` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `inasistencia`
---
-
-INSERT INTO `inasistencia` (`inasistencia_id`, `Cod_inasist`, `total_inasist`, `fecha_inasist`, `tipo_inasist`) VALUES
-(1, 1, 1, '2019-12-03 04:00:00', 'No Justificado');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `instituto`
+-- Estructura de tabla para la tabla `instituto`
 --
 
 CREATE TABLE `instituto` (
@@ -177,16 +226,17 @@ CREATE TABLE `instituto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `instituto`
+-- Volcado de datos para la tabla `instituto`
 --
 
 INSERT INTO `instituto` (`Cod_inst`, `Cod_dir`, `Nombre_inst`) VALUES
-(12, 12, 'Lya Imber del Coroni');
+(17, 17, 'Uptjaa'),
+(18, 18, 'Uptjaa');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `justificacion`
+-- Estructura de tabla para la tabla `justificacion`
 --
 
 CREATE TABLE `justificacion` (
@@ -197,17 +247,10 @@ CREATE TABLE `justificacion` (
   `Cod_perm` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `justificacion`
---
-
-INSERT INTO `justificacion` (`Cod_just`, `Num_just`, `Motivo_just`, `Fecha_just`, `Cod_perm`) VALUES
-(1, 123, 'Salud', '2019-11-27', 0);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permiso`
+-- Estructura de tabla para la tabla `permiso`
 --
 
 CREATE TABLE `permiso` (
@@ -220,10 +263,17 @@ CREATE TABLE `permiso` (
   `fecha_culm` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `permiso`
+--
+
+INSERT INTO `permiso` (`Cod_perm`, `Fecha_perm`, `Tipo_perm`, `Observ_perm`, `dias_perm`, `fecha_inicio`, `fecha_culm`) VALUES
+(1, '2020-02-10', 'prueba1', 'prueba observacion', 58, '2020-02-01', '2020-02-29');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal`
+-- Estructura de tabla para la tabla `personal`
 --
 
 CREATE TABLE `personal` (
@@ -239,25 +289,21 @@ CREATE TABLE `personal` (
   `Tipo_pers` char(20) NOT NULL,
   `habilidades` varchar(300) NOT NULL,
   `ocupacion_2` varchar(200) NOT NULL,
-  `exp_lab` int(11) NOT NULL,
-  `oficial_exp_lab` varchar(200) NOT NULL,
-  `priv_exp_lab` varchar(200) NOT NULL,
-  `exihijos` enum('No tiene','Tiene') NOT NULL,
-  `gradoCursoHijo` varchar(200) NOT NULL,
-  `fecha_ingreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `fecha_ingreso` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `personal`
+-- Volcado de datos para la tabla `personal`
 --
 
-INSERT INTO `personal` (`P_nombre`, `P_apellido`, `C_I`, `Sexo`, `S_nombre`, `S_apellido`, `Estado_civil`, `Edad`, `Fecha_n`, `Tipo_pers`, `habilidades`, `ocupacion_2`, `exp_lab`, `oficial_exp_lab`, `priv_exp_lab`, `exihijos`, `gradoCursoHijo`, `fecha_ingreso`) VALUES
-('Marielys', 'Araujo', 27592227, 'Femenino', 'Jackeline', 'Franco', 'Soltero', 25, '1994-03-09', 'Docente', 'Bilingue', '', 0, '', '', '', '', '2019-12-03 19:34:38');
+INSERT INTO `personal` (`P_nombre`, `P_apellido`, `C_I`, `Sexo`, `S_nombre`, `S_apellido`, `Estado_civil`, `Edad`, `Fecha_n`, `Tipo_pers`, `habilidades`, `ocupacion_2`, `fecha_ingreso`) VALUES
+('frans', 'hidalgo', 22222222, 'Masculino', 'Francisco', 'far', 'Casado', 24, '1996-04-10', 'Administrativo', 'sn', 'ni', '2020-02-01 19:58:23'),
+('Franchesco', 'Pontero', 26237838, 'Masculino', 'Virgolini', 'Mancero', 'Soltero', 24, '1996-04-10', 'Administrativo', 'No presenta', '', '2020-02-09 23:17:53');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_cumple_inasistencia`
+-- Estructura de tabla para la tabla `personal_cumple_inasistencia`
 --
 
 CREATE TABLE `personal_cumple_inasistencia` (
@@ -265,17 +311,10 @@ CREATE TABLE `personal_cumple_inasistencia` (
   `Cod_inasist` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `personal_cumple_inasistencia`
---
-
-INSERT INTO `personal_cumple_inasistencia` (`horario_id`, `Cod_inasist`) VALUES
-(9, 1);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_genera_amonestacion`
+-- Estructura de tabla para la tabla `personal_genera_amonestacion`
 --
 
 CREATE TABLE `personal_genera_amonestacion` (
@@ -284,17 +323,16 @@ CREATE TABLE `personal_genera_amonestacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `personal_genera_amonestacion`
+-- Volcado de datos para la tabla `personal_genera_amonestacion`
 --
 
 INSERT INTO `personal_genera_amonestacion` (`C_I`, `Cod_amon`) VALUES
-(27592227, 2),
-(27592227, 3);
+(22222222, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_lleva_horario`
+-- Estructura de tabla para la tabla `personal_lleva_horario`
 --
 
 CREATE TABLE `personal_lleva_horario` (
@@ -302,10 +340,17 @@ CREATE TABLE `personal_lleva_horario` (
   `Cod_hor_asist` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `personal_lleva_horario`
+--
+
+INSERT INTO `personal_lleva_horario` (`horario_id`, `Cod_hor_asist`) VALUES
+(15, 3);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_solicita_permiso`
+-- Estructura de tabla para la tabla `personal_solicita_permiso`
 --
 
 CREATE TABLE `personal_solicita_permiso` (
@@ -313,10 +358,17 @@ CREATE TABLE `personal_solicita_permiso` (
   `Cod_perm` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `personal_solicita_permiso`
+--
+
+INSERT INTO `personal_solicita_permiso` (`C_I`, `Cod_perm`) VALUES
+(22222222, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_tiene_formacion_acad`
+-- Estructura de tabla para la tabla `personal_tiene_formacion_acad`
 --
 
 CREATE TABLE `personal_tiene_formacion_acad` (
@@ -328,7 +380,7 @@ CREATE TABLE `personal_tiene_formacion_acad` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_tiene_justificacion`
+-- Estructura de tabla para la tabla `personal_tiene_justificacion`
 --
 
 CREATE TABLE `personal_tiene_justificacion` (
@@ -336,17 +388,10 @@ CREATE TABLE `personal_tiene_justificacion` (
   `Cod_just` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `personal_tiene_justificacion`
---
-
-INSERT INTO `personal_tiene_justificacion` (`C_I`, `Cod_just`) VALUES
-(27592227, 1);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `telefono`
+-- Estructura de tabla para la tabla `telefono`
 --
 
 CREATE TABLE `telefono` (
@@ -358,17 +403,18 @@ CREATE TABLE `telefono` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `telefono`
+-- Volcado de datos para la tabla `telefono`
 --
 
 INSERT INTO `telefono` (`Cod_telf`, `Tipo_telf`, `Area_telf`, `Num_telf`, `C_I`) VALUES
-(15, 'Celular', '0416', 581646, 27592227),
-(16, 'Celular', '0416', 581646, 27592227);
+(22, 'Casa', '0283', 2552845, 22222222),
+(23, 'Celular', '0414', 8327690, 22222222),
+(24, 'Casa', '0414', 8288954, 26237838);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -387,141 +433,155 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`Nom_usuario`, `ID_usuario`, `Tipo_cuenta`, `Password`, `Intento`, `Preg_1`, `Preg_2`, `Preg_3`, `Res_1`, `Res_2`, `Res_3`, `C_I`) VALUES
-('marielys', 1, 'Administrador', 1234, 1, '45', '454', '45', '45', '45', '45', 27592227);
+('franss', 3, 'Administrador', 123456, 0, '45', '45', '45', '45', '45', '45', 22222222);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `amonestaciones`
+-- Indices de la tabla `amonestaciones`
 --
 ALTER TABLE `amonestaciones`
   ADD PRIMARY KEY (`Cod_amon`);
 
 --
--- Indexes for table `asistencia`
+-- Indices de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
   ADD PRIMARY KEY (`asistencia_id`),
   ADD KEY `Cod_hor_asist` (`Cod_hor_asist`);
 
 --
--- Indexes for table `correo`
+-- Indices de la tabla `correo`
 --
 ALTER TABLE `correo`
   ADD PRIMARY KEY (`ID_correo`),
   ADD KEY `C_I` (`C_I`) USING BTREE;
 
 --
--- Indexes for table `direccion`
+-- Indices de la tabla `direccion`
 --
 ALTER TABLE `direccion`
   ADD PRIMARY KEY (`Cod_dir`),
   ADD KEY `C_I` (`C_I`);
 
 --
--- Indexes for table `formacion_academica`
+-- Indices de la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  ADD PRIMARY KEY (`id_exp`),
+  ADD KEY `C_I` (`C_I`);
+
+--
+-- Indices de la tabla `formacion_academica`
 --
 ALTER TABLE `formacion_academica`
   ADD PRIMARY KEY (`Cod_for_a`),
   ADD KEY `C.I` (`C_I`);
 
 --
--- Indexes for table `horario`
+-- Indices de la tabla `hijos_personal`
+--
+ALTER TABLE `hijos_personal`
+  ADD PRIMARY KEY (`id_hijos`),
+  ADD KEY `C_I` (`C_I`);
+
+--
+-- Indices de la tabla `horario`
 --
 ALTER TABLE `horario`
   ADD PRIMARY KEY (`horario_id`),
   ADD KEY `C_I` (`C_I`);
 
 --
--- Indexes for table `inasistencia`
+-- Indices de la tabla `inasistencia`
 --
 ALTER TABLE `inasistencia`
   ADD PRIMARY KEY (`inasistencia_id`),
   ADD KEY `Cod_inasist` (`Cod_inasist`);
 
 --
--- Indexes for table `instituto`
+-- Indices de la tabla `instituto`
 --
 ALTER TABLE `instituto`
   ADD PRIMARY KEY (`Cod_inst`),
   ADD KEY `Cod_dir` (`Cod_dir`);
 
 --
--- Indexes for table `justificacion`
+-- Indices de la tabla `justificacion`
 --
 ALTER TABLE `justificacion`
   ADD PRIMARY KEY (`Cod_just`),
   ADD KEY `Cod_perm` (`Cod_perm`);
 
 --
--- Indexes for table `permiso`
+-- Indices de la tabla `permiso`
 --
 ALTER TABLE `permiso`
   ADD PRIMARY KEY (`Cod_perm`);
 
 --
--- Indexes for table `personal`
+-- Indices de la tabla `personal`
 --
 ALTER TABLE `personal`
   ADD PRIMARY KEY (`C_I`);
 
 --
--- Indexes for table `personal_cumple_inasistencia`
+-- Indices de la tabla `personal_cumple_inasistencia`
 --
 ALTER TABLE `personal_cumple_inasistencia`
   ADD PRIMARY KEY (`Cod_inasist`),
   ADD KEY `horario_id` (`horario_id`);
 
 --
--- Indexes for table `personal_genera_amonestacion`
+-- Indices de la tabla `personal_genera_amonestacion`
 --
 ALTER TABLE `personal_genera_amonestacion`
   ADD KEY `C.I` (`C_I`,`Cod_amon`),
   ADD KEY `Cod_amon` (`Cod_amon`);
 
 --
--- Indexes for table `personal_lleva_horario`
+-- Indices de la tabla `personal_lleva_horario`
 --
 ALTER TABLE `personal_lleva_horario`
   ADD PRIMARY KEY (`Cod_hor_asist`),
   ADD KEY `horario_id` (`horario_id`);
 
 --
--- Indexes for table `personal_solicita_permiso`
+-- Indices de la tabla `personal_solicita_permiso`
 --
 ALTER TABLE `personal_solicita_permiso`
   ADD KEY `C.I` (`C_I`,`Cod_perm`),
   ADD KEY `Cod_perm` (`Cod_perm`);
 
 --
--- Indexes for table `personal_tiene_formacion_acad`
+-- Indices de la tabla `personal_tiene_formacion_acad`
 --
 ALTER TABLE `personal_tiene_formacion_acad`
   ADD KEY `C.I` (`C_I`,`Cod_for_a`,`Fecha_for`),
   ADD KEY `Cod_for_a` (`Cod_for_a`);
 
 --
--- Indexes for table `personal_tiene_justificacion`
+-- Indices de la tabla `personal_tiene_justificacion`
 --
 ALTER TABLE `personal_tiene_justificacion`
   ADD KEY `C_I` (`C_I`),
   ADD KEY `Cod_just` (`Cod_just`);
 
 --
--- Indexes for table `telefono`
+-- Indices de la tabla `telefono`
 --
 ALTER TABLE `telefono`
   ADD PRIMARY KEY (`Cod_telf`),
   ADD KEY `C.I` (`C_I`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`ID_usuario`),
@@ -529,176 +589,215 @@ ALTER TABLE `usuario`
   ADD KEY `C_I` (`C_I`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `amonestaciones`
+-- AUTO_INCREMENT de la tabla `amonestaciones`
 --
 ALTER TABLE `amonestaciones`
-  MODIFY `Cod_amon` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Cod_amon` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
--- AUTO_INCREMENT for table `asistencia`
+-- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `asistencia_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `asistencia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `correo`
+-- AUTO_INCREMENT de la tabla `correo`
 --
 ALTER TABLE `correo`
-  MODIFY `ID_correo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_correo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
--- AUTO_INCREMENT for table `direccion`
+-- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `Cod_dir` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Cod_dir` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
--- AUTO_INCREMENT for table `formacion_academica`
+-- AUTO_INCREMENT de la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  MODIFY `id_exp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `formacion_academica`
 --
 ALTER TABLE `formacion_academica`
-  MODIFY `Cod_for_a` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Cod_for_a` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
--- AUTO_INCREMENT for table `horario`
+-- AUTO_INCREMENT de la tabla `hijos_personal`
+--
+ALTER TABLE `hijos_personal`
+  MODIFY `id_hijos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `horario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `horario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
--- AUTO_INCREMENT for table `inasistencia`
+-- AUTO_INCREMENT de la tabla `inasistencia`
 --
 ALTER TABLE `inasistencia`
-  MODIFY `inasistencia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `inasistencia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `instituto`
+-- AUTO_INCREMENT de la tabla `instituto`
 --
 ALTER TABLE `instituto`
-  MODIFY `Cod_inst` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Cod_inst` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
--- AUTO_INCREMENT for table `justificacion`
+-- AUTO_INCREMENT de la tabla `justificacion`
 --
 ALTER TABLE `justificacion`
-  MODIFY `Cod_just` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Cod_just` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `permiso`
+-- AUTO_INCREMENT de la tabla `permiso`
 --
 ALTER TABLE `permiso`
-  MODIFY `Cod_perm` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Cod_perm` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
--- AUTO_INCREMENT for table `personal_cumple_inasistencia`
+-- AUTO_INCREMENT de la tabla `personal_cumple_inasistencia`
 --
 ALTER TABLE `personal_cumple_inasistencia`
-  MODIFY `Cod_inasist` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Cod_inasist` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `personal_lleva_horario`
+-- AUTO_INCREMENT de la tabla `personal_lleva_horario`
 --
 ALTER TABLE `personal_lleva_horario`
-  MODIFY `Cod_hor_asist` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Cod_hor_asist` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `telefono`
+-- AUTO_INCREMENT de la tabla `telefono`
 --
 ALTER TABLE `telefono`
-  MODIFY `Cod_telf` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `Cod_telf` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_usuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_usuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `asistencia`
+-- Filtros para la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
   ADD CONSTRAINT `asistencia_ibfk_1` FOREIGN KEY (`Cod_hor_asist`) REFERENCES `personal_lleva_horario` (`Cod_hor_asist`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `correo`
+-- Filtros para la tabla `correo`
 --
 ALTER TABLE `correo`
   ADD CONSTRAINT `correo_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `direccion`
+-- Filtros para la tabla `direccion`
 --
 ALTER TABLE `direccion`
   ADD CONSTRAINT `direccion_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `formacion_academica`
+-- Filtros para la tabla `experiencia_laboral`
+--
+ALTER TABLE `experiencia_laboral`
+  ADD CONSTRAINT `experiencia_laboral_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `formacion_academica`
 --
 ALTER TABLE `formacion_academica`
   ADD CONSTRAINT `formacion_academica_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `horario`
+-- Filtros para la tabla `hijos_personal`
+--
+ALTER TABLE `hijos_personal`
+  ADD CONSTRAINT `hijos_personal_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `horario`
 --
 ALTER TABLE `horario`
   ADD CONSTRAINT `horario_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `inasistencia`
+-- Filtros para la tabla `inasistencia`
 --
 ALTER TABLE `inasistencia`
   ADD CONSTRAINT `inasistencia_ibfk_1` FOREIGN KEY (`Cod_inasist`) REFERENCES `personal_cumple_inasistencia` (`Cod_inasist`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `instituto`
+-- Filtros para la tabla `instituto`
 --
 ALTER TABLE `instituto`
   ADD CONSTRAINT `instituto_ibfk_1` FOREIGN KEY (`Cod_dir`) REFERENCES `direccion` (`Cod_dir`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `personal_cumple_inasistencia`
+-- Filtros para la tabla `personal_cumple_inasistencia`
 --
 ALTER TABLE `personal_cumple_inasistencia`
   ADD CONSTRAINT `personal_cumple_inasistencia_ibfk_1` FOREIGN KEY (`horario_id`) REFERENCES `horario` (`horario_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `personal_genera_amonestacion`
+-- Filtros para la tabla `personal_genera_amonestacion`
 --
 ALTER TABLE `personal_genera_amonestacion`
   ADD CONSTRAINT `personal_genera_amonestacion_ibfk_1` FOREIGN KEY (`Cod_amon`) REFERENCES `amonestaciones` (`Cod_amon`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_genera_amonestacion_ibfk_2` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `personal_lleva_horario`
+-- Filtros para la tabla `personal_lleva_horario`
 --
 ALTER TABLE `personal_lleva_horario`
   ADD CONSTRAINT `personal_lleva_horario_ibfk_1` FOREIGN KEY (`horario_id`) REFERENCES `horario` (`horario_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `personal_solicita_permiso`
+-- Filtros para la tabla `personal_solicita_permiso`
 --
 ALTER TABLE `personal_solicita_permiso`
   ADD CONSTRAINT `personal_solicita_permiso_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_solicita_permiso_ibfk_2` FOREIGN KEY (`Cod_perm`) REFERENCES `permiso` (`Cod_perm`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `personal_tiene_formacion_acad`
+-- Filtros para la tabla `personal_tiene_formacion_acad`
 --
 ALTER TABLE `personal_tiene_formacion_acad`
   ADD CONSTRAINT `personal_tiene_formacion_acad_ibfk_1` FOREIGN KEY (`Cod_for_a`) REFERENCES `formacion_academica` (`Cod_for_a`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_tiene_formacion_acad_ibfk_2` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `personal_tiene_justificacion`
+-- Filtros para la tabla `personal_tiene_justificacion`
 --
 ALTER TABLE `personal_tiene_justificacion`
   ADD CONSTRAINT `personal_tiene_justificacion_ibfk_1` FOREIGN KEY (`Cod_just`) REFERENCES `justificacion` (`Cod_just`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_tiene_justificacion_ibfk_2` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `telefono`
+-- Filtros para la tabla `telefono`
 --
 ALTER TABLE `telefono`
   ADD CONSTRAINT `telefono_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `usuario`
+-- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

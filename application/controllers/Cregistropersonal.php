@@ -66,16 +66,21 @@ class Cregistropersonal extends CI_Controller
 					'Edad' => $edad,
 					'habilidades' =>  $this->input->post('habilidades'),
 					'ocupacion_2' =>  $this->input->post('ocupacion_2'),
-					'exp_lab' =>  $this->input->post('exp_lab'),
-					'ExiHijos' => $this->input->post('ExiHijos'),
-					'gradoCursoHijo' => $this->input->post('gradoCursoHijo'),
 					'fecha_ingreso' => date('Y-m-d H:i:s'),
 				);
+				$datosHijos = array(
+					'C_I' => $this->input->post('C_I'),
+					'ExiHijos' => $this->input->post('ExiHijos'),
+					'gradoCursoHijos' => $this->input->post('gradoCursoHijo'),
+				);
+				$datosExp = array(
+					'C_I' => $this->input->post('C_I'),
+					'exp_lab' =>  $this->input->post('exp_lab'),
+				);
 				if ($this->input->post('exp_lab') != 0) {
-					$param['oficial_exp_lab'] = $this->input->post('oficial_exp_lab');
-					$param['priv_exp_lab'] = $this->input->post('priv_exp_lab');
+					$datosExp['oficial_exp_lab'] = $this->input->post('oficial_exp_lab');
+					$datosExp['priv_exp_lab'] = $this->input->post('priv_exp_lab');
 				}
-	
 				$res = $this->Mregistropersonal->guardar($param);
 				$datosdireccion = array(
 					'C_I' => $this->input->post('C_I'),
@@ -131,6 +136,8 @@ class Cregistropersonal extends CI_Controller
 					$this->Mregistropersonal->telefono($telefono1);
 				}
 				$this->Mregistropersonal->correo($correo);
+				$this->Mregistropersonal->datosHijos($datosHijos);
+				$this->Mregistropersonal->datosExp($datosExp);
 				$res = $this->Mregistropersonal->datos_formacion($datosformacion);
 				$res = array(
 					'exito' => true,
@@ -168,13 +175,17 @@ class Cregistropersonal extends CI_Controller
 					'Edad' => $edad,
 					'habilidades' =>  $this->input->post('habilidades'),
 					'ocupacion_2' =>  $this->input->post('ocupacion_2'),
-					'exp_lab' =>  $this->input->post('exp_lab'),
+				);
+				$datosHijos = array(
 					'ExiHijos' => $this->input->post('ExiHijos'),
-					'gradoCursoHijo' => $this->input->post('gradoCursoHijo'),
+					'gradoCursoHijos' => $this->input->post('gradoCursoHijo'),
+				);
+				$datosExp = array(
+					'exp_lab' =>  $this->input->post('exp_lab'),
 				);
 				if ($this->input->post('exp_lab') != 0) {
-					$paramact['oficial_exp_lab'] = $this->input->post('oficial_exp_lab');
-					$paramact['priv_exp_lab'] = $this->input->post('priv_exp_lab');
+					$datosExp['oficial_exp_lab'] = $this->input->post('oficial_exp_lab');
+					$datosExp['priv_exp_lab'] = $this->input->post('priv_exp_lab');
 				}
 				$datosdireccion = array(
 					'Calle' => $this->input->post('Calle'),
@@ -225,7 +236,8 @@ class Cregistropersonal extends CI_Controller
 				if($telefono1!=false){
 					$this->Mregistropersonal->upd_telefono($telefono1,$this->input->post('idr'),$tipo_);
 				}
-				
+				$this->Mregistropersonal->upd_datosHijos($datosHijos,$this->input->post('idr'));
+				$this->Mregistropersonal->upd_datosExp($datosExp,$this->input->post('idr'));
 				$this->Mregistropersonal->upd_correo($correo,$this->input->post('idr'));
 				$this->Mregistropersonal->upd_formacion_academica($datosformacion,$this->input->post('idr'));
 				$res = $this->Mregistropersonal->upd_guardar($paramact,$this->input->post('idr'));
