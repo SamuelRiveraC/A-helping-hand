@@ -1,13 +1,13 @@
 $(function () {
   $('#btnNew').click(function() {
-    $("#form1 input").val("");
+    $("#form1 input").val(""); // Nueva Amonestacion 
       comboselect(null, base_url+'Cpermisos/usuarios_select','Seleccione Personal', 'item.C_I','item.P_nombre','form1','C_I')
     $('#modal-overlay').modal('show');
   })
 
   jalar_data();
 
-  $('#form1').submit(function(e) {
+  $('#form1').submit(function(e) { //Enviar datos Nueva Amonestacion
       e.preventDefault()
       $('#Act').attr('disabled',true);
       $.ajax({
@@ -29,7 +29,7 @@ $(function () {
 })
 
 
-function jalar_data() {
+function jalar_data() { // Trae los datos de amonestacion
   var content_asistentes = ''
   $('#amonestacion').DataTable().destroy();
   $.getJSON(base_url+'Camonestacion/list_amonestacion',function(data) {
@@ -45,6 +45,7 @@ function jalar_data() {
       </tr>
       `
     });
+    // Inicializacion de los DataTables
     $('#dataTables-table').html(content_asistentes)
     $('#amonestacion').DataTable({
       "responsive": true,

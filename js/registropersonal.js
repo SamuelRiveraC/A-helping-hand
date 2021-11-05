@@ -2,6 +2,7 @@ var contador = 0;
 var contadorDetalle = 0;
   $(function () {
     jalar_data();
+    //nuevo registro de personal
     $('#btnNew').click(function() {
       contador = 0;
       view(contador);
@@ -13,13 +14,13 @@ var contadorDetalle = 0;
       $('#modal-overlay').modal('show')
       $('#accion').val('creado');
     })
-  
+    //click de sig pagina en modal de registro
     $('#sigPag').click(function() {
         contador += 1;
         view(contador);
 
     });
-
+    // click de pagina anterior de registro
     $('#antPag').click(function() {
       contador -= 1;
       if (contador == 0) {
@@ -38,12 +39,12 @@ var contadorDetalle = 0;
       } 
     });
 
-
+    //sig pagina en detalle
     $('#sigPagDet').click(function() {
         contadorDetalle += 1;
         view_det(contadorDetalle); 
     });
-  
+  //anterior pagina en detalle
     $('#antPagDet').click(function() {
       contadorDetalle -= 1;
       if (contadorDetalle == 0) {
@@ -61,7 +62,7 @@ var contadorDetalle = 0;
         $('#Guardar').hide();
       }
     });
-
+//control de cambio en inputs de zona urb
     $('#seleccione').change(function(){
       var estado = $(this).val();
       if (estado != '') {
@@ -77,7 +78,7 @@ var contadorDetalle = 0;
         $('#Urb').hide();
       } 
     });
-    
+    //control de cambio en inputs de experiencia laboral
     $('#exp_lab').change(function(){
       var value = $(this).val();
       if (value != "") {
@@ -90,7 +91,7 @@ var contadorDetalle = 0;
         $('#exp_lab_extra').hide();
       }
     });
-
+//control de cambio en inputs de actual instruc
     $('#Actual_instruct').change(function(){
       var value = $(this).val();
       if (value != "") {
@@ -103,7 +104,7 @@ var contadorDetalle = 0;
         $('#extra_estudio').hide();
       }
     });
-
+//editar registro
     $('#dataTables-table').on('click','.edi_registro',function(e) {
       e.preventDefault()
       $("#C_I").attr('disabled', true)
@@ -115,7 +116,7 @@ var contadorDetalle = 0;
       modalData(idr)
       $('#modal-overlay').modal('show')
     })
-
+//ver registro
     $('#dataTables-table').on('click','.ver_registro',function(e) {
       e.preventDefault()
       contadorDetalle = 0;
@@ -128,7 +129,7 @@ var contadorDetalle = 0;
       modalData(idr)
       $('#modal_ver').modal('show')
     })
-
+//borrar registro
     $('#dataTables-table').on('click','.bor_registro',function(e) {
       e.preventDefault()
 
@@ -141,7 +142,7 @@ var contadorDetalle = 0;
     $('#eli_btn').click(function() {
       $('#form1').submit()
     });
-
+//control de cambio en inputs de existencia hijos
     $('#ExiHijos').change(function(){
       var value = $(this).val();
       if (value != "") {
@@ -154,7 +155,7 @@ var contadorDetalle = 0;
         $('#GradoHijo').hide();
       }
     });
-
+//envio de formulario para enviar editar y eliminar
     $('#form1').submit(function(e) {
         e.preventDefault()
         $('#Guardar').attr('disabled',true);
@@ -207,6 +208,7 @@ var contadorDetalle = 0;
       direction: 'YYYY-MM-DD',
     }
   });
+  //calcular contador para la vista del modal
   function view(contador) {
     if (contador == 1) {
       $('#antPag').show();
@@ -226,7 +228,7 @@ var contadorDetalle = 0;
       $('#antPag').hide();
     }
   }
-
+//reiniciar la vista del modal
   function reset_view() {
       $('#datosPer').show();
       $('#direccion').hide();
@@ -235,6 +237,7 @@ var contadorDetalle = 0;
       $('#Guardar').hide();
       $('#antPag').hide();
   }
+  //calcular la vista de detalle en el modal detalle
   function view_det(contadorDetalle) {
     if (contadorDetalle == 1) {
       $('#antPagDet').show();
@@ -255,6 +258,7 @@ var contadorDetalle = 0;
       $('#antPagDet').hide();
     }
   }
+  //rellenar datos para ver mas en modal y editar
   function modalData(idr) {
     var detalle = '';
     var detalle1 = "";
@@ -401,7 +405,7 @@ var contadorDetalle = 0;
   }
 
 
-  function jalar_data() {
+  function jalar_data() { //trae datos de personales creados
     var content = '';
     $.getJSON(base_url+'Cregistropersonal/listar',function(data) {
       $.each(data, function(i,item) {
@@ -420,6 +424,7 @@ var contadorDetalle = 0;
         </tr>
         `;
       });
+      //inicializacion de la datatable
       $('#dataTables-table').html(content)
       $('#Personal').DataTable({
         "responsive": true,

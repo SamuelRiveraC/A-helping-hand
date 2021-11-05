@@ -1,5 +1,6 @@
   $(function () {
     jalar_data();
+    // nuevo permiso
     $('#btnNew').click(function() {
       $('#fecha_inicio').attr('disabled', false);
       $('#fecha_culm').attr('disabled', false);
@@ -10,7 +11,7 @@
       $('#accion').val('creado')
 
     })
-
+    //editar permiso
     $('#dataTables-table').on('click','.edi_registro',function(e) {
       e.preventDefault()
       $('#fecha_inicio').attr('disabled',true);
@@ -20,6 +21,7 @@
       modalData(idr)
       $('#modal-overlay').modal('show')
     })
+    //ver permiso
     $('#dataTables-table').on('click','.ver_registro',function(e) {
       e.preventDefault()
 
@@ -36,7 +38,7 @@
     })
 
 
-
+    //envio de formulario de permiso
     $('#form1').submit(function(e) {
         e.preventDefault()
         $('#Act').attr('disabled',true);
@@ -78,7 +80,7 @@
 
   });
 
-
+  //estructurar modal ver
   function modalData(cod_perm) {
     var detalle = '';
     $.getJSON(base_url+'Cpermisos/listar/'+cod_perm,function(data) {
@@ -103,7 +105,7 @@
   }
 
 
-  function jalar_data() {
+  function jalar_data() {//traer datos de tabla
     var content = '';
     $.getJSON(base_url+'Cpermisos/listar',function(data) {
       // console.log(data)
@@ -121,6 +123,7 @@
         </tr>
         `;
       })
+      //inicializar datatable
       $('#dataTables-table').html(content)
       $('#usuario').DataTable({
         "responsive": true,

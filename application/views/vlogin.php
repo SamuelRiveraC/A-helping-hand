@@ -47,15 +47,6 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Recuerdame
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
           </div>
@@ -67,9 +58,6 @@
       <p class="mb-1">
         <a href="#" id='lost_pas'>¿Ha olvidado su contraseña?</a><br>
         
-      </p>
-      <p class="mb-0">
-        <a href="register.html" class="text-center"></a>
       </p>
           <?php echo $mensaje;?>
 
@@ -148,7 +136,6 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" id='recu'>Recuperar</button>
             </div>
           </div>
           <!-- /.modal-content -->

@@ -21,7 +21,6 @@ class Impresiones extends CI_controller {
         $fech1 = $fech1[2]."-".$fech1[1]."-".$fech1[0];
 
         $html = $this->create_pdf($fech1, $fech2);
-        //  echo $html;
         $this->load->library('DomP');
         $this->domp->loadHtml($html);
 
@@ -36,6 +35,20 @@ class Impresiones extends CI_controller {
     public function create_pdf($fech1, $fech2)
     {
         $data = $this->Modelo_pdf->get_data($fech1, $fech2);
+        $datos = "";
+        
+        foreach ($data as $key => $value) {
+          $datos = $datos . 
+            "
+            <tr>
+            <td></td>
+            <td style='text-align: left'>".$value['nombre']."</td>
+            <td style='text-align: left'>".$value['C_I']."</td>
+            <td>".$value['inasistencia']."</td>
+            <td>".$value['asistencia']."</td>
+            </tr>
+            ";
+         }
 
         $html = "
         <!DOCTYPE html>
@@ -124,18 +137,14 @@ class Impresiones extends CI_controller {
             <th></th>
             <th style='text-align: left'>Nombre</th>
             <th style='text-align: left'>Cedula</th>
-            <th>Asistencias</th>
             <th>Inasistencias</th>
+            <th>Asistencias</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-          <td></td>
-          <td style='text-align: left'>".$data['nombre']."</td>
-          <td style='text-align: left'>".$data['C_I']."</td>
-          <td>".$data['inasistencia']."</td>
-          <td>".$data['asistencia']."</td>
-          </tr>
+
+          ".$datos."
+
           </tbody>
          
         </body>

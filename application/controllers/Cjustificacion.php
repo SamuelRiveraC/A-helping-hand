@@ -9,7 +9,7 @@ class Cjustificacion extends CI_Controller
     parent::__construct();
     $this->load->model('Mjustificacion');
   }
-  public function index()
+  public function index() //La funcion predeterminada al momento de llamar al controlador
   {
 		$menu = array();
 		$datos = array();
@@ -17,6 +17,7 @@ class Cjustificacion extends CI_Controller
 		$datos['submenu'] = 'Cregistropersonal';
 		$menu = array('datos' => $datos);
     if ($this->session->userdata('Login')) {
+     //Division de Vista General en vistas pequeñas 
       $this->load->view('layout/header');
       $this->load->view('layout/menu',$menu);
       $this->load->view('vjustificacion');
@@ -26,9 +27,9 @@ class Cjustificacion extends CI_Controller
     }
   }
 
-  public function list()
+  public function listar() // Lista las justificaciones del personal
   {
-    $res = $this->Mjustificacion->list();
+    $res = $this->Mjustificacion->listar();
     $this->output->set_content_type('application/json')
     ->set_output(json_encode($res));
   }

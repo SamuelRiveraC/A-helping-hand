@@ -3,6 +3,10 @@ $(function() {
 
   $('#dataTables-table').on('click','.asistencia',function() {
     var idr = $(this).attr('idr');
+    $('#form1 #asistencia').val("");
+    $('#oculto_justificado').hide();
+    $('#oculto_inasistencia').hide()
+    $('#oculto_asistencia').hide()
     $('#C_I').val(idr);
     $('#modal-overlay').modal('show');
   })
@@ -43,15 +47,16 @@ $(function() {
 
   $('#form1 #asistencia').on('change',function() {
     if ($(this).val() != '') {
-      console.log($(this).val())
       if ($(this).val() == 'Asistente') {
         $('#oculto_asistencia').show()
+        $('#oculto_justificado').hide();
         $('#oculto_inasistencia').hide()
         $('#Act').attr('disabled',false)
       } else {
         $('#Act').attr('disabled',false)
         $('#oculto_asistencia').hide()
         $('#oculto_inasistencia').show()
+        $('#form1 #tipo_inasistencia').trigger("change");
       }
     } else {
       $('#Act').attr('disabled',true)

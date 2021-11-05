@@ -1,7 +1,9 @@
 $(function() {
+  //Buscar por rango de fecha 
   $('#Buscar').click(function() {
     jalar_data($('#rangofecha').val(), $('#rangofecha1').val())
   })
+  // Mostrar PDF en el rango de fecha
   $("#get_pdf").click(function () {
     fecha1 = $('#rangofecha').val().split('/'), fecha2 = $('#rangofecha1').val().split('/');
     fecha1 = fecha1[0]+'-'+fecha1[1]+'-'+fecha1[2]
@@ -9,11 +11,7 @@ $(function() {
     // console.log(fecha1);
     window.open(base_url+`Impresiones/imp_data/${fecha1}/${fecha2}`, '_blank')
   })
-  $('#dataTables-table').on('click','.asistencia',function() {
-    var idr = $(this).attr('idr');
-    $('#C_I').val(idr);
-    $('#modal-overlay').modal('show');
-  })
+ // Inicialiacion de datatables
 
   $('#rangofecha').daterangepicker({
     opens: 'left',
@@ -33,31 +31,12 @@ $(function() {
     }
   });
 
-  $('#form1').submit(function(e) {
-      e.preventDefault()
-      $('#Act').attr('disabled',true);
-      $.ajax({
-        url:`${base_url}Casistencia/ins_datos`,
-        data : $('#form1').serialize(),
-        type: 'POST',
-        success:function(data){
-          $('#Act').attr('disabled',false);
-          jalar_data();
-          $('#modal_borrar').modal('hide')
-          $("#modal-overlay").modal("hide");
-        },
-        error:function(data) {
-          $('#Act').attr('disabled',false);
-          alert('Error!','Hubo un error en el proceso','error')
-        }
-      })
-    })
 
 
 
 
 })
-
+// Rango fecha
 function formatFirstDate(date) {
   var monthNames = [
     "January", "February", "March",
@@ -77,12 +56,18 @@ function formatFirstDate(date) {
   return day + '-' + monthNumber[monthIndex] + '-' + year;
 }
 
-
+//Traer datos de rango fecha
 function jalar_data(rangofecha,rangofecha1) {
   var content_asistentes = '', content_inasistencia = ''
   $('#inasistencia').DataTable().destroy();
   $('#asistencia').DataTable().destroy();
   $.post(base_url+'Casistencia/count_list_personal',{rangofecha:rangofecha,rangofecha1:rangofecha1},function(data) {
+    if (Object.keys(data.asistencia).length == 0 && Object.keys(data.inasistencia).length == 0){
+      $("#get_pdf").attr('disabled', true);
+   }else{
+      $("#get_pdf").attr('disabled', false);
+   } 
+   // Recorre los datos para llenar la datatable
     $.each(data.asistencia, function(i,item) {
       content_asistentes += `
       <tr>
@@ -92,6 +77,7 @@ function jalar_data(rangofecha,rangofecha1) {
       </tr>
       `
     })
+    // Recorre los datos para llenar la datatable
     $.each(data.inasistencia, function(i,item) {
       content_inasistencia += `
       <tr>
@@ -101,6 +87,7 @@ function jalar_data(rangofecha,rangofecha1) {
       </tr>
       `
     })
+    //Inicializacion de datatables
     $('#dataTables-inasistencia').html(content_inasistencia)
     $('#dataTables-asistencia').html(content_asistentes)
     $('#inasistencia').DataTable({

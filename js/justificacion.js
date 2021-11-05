@@ -5,9 +5,9 @@
 
 
 
-  function jalar_data() {
+  function jalar_data() { //Traer datos de justificacion 
     var content = '';
-    $.getJSON(base_url+'Cjustificacion/list',function(data) {
+    $.getJSON(base_url+'Cjustificacion/listar',function(data) {
       // console.log(data)
       $.each(data, function(i,item) {
         content += `
@@ -19,7 +19,7 @@
         </tr>
         `;
       })
-      $('#dataTables-table').html(content)
+      $('#dataTables-table').html(content) // Inicializacion de datatables
       $('#justificacion').DataTable({
         "responsive": true,
         "language": {

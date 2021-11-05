@@ -7,7 +7,7 @@ class Chome extends CI_controller
     parent::__construct();
   }
 
-  public function index()
+  public function index() //La funcion predeterminada al momento de llamar al controlador
   {
       $menu = array();
       $datos = array();

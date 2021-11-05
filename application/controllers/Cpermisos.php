@@ -10,13 +10,14 @@ class Cpermisos extends CI_Controller
     $this->load->model('Mpermisos');
   }
 
-  public function index()
+  public function index()// La funcion predeterminada al momento de llamar al controlador
   {
 		$menu = array();
 		$datos = array();
 		$datos['menu'] = 'Personal';
 		$datos['submenu'] = 'Cregistropersonal';
 		$menu = array('datos' => $datos);
+    //Division de Vista General en vistas pequeñas
     if ($this->session->userdata('Login')) {
       $this->load->view('layout/header');
       $this->load->view('layout/menu',$menu);
@@ -27,14 +28,14 @@ class Cpermisos extends CI_Controller
     }
   }
 
-  public function listar($id=null)
+  public function listar($id=null) // Lista los permisos de personal
   {
     $res = $this->Mpermisos->listar($id);
     $this->output->set_content_type('application/json')
     ->set_output(json_encode($res));
   }
 
-  public function ins()
+  public function ins() //Inserta datos de permiso
   {
     $datos = array(
       'Fecha_perm' => $this->input->post('Fecha_perm'),
@@ -58,7 +59,7 @@ class Cpermisos extends CI_Controller
     ->set_output(json_encode($res));
   }
 
-  public function upd()
+  public function upd() // Actualiza el permiso
   {
     $datos = array(
       'Fecha_perm' => $this->input->post('Fecha_perm'),
@@ -71,7 +72,7 @@ class Cpermisos extends CI_Controller
     ->set_output(json_encode($res));
   }
 
-  public function usuarios_select()
+  public function usuarios_select() // Listar de comboselect de personal 
   {
     $res = $this->Mpermisos->usuarios_select();
     $this->output->set_content_type('application/json')

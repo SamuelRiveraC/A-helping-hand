@@ -15,7 +15,7 @@
           <img src="" >
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a>Unidad Educativa Padre Pio</a>
         </div>
       </div>
 
@@ -38,6 +38,13 @@
                   <p>Usuarios</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="<?= base_url() ?>cbackup" class="nav-link">
+                  <i class="fa fa-database"></i>
+                  <p>Base de datos</p>
+                </a>
+              </li>
             </ul>
           </li>
           <?php endif; ?>
@@ -50,12 +57,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview" >
+              <?php if ($this->session->userdata("Login")['session_Tipo'] == "Administrador"): ?>
               <li class="nav-item">
                 <a href="<?= base_url() ?>cregistropersonal"class="nav-link">
                   <i class="fa fa-user-plus"></i>
                   <p>Nuevo Personal</p>
                 </a>
               </li>
+            <?php endif; ?>
               <li class="nav-item">
                 <a href="<?= base_url() ?>Cjustificacion" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

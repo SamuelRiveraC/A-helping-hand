@@ -3,7 +3,7 @@
  */
 class Mpermisos extends CI_Model
 {
-  public function listar($id)
+  public function listar($id) // Lista el permiso del personal
   {
     $and = "";
     if ($id != null) {
@@ -18,7 +18,7 @@ class Mpermisos extends CI_Model
     }
   }
 
-  public function usuarios_select()
+  public function usuarios_select() // Lista para el comboselect de personal
   {
     $this->db->select('C_I,P_nombre');
     $this->db->from('personal');
@@ -30,7 +30,7 @@ class Mpermisos extends CI_Model
     }
   }
 
-  public function ins($datos)
+  public function ins($datos) // inserta datos de permiso 
   {
     if ($this->db->insert('permiso',$datos)) {
       return $this->db->insert_id();
@@ -39,7 +39,7 @@ class Mpermisos extends CI_Model
     }
   }
 
-  public function ins_extra($datos)
+  public function ins_extra($datos) // inserta datos de permiso
   {
     if ($this->db->insert('personal_solicita_permiso',$datos)) {
       return true;
@@ -48,7 +48,7 @@ class Mpermisos extends CI_Model
     }
   }
 
-  public function upd($datos,$id)
+  public function upd($datos,$id) // actualiza datos de personal
   {
     $this->db->where('Cod_perm',$id);
     if ($this->db->update('permiso',$datos)) {

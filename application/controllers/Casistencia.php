@@ -9,7 +9,7 @@ class Casistencia extends CI_Controller
     parent::__construct();
     $this->load->model('Masistencia');
   }
-
+//La funcion predeterminada al momento de llamar al controlador. Genera la vista de Asistencia 
   public function index()
   {
       $menu = array();
@@ -18,6 +18,7 @@ class Casistencia extends CI_Controller
       $datos['submenu'] = 'Casistencia';
       $menu = array('datos' => $datos);
     if ($this->session->userdata("Login")) {
+      //Division de Vista General en vistas pequeñas
       $this->load->view('layout/header');
       $this->load->view('layout/menu',$menu);
       $this->load->view('vasistencia');
@@ -29,12 +30,14 @@ class Casistencia extends CI_Controller
 
   public function controlAsistencia()
   {
+    // Vista de control de asistencia 
       $menu = array();
       $datos = array();
       $datos['menu'] = 'Asistencia';
       $datos['submenu'] = 'Casistencia';
       $menu = array('datos' => $datos);
-    if ($this->session->userdata("Login")) {
+    if ($this->session->userdata("Login")) {      
+    //Division de Vista General en vistas pequeñas 
       $this->load->view('layout/header');
       $this->load->view('layout/menu',$menu);
       $this->load->view('vcontrolasistencia');
@@ -44,12 +47,12 @@ class Casistencia extends CI_Controller
     }
   }
 
-  public function listar()
+  public function listar() // Lista el personal que no ha presentado asistencia o inasistencia diaria
   {
     $datos['personal'] = $this->Masistencia->listar();
     $res['asistentes'] = $this->Masistencia->listar_asistencia();
     $res['inasistencia'] = $this->Masistencia->listar_inasistentes();
-
+// Se recorre la respuesta del personal para determinar si el personal tiene un permiso el dia de hoy
     foreach ($datos['personal'] as $key) {
       $if_can = $this->Masistencia->compruebe_ci_permiso($key->C_I);
       if ($if_can) {
@@ -66,7 +69,7 @@ class Casistencia extends CI_Controller
     ->set_output(json_encode($res));
   }
 
-
+  // Inserta los datos para llevar la asistencia
   public function ins_datos()
   {
     $turno = $this->input->post('turno');
@@ -100,6 +103,7 @@ class Casistencia extends CI_Controller
           'Motivo_just' => $this->input->post('Motivo_just'),
           'Fecha_just' => date('Y-m-d'),
         );
+        // Inserta los datos en la tabla justificacion
         $id_justificacion = $this->Masistencia->ins_Justificacion($justificacion);
         if ($id_justificacion) {
           $justificacion_extra = array(
@@ -112,7 +116,7 @@ class Casistencia extends CI_Controller
           $data_extra = array(
             'horario_id' => $horario_id,
           );
-          $Cod_inasist = $this->Masistencia->ins_personal_cumple_inasistecia($data_extra);
+          $Cod_inasist = $this->Masistencia->ins_personal_cumple_inasistencia($data_extra);
         if ($Cod_inasist) {
         //tabla inasistencia
         $datos = array(
@@ -130,7 +134,7 @@ class Casistencia extends CI_Controller
   }
 
 
-  public function count_list_personal()
+  public function count_list_personal() // Lista el total de asistencias e inasistencias de un personal por un rango de fecha
   {
     $fecha = $this->input->post('rangofecha');
     $fecha1 = $this->input->post('rangofecha1');

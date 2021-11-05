@@ -1,6 +1,6 @@
 var res1, res2,res3,id
 $(function() {
-
+// Recuperacion de contraseña obtener preguntas
   $('#lost_pas').click(function() {
     var nombre = $('#NomUsuario').val()
     if ($('#NomUsuario').val().length > 3) {
@@ -20,7 +20,7 @@ $(function() {
     }
   })
 
-
+  //validacion de respuestas antes de enviar
   $('#recu').click(function() {
     var preg1 = $('#preg1').val()
     var preg2 = $('#preg2').val()
@@ -30,7 +30,7 @@ $(function() {
       $('#clavImp').html(data)
       $('#modal-overlay').modal('hide')
       $('#modal-overlay-last').modal('show')
-
+      $("#recu").hide();
     })
     } else {
       alert('Sus Respuestas no coinciden')

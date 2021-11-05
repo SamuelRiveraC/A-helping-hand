@@ -1,6 +1,7 @@
 var ifshow = false;
   $(function () {
     jalar_data();
+    //nuevo usuario
     $('#btnNew').click(function() {
       $("input").val('')
       $("#mess").html('Guardar');
@@ -9,7 +10,7 @@ var ifshow = false;
       $('#modal-overlay').modal('show')
       $('#accion').val('creado')
     });
-
+    //editar registro de usuario
     $('#dataTables-table').on('click','.edi_registro',function(e) {
       e.preventDefault()
       $("#mess").html('Actualizar');
@@ -20,6 +21,7 @@ var ifshow = false;
       modalData(idr)
       $('#modal-overlay').modal('show')
     })
+    //ver registro de usuario
     $('#dataTables-table').on('click','.ver_registro',function(e) {
       e.preventDefault()
       $('#tabla_respuestas').hide();
@@ -28,7 +30,7 @@ var ifshow = false;
       $('#modal_ver').modal('show')
     })
 
-
+    //borrar datos de usuario
     $('#dataTables-table').on('click','.bor_registro',function(e) {
       e.preventDefault()
 
@@ -41,7 +43,7 @@ var ifshow = false;
     $('#borr_btn').click(function() {
       $('#form1').submit()
     })
-
+    //ver respuestas de las preguntas secretas
     $('#ver_answer').click(function() {
       if (ifshow) {
         ifshow = false;
@@ -51,6 +53,7 @@ var ifshow = false;
         $('#tabla_respuestas').show();
       }
     });
+    //busqueda sensitiva de usuarios
     $("#Nom_usuario").keyup(function () {
       if($('#accion').val()=='creado'){
         $("#Act").attr('disabled', true)
@@ -77,7 +80,7 @@ var ifshow = false;
       }
       
     })
-
+    //envio de formulario de usuario
 
     $('#form1').submit(function(e) {
         e.preventDefault()
@@ -121,7 +124,7 @@ var ifshow = false;
           alert('Las claves no coinciden');
         }
       })
-
+    //detectar existencia de la cedula
     $('#C_Isearch').keyup(function () {
       var input = $('#C_Isearch').val();
       if (input != '') {
@@ -132,7 +135,7 @@ var ifshow = false;
         }
       }
     });
-
+    //obtener si cedula existe
     $('#listaUsuario').on('click', '.existCli', function (e) {
       $('#listaUsuario').empty();
       e.preventDefault();
@@ -145,7 +148,7 @@ var ifshow = false;
     });
 
   });
-
+//obtener parecidos por cedeula y nombre
 function getInput(input) {
   $('#listaUsuario').empty();
   $.post(base_url + 'Cusuarios/getLike_', { data: input }, function (data) {
@@ -157,6 +160,8 @@ function getInput(input) {
     comboselect1(objectFor,count);
   });
 }
+
+//function para obtener cedula identintidad existente
 function getCI(input) {
 
   if($('#accion').val()=='creado'){
@@ -186,7 +191,7 @@ function getCI(input) {
     })
   }
 }
-
+//comboselect dinamico
 function comboselect1(object,count) {
   if (count > 0) {
     var lis = "";
@@ -223,7 +228,7 @@ function comboselect1(object,count) {
 }
 
 
-
+//armado de modal ver y editar
   function modalData(usuario) {
     var detalle = '';
     var respuestas = "";
@@ -258,7 +263,7 @@ function comboselect1(object,count) {
   }
 
 
-  function jalar_data() {
+  function jalar_data() { //trae datos de base de datos para mostrar en la tabla
     var content = '';
     $.getJSON(base_url+'Cusuarios/listar',function(data) {
       $.each(data, function(i,item) {
@@ -266,14 +271,17 @@ function comboselect1(object,count) {
         <tr>
           <td>${item.Nom_usuario}</td>
           <td>${item.Tipo_cuenta}</td>
-
           <td class="ver_registro" idr="${item.ID_usuario}"> <i class="fa fa-eye"></i> </td>
           <td class="edi_registro" idr="${item.ID_usuario}"> <i class="fa fa-cog"></i> </td>
-          <td class="bor_registro" idr="${item.ID_usuario}"> <i class="fa fa-trash"></i> </td>
-
-        </tr>
         `;
+        if (item.Tipo_cuenta == "Administrador") {
+          content += `<td></td>`
+        } else {
+          content += `<td class="bor_registro" idr="${item.ID_usuario}"> <i class="fa fa-trash"></i></td>`
+        }
+        content += `</tr>`
       })
+      //inicializacion de datatable
       $('#dataTables-table').html(content)
       $('#usuario').DataTable({
         "responsive": true,

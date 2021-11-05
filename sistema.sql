@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-02-2020 a las 19:44:27
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.2
+-- Tiempo de generación: 05-06-2020 a las 00:48:16
+-- Versión del servidor: 10.1.32-MariaDB
+-- Versión de PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,13 +37,6 @@ CREATE TABLE `amonestaciones` (
   `Emisor_amon` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `amonestaciones`
---
-
-INSERT INTO `amonestaciones` (`Cod_amon`, `Fecha_amon`, `Num_amon`, `Motivo_amon`, `Tipo_amon`, `Emisor_amon`) VALUES
-(5, '2020-02-09', '1', 'Porque si', 'Escrita', 'Coordinador');
-
 -- --------------------------------------------------------
 
 --
@@ -54,7 +47,7 @@ CREATE TABLE `asistencia` (
   `asistencia_id` int(11) NOT NULL,
   `Cod_hor_asist` int(100) NOT NULL,
   `total` int(11) NOT NULL,
-  `Fecha` timestamp NOT NULL DEFAULT current_timestamp()
+  `Fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -62,7 +55,8 @@ CREATE TABLE `asistencia` (
 --
 
 INSERT INTO `asistencia` (`asistencia_id`, `Cod_hor_asist`, `total`, `Fecha`) VALUES
-(3, 3, 1, '2020-02-09 04:00:00');
+(2, 7, 1, '2020-02-13 04:00:00'),
+(3, 8, 1, '2020-02-11 04:00:00');
 
 -- --------------------------------------------------------
 
@@ -81,8 +75,21 @@ CREATE TABLE `correo` (
 --
 
 INSERT INTO `correo` (`ID_correo`, `Tipo_correo`, `C_I`) VALUES
-(13, 'franciscomaneiro97@gmail.com', 22222222),
-(14, 'franciscomaneiro97@gmail.com', 26237838);
+(2, 'marielysjaraujof@gmail.com', 27592227),
+(3, 'servio7@gmail.com', 26237838),
+(4, 'sebas335@gmail.com', 27578118);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `deuda`
+--
+
+CREATE TABLE `deuda` (
+  `Cod_deuda` int(11) NOT NULL,
+  `monto_deuda_total` int(11) NOT NULL,
+  `cod_pago` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,8 +113,9 @@ CREATE TABLE `direccion` (
 --
 
 INSERT INTO `direccion` (`Calle`, `Cod_dir`, `Cod_postal`, `Num_calle`, `Num_casa`, `Sector`, `Urb`, `C_I`) VALUES
-('', 17, 0, '55435', '34534', '', '', 22222222),
-('calle primera', 18, 6054, '', '', 'negro segundo', '', 26237838);
+('Calle Caracas', 21, 6064, '', '', 'La Floresta', '', 27592227),
+('', 22, 0, '01', '15', '', 'Los Cocales', 26237838),
+('', 23, 0, '01', 'B2', '', 'Santa Agata', 27578118);
 
 -- --------------------------------------------------------
 
@@ -128,8 +136,24 @@ CREATE TABLE `experiencia_laboral` (
 --
 
 INSERT INTO `experiencia_laboral` (`id_exp`, `C_I`, `exp_lab`, `oficial_exp_lab`, `priv_exp_lab`) VALUES
-(4, 22222222, 0, '', ''),
-(5, 26237838, 0, '', '');
+(2, 27592227, 0, '', ''),
+(3, 26237838, 0, '', ''),
+(4, 27578118, 0, '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `factura`
+--
+
+CREATE TABLE `factura` (
+  `descuento` varchar(90) NOT NULL,
+  `IVA` varchar(90) NOT NULL,
+  `monto_completo` varchar(90) NOT NULL,
+  `cod_factura` int(90) NOT NULL,
+  `num_factura` varchar(90) NOT NULL,
+  `cod_pago` int(90) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -154,8 +178,9 @@ CREATE TABLE `formacion_academica` (
 --
 
 INSERT INTO `formacion_academica` (`Cod_for_a`, `Titulo`, `Grado_actual_instruc`, `Año_for_a`, `credencial_titulo`, `Actual_instruct`, `titulo_fecha`, `C_I`, `nivel_curso`) VALUES
-(8, 'tsu', NULL, '1997', '6634534', 'No', '0000-00-00', 22222222, 'tsu'),
-(9, 'tsu', NULL, '1997', '6054879519', 'No', '0000-00-00', 26237838, 'tsu');
+(12, 'Bachiller', NULL, '2016', 'AKL658SF5HW6', 'No', '0000-00-00', 27592227, 'Bachiller'),
+(13, 'Bachiller', NULL, '2016', 'gjhgjfgv', 'No', '0000-00-00', 26237838, 'Bachiller'),
+(14, 'Bachiller', NULL, '2016', 'gkldk4534', 'No', '0000-00-00', 27578118, 'Bachiller');
 
 -- --------------------------------------------------------
 
@@ -175,8 +200,9 @@ CREATE TABLE `hijos_personal` (
 --
 
 INSERT INTO `hijos_personal` (`id_hijos`, `C_I`, `exihijos`, `gradoCursoHijos`) VALUES
-(2, 22222222, '', ''),
-(3, 26237838, '', '');
+(2, 27592227, '', ''),
+(3, 26237838, '', '2do Grado'),
+(4, 27578118, '', '');
 
 -- --------------------------------------------------------
 
@@ -196,8 +222,9 @@ CREATE TABLE `horario` (
 --
 
 INSERT INTO `horario` (`horario_id`, `horas_trab`, `C_I`, `turno`) VALUES
-(14, '8:00 AM - 5:00 PM', 22222222, 'Mañana'),
-(15, '8:00 AM - 11:00 PM', 26237838, 'Mañana');
+(18, '8:00 AM - 12:00PM', 27592227, 'Mañana'),
+(19, '1:30 PM - 5:00PM', 26237838, 'Tarde'),
+(20, '8:00 AM - 12:00 PM', 27578118, 'Ambos');
 
 -- --------------------------------------------------------
 
@@ -209,9 +236,17 @@ CREATE TABLE `inasistencia` (
   `inasistencia_id` int(11) NOT NULL,
   `Cod_inasist` int(100) NOT NULL,
   `total_inasist` int(11) NOT NULL,
-  `fecha_inasist` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fecha_inasist` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tipo_inasist` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `inasistencia`
+--
+
+INSERT INTO `inasistencia` (`inasistencia_id`, `Cod_inasist`, `total_inasist`, `fecha_inasist`, `tipo_inasist`) VALUES
+(5, 5, 4, '2020-02-13 04:00:00', 'No Justificado'),
+(6, 6, 3, '2020-02-12 01:00:28', 'No Justificado');
 
 -- --------------------------------------------------------
 
@@ -230,8 +265,9 @@ CREATE TABLE `instituto` (
 --
 
 INSERT INTO `instituto` (`Cod_inst`, `Cod_dir`, `Nombre_inst`) VALUES
-(17, 17, 'Uptjaa'),
-(18, 18, 'Uptjaa');
+(2, 21, 'José Gil Fortoul'),
+(3, 22, 'Churum Merú'),
+(4, 23, 'Churum Meru');
 
 -- --------------------------------------------------------
 
@@ -245,6 +281,54 @@ CREATE TABLE `justificacion` (
   `Motivo_just` varchar(20) NOT NULL,
   `Fecha_just` date NOT NULL,
   `Cod_perm` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `justificacion`
+--
+
+INSERT INTO `justificacion` (`Cod_just`, `Num_just`, `Motivo_just`, `Fecha_just`, `Cod_perm`) VALUES
+(4, 123, 'Salud', '2020-02-12', 0),
+(5, 123, 'Prueba', '2020-02-11', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `moroso`
+--
+
+CREATE TABLE `moroso` (
+  `tiempo_retraso` varchar(90) NOT NULL,
+  `monto_mora` varchar(90) NOT NULL,
+  `nro_factura_mora` varchar(90) NOT NULL,
+  `cod_moroso` int(90) NOT NULL,
+  `cod_representante` int(90) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pago`
+--
+
+CREATE TABLE `pago` (
+  `num_pago` varchar(90) NOT NULL,
+  `cod_pago` int(11) NOT NULL,
+  `control_pago` varchar(90) NOT NULL,
+  `cod_representante` int(90) NOT NULL,
+  `abono` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pago_genera factura`
+--
+
+CREATE TABLE `pago_genera factura` (
+  `cod_pago` int(90) NOT NULL,
+  `cod_factura` int(90) NOT NULL,
+  `fecha_titulo_fac` varchar(90) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -262,13 +346,6 @@ CREATE TABLE `permiso` (
   `fecha_inicio` date NOT NULL,
   `fecha_culm` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `permiso`
---
-
-INSERT INTO `permiso` (`Cod_perm`, `Fecha_perm`, `Tipo_perm`, `Observ_perm`, `dias_perm`, `fecha_inicio`, `fecha_culm`) VALUES
-(1, '2020-02-10', 'prueba1', 'prueba observacion', 58, '2020-02-01', '2020-02-29');
 
 -- --------------------------------------------------------
 
@@ -289,7 +366,7 @@ CREATE TABLE `personal` (
   `Tipo_pers` char(20) NOT NULL,
   `habilidades` varchar(300) NOT NULL,
   `ocupacion_2` varchar(200) NOT NULL,
-  `fecha_ingreso` timestamp NOT NULL DEFAULT current_timestamp()
+  `fecha_ingreso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -297,8 +374,9 @@ CREATE TABLE `personal` (
 --
 
 INSERT INTO `personal` (`P_nombre`, `P_apellido`, `C_I`, `Sexo`, `S_nombre`, `S_apellido`, `Estado_civil`, `Edad`, `Fecha_n`, `Tipo_pers`, `habilidades`, `ocupacion_2`, `fecha_ingreso`) VALUES
-('frans', 'hidalgo', 22222222, 'Masculino', 'Francisco', 'far', 'Casado', 24, '1996-04-10', 'Administrativo', 'sn', 'ni', '2020-02-01 19:58:23'),
-('Franchesco', 'Pontero', 26237838, 'Masculino', 'Virgolini', 'Mancero', 'Soltero', 24, '1996-04-10', 'Administrativo', 'No presenta', '', '2020-02-09 23:17:53');
+('Servio', 'Wright', 26237838, 'Masculino', 'Lee', 'Chan', 'Soltero', 27, '1993-05-02', 'Docente', '', '', '2020-02-12 04:02:53'),
+('Sebastian', 'Zerpa', 27578118, 'Masculino', 'Ernesto', 'Rosal', 'Soltero', 26, '1994-08-14', 'Obrero', '', '', '2020-02-12 04:11:22'),
+('Marielys', 'Araujo', 27592227, 'Femenino', 'Jackeline', 'Franco', 'Soltero', 26, '1994-09-30', 'Administrativo', 'Bilingue', 'No ocupa', '2020-02-12 03:48:16');
 
 -- --------------------------------------------------------
 
@@ -311,6 +389,14 @@ CREATE TABLE `personal_cumple_inasistencia` (
   `Cod_inasist` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `personal_cumple_inasistencia`
+--
+
+INSERT INTO `personal_cumple_inasistencia` (`horario_id`, `Cod_inasist`) VALUES
+(19, 5),
+(20, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -321,13 +407,6 @@ CREATE TABLE `personal_genera_amonestacion` (
   `C_I` int(100) NOT NULL,
   `Cod_amon` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `personal_genera_amonestacion`
---
-
-INSERT INTO `personal_genera_amonestacion` (`C_I`, `Cod_amon`) VALUES
-(22222222, 5);
 
 -- --------------------------------------------------------
 
@@ -345,7 +424,8 @@ CREATE TABLE `personal_lleva_horario` (
 --
 
 INSERT INTO `personal_lleva_horario` (`horario_id`, `Cod_hor_asist`) VALUES
-(15, 3);
+(18, 8),
+(20, 7);
 
 -- --------------------------------------------------------
 
@@ -357,13 +437,6 @@ CREATE TABLE `personal_solicita_permiso` (
   `C_I` int(100) NOT NULL,
   `Cod_perm` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `personal_solicita_permiso`
---
-
-INSERT INTO `personal_solicita_permiso` (`C_I`, `Cod_perm`) VALUES
-(22222222, 1);
 
 -- --------------------------------------------------------
 
@@ -388,6 +461,40 @@ CREATE TABLE `personal_tiene_justificacion` (
   `Cod_just` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `personal_tiene_justificacion`
+--
+
+INSERT INTO `personal_tiene_justificacion` (`C_I`, `Cod_just`) VALUES
+(27592227, 4),
+(26237838, 5),
+(27592227, 4),
+(26237838, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `representante`
+--
+
+CREATE TABLE `representante` (
+  `cod_representante` int(90) NOT NULL,
+  `Tipo_representante` varchar(90) NOT NULL,
+  `parentesco` varchar(90) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `representante_puede_ser_moroso`
+--
+
+CREATE TABLE `representante_puede_ser_moroso` (
+  `fecha_pago_mora` int(90) NOT NULL,
+  `cod_representante` int(90) NOT NULL,
+  `cod_moroso` int(90) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 
 --
@@ -407,9 +514,35 @@ CREATE TABLE `telefono` (
 --
 
 INSERT INTO `telefono` (`Cod_telf`, `Tipo_telf`, `Area_telf`, `Num_telf`, `C_I`) VALUES
-(22, 'Casa', '0283', 2552845, 22222222),
-(23, 'Celular', '0414', 8327690, 22222222),
-(24, 'Casa', '0414', 8288954, 26237838);
+(2, 'Casa', '0283', 2552079, 27592227),
+(3, 'Celular', '0416', 5813646, 27592227),
+(4, 'Casa', '424', 545, 26237838),
+(5, 'Celular', '56464', 46565, 26237838),
+(6, 'Casa', '456', 4123659, 27578118),
+(7, 'Celular', '0424', 4698123, 27578118);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_pago`
+--
+
+CREATE TABLE `tipo_pago` (
+  `Cod_tipo_pago` int(11) NOT NULL,
+  `Tipo_pago` enum('Solvente','Moroso','','') NOT NULL,
+  `cod_pago` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajador`
+--
+
+CREATE TABLE `trabajador` (
+  `ID_trabajador` int(11) NOT NULL,
+  `C_I` int(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -421,7 +554,7 @@ CREATE TABLE `usuario` (
   `Nom_usuario` varchar(20) NOT NULL,
   `ID_usuario` int(100) NOT NULL,
   `Tipo_cuenta` varchar(20) NOT NULL,
-  `Password` int(20) NOT NULL,
+  `Password` varchar(255) NOT NULL,
   `Intento` int(20) NOT NULL,
   `Preg_1` varchar(20) NOT NULL,
   `Preg_2` varchar(20) NOT NULL,
@@ -437,7 +570,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`Nom_usuario`, `ID_usuario`, `Tipo_cuenta`, `Password`, `Intento`, `Preg_1`, `Preg_2`, `Preg_3`, `Res_1`, `Res_2`, `Res_3`, `C_I`) VALUES
-('franss', 3, 'Administrador', 123456, 0, '45', '45', '45', '45', '45', '45', 22222222);
+('marielys', 2, 'Administrador', "27592227", 0, 'Color', 'Edad ', 'Animal', 'azul', '20', 'gato', 27592227),
+('servio', 3, 'Administrador', "1234", 0, 'hjjgkg', 'kgkh', 'kgkhl', 'gkkih', 'khkihikh', 'khkhik', 26237838),
+('sebas', 4, 'Usuario', "123456", 0, 'Edad', 'Hermano', 'Mes', '21', 'carlos', 'febrero', 27578118);
 
 --
 -- Índices para tablas volcadas
@@ -464,6 +599,13 @@ ALTER TABLE `correo`
   ADD KEY `C_I` (`C_I`) USING BTREE;
 
 --
+-- Indices de la tabla `deuda`
+--
+ALTER TABLE `deuda`
+  ADD PRIMARY KEY (`Cod_deuda`),
+  ADD KEY `cod_pago` (`cod_pago`);
+
+--
 -- Indices de la tabla `direccion`
 --
 ALTER TABLE `direccion`
@@ -476,6 +618,13 @@ ALTER TABLE `direccion`
 ALTER TABLE `experiencia_laboral`
   ADD PRIMARY KEY (`id_exp`),
   ADD KEY `C_I` (`C_I`);
+
+--
+-- Indices de la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD PRIMARY KEY (`cod_factura`),
+  ADD KEY `cod_pago` (`cod_pago`);
 
 --
 -- Indices de la tabla `formacion_academica`
@@ -518,6 +667,27 @@ ALTER TABLE `instituto`
 ALTER TABLE `justificacion`
   ADD PRIMARY KEY (`Cod_just`),
   ADD KEY `Cod_perm` (`Cod_perm`);
+
+--
+-- Indices de la tabla `moroso`
+--
+ALTER TABLE `moroso`
+  ADD PRIMARY KEY (`cod_moroso`),
+  ADD KEY `cod_representante` (`cod_representante`);
+
+--
+-- Indices de la tabla `pago`
+--
+ALTER TABLE `pago`
+  ADD PRIMARY KEY (`cod_pago`),
+  ADD KEY `cod_representante` (`cod_representante`);
+
+--
+-- Indices de la tabla `pago_genera factura`
+--
+ALTER TABLE `pago_genera factura`
+  ADD KEY `cod_pago` (`cod_pago`,`cod_factura`),
+  ADD KEY `cod_factura` (`cod_factura`);
 
 --
 -- Indices de la tabla `permiso`
@@ -574,11 +744,37 @@ ALTER TABLE `personal_tiene_justificacion`
   ADD KEY `Cod_just` (`Cod_just`);
 
 --
+-- Indices de la tabla `representante`
+--
+ALTER TABLE `representante`
+  ADD PRIMARY KEY (`cod_representante`),
+  ADD KEY `cod_representante` (`cod_representante`);
+
+--
+-- Indices de la tabla `representante_puede_ser_moroso`
+--
+ALTER TABLE `representante_puede_ser_moroso`
+  ADD KEY `cod_representante` (`cod_representante`,`cod_moroso`),
+  ADD KEY `cod_moroso` (`cod_moroso`);
+
+--
 -- Indices de la tabla `telefono`
 --
 ALTER TABLE `telefono`
   ADD PRIMARY KEY (`Cod_telf`),
   ADD KEY `C.I` (`C_I`);
+
+--
+-- Indices de la tabla `tipo_pago`
+--
+ALTER TABLE `tipo_pago`
+  ADD KEY `cod_pago` (`cod_pago`);
+
+--
+-- Indices de la tabla `trabajador`
+--
+ALTER TABLE `trabajador`
+  ADD KEY `C_I` (`C_I`);
 
 --
 -- Indices de la tabla `usuario`
@@ -596,7 +792,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `amonestaciones`
 --
 ALTER TABLE `amonestaciones`
-  MODIFY `Cod_amon` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Cod_amon` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `asistencia`
@@ -608,85 +804,97 @@ ALTER TABLE `asistencia`
 -- AUTO_INCREMENT de la tabla `correo`
 --
 ALTER TABLE `correo`
-  MODIFY `ID_correo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID_correo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `deuda`
+--
+ALTER TABLE `deuda`
+  MODIFY `Cod_deuda` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `Cod_dir` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Cod_dir` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `experiencia_laboral`
 --
 ALTER TABLE `experiencia_laboral`
-  MODIFY `id_exp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_exp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `formacion_academica`
 --
 ALTER TABLE `formacion_academica`
-  MODIFY `Cod_for_a` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Cod_for_a` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `hijos_personal`
 --
 ALTER TABLE `hijos_personal`
-  MODIFY `id_hijos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_hijos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`
 --
 ALTER TABLE `horario`
-  MODIFY `horario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `horario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `inasistencia`
 --
 ALTER TABLE `inasistencia`
-  MODIFY `inasistencia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `inasistencia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `instituto`
 --
 ALTER TABLE `instituto`
-  MODIFY `Cod_inst` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Cod_inst` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `justificacion`
 --
 ALTER TABLE `justificacion`
-  MODIFY `Cod_just` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Cod_just` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `pago`
+--
+ALTER TABLE `pago`
+  MODIFY `cod_pago` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `permiso`
 --
 ALTER TABLE `permiso`
-  MODIFY `Cod_perm` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Cod_perm` int(100) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_cumple_inasistencia`
 --
 ALTER TABLE `personal_cumple_inasistencia`
-  MODIFY `Cod_inasist` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Cod_inasist` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_lleva_horario`
 --
 ALTER TABLE `personal_lleva_horario`
-  MODIFY `Cod_hor_asist` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Cod_hor_asist` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `telefono`
 --
 ALTER TABLE `telefono`
-  MODIFY `Cod_telf` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Cod_telf` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `ID_usuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_usuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -705,6 +913,12 @@ ALTER TABLE `correo`
   ADD CONSTRAINT `correo_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `deuda`
+--
+ALTER TABLE `deuda`
+  ADD CONSTRAINT `deuda_ibfk_1` FOREIGN KEY (`cod_pago`) REFERENCES `pago` (`cod_pago`);
+
+--
 -- Filtros para la tabla `direccion`
 --
 ALTER TABLE `direccion`
@@ -715,6 +929,12 @@ ALTER TABLE `direccion`
 --
 ALTER TABLE `experiencia_laboral`
   ADD CONSTRAINT `experiencia_laboral_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`cod_pago`) REFERENCES `pago` (`cod_pago`);
 
 --
 -- Filtros para la tabla `formacion_academica`
@@ -745,6 +965,25 @@ ALTER TABLE `inasistencia`
 --
 ALTER TABLE `instituto`
   ADD CONSTRAINT `instituto_ibfk_1` FOREIGN KEY (`Cod_dir`) REFERENCES `direccion` (`Cod_dir`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `moroso`
+--
+ALTER TABLE `moroso`
+  ADD CONSTRAINT `moroso_ibfk_1` FOREIGN KEY (`cod_representante`) REFERENCES `representante` (`cod_representante`);
+
+--
+-- Filtros para la tabla `pago`
+--
+ALTER TABLE `pago`
+  ADD CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`cod_representante`) REFERENCES `representante` (`cod_representante`);
+
+--
+-- Filtros para la tabla `pago_genera factura`
+--
+ALTER TABLE `pago_genera factura`
+  ADD CONSTRAINT `pago_genera factura_ibfk_1` FOREIGN KEY (`cod_factura`) REFERENCES `factura` (`cod_factura`),
+  ADD CONSTRAINT `pago_genera factura_ibfk_2` FOREIGN KEY (`cod_pago`) REFERENCES `pago` (`cod_pago`);
 
 --
 -- Filtros para la tabla `personal_cumple_inasistencia`
@@ -787,10 +1026,29 @@ ALTER TABLE `personal_tiene_justificacion`
   ADD CONSTRAINT `personal_tiene_justificacion_ibfk_2` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `representante_puede_ser_moroso`
+--
+ALTER TABLE `representante_puede_ser_moroso`
+  ADD CONSTRAINT `representante_puede_ser_moroso_ibfk_1` FOREIGN KEY (`cod_representante`) REFERENCES `representante` (`cod_representante`),
+  ADD CONSTRAINT `representante_puede_ser_moroso_ibfk_2` FOREIGN KEY (`cod_moroso`) REFERENCES `moroso` (`cod_moroso`);
+
+--
 -- Filtros para la tabla `telefono`
 --
 ALTER TABLE `telefono`
   ADD CONSTRAINT `telefono_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tipo_pago`
+--
+ALTER TABLE `tipo_pago`
+  ADD CONSTRAINT `tipo_pago_ibfk_1` FOREIGN KEY (`cod_pago`) REFERENCES `pago` (`cod_pago`);
+
+--
+-- Filtros para la tabla `trabajador`
+--
+ALTER TABLE `trabajador`
+  ADD CONSTRAINT `trabajador_ibfk_1` FOREIGN KEY (`C_I`) REFERENCES `personal` (`C_I`);
 
 --
 -- Filtros para la tabla `usuario`

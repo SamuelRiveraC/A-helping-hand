@@ -1,15 +1,25 @@
 <?php
 
 
+
 class Mlogin extends CI_Model
 {
 
-public function ingresar ($usu, $pass){
+  function __construct()
+  {
+    parent::__construct();
+    $this->load->library('encrypt');
+  }
+
+public function ingresar ($usu, $pass){ // Insertar datos de usuario para inicar sesion
+
+
+        // HERE MUST GO THE HASHING COMPARING FUNCTIOn
 
         $this->db->select('*');
         $this->db->from('usuario');
         $this->db->where ('Nom_usuario',$usu );
-        $this->db->where ('Password',$pass );
+        $this->db->where ('Password', $this->encrypt->decode($pass) );
 
          $resultado = $this->db->get();
 
@@ -22,7 +32,7 @@ public function ingresar ($usu, $pass){
                 'session_Tipo' => $r->Tipo_cuenta,
                  );
 
-            $this->session->set_userdata('Login',$session_usuario);
+            $this->session->set_userdata('Login',$session_usuario); 
 
             return true;
         }else {
@@ -35,7 +45,7 @@ public function ingresar ($usu, $pass){
 
 
 
-    public function obtener_preg($nombre)
+    public function obtener_preg($nombre) // el usuario obtiene las preguntas de seguridad
     {
       $this->db->where('Nom_usuario',$nombre);
       $this->db->from('usuario');
@@ -49,7 +59,7 @@ public function ingresar ($usu, $pass){
 
     }
 
-    public function upd($id,$clave)
+    public function upd($id,$clave) // actualiza los datos de usuario
     {
       $this->db->where('ID_usuario',$id);
       if ($this->db->update('usuario',$clave)) {
