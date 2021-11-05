@@ -313,4 +313,9 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
+
+require FCPATH . 'vendor/autoload.php'; // composer installing into application/vendor
+$dotenv = Dotenv\Dotenv::createMutable(FCPATH);
+$dotenv->load();
+
 require_once BASEPATH.'core/CodeIgniter.php';

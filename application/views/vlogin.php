@@ -152,11 +152,8 @@
  <footer class="login-footer">
     <strong>Copyright &copy; 2019 SISCA.PP by MMSS</a>.</strong>
     All rights reserved.
-
-
     </div>
   </footer>
-
 <!-- jQuery -->
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
