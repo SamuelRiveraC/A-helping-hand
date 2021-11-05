@@ -20,10 +20,10 @@ class Mlogin extends CI_Model
 
       $resultado = $this->db->get();
 
+      // ENSEÑAR 
+
       if ($resultado->num_rows() == 1 ) {
           $r =$resultado->row();
-          
-          echo $this->encryption->decrypt($r->Password)."==".$pass;
 
           if ($this->encryption->decrypt($r->Password) == $pass) {
             $session_usuario = array(
