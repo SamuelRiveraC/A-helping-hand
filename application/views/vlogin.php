@@ -8,7 +8,7 @@
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
@@ -57,9 +57,13 @@
 
       <p class="mb-1">
         <a href="#" id='lost_pas'>¿Ha olvidado su contraseña?</a><br>
-        
       </p>
+
+      <?php if ($mensaje) { ?>
+        <div class="alert alert-danger my-5 text-center">
           <?php echo $mensaje;?>
+        </div>
+      <?php } ?>
 
 
     </div>

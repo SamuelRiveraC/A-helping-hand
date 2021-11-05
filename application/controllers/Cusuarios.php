@@ -8,7 +8,7 @@ class Cusuarios extends CI_Controller
 	{
     parent::__construct();
     $this->load->model("mregistrousuario");
-    $this->load->library('encrypt');
+    $this->load->library('encryption');
   }
 
     public function index(){ //funcion predeterminada al momento de llamar al controlador
@@ -44,7 +44,7 @@ class Cusuarios extends CI_Controller
         'Nom_usuario' => $this->input->post('Nom_usuario'),
         'Tipo_cuenta' => $this->input->post('Tipo_cuenta'),
 
-        'Password' => $this->encrypt->encode($this->input->post('Password') ) ,
+        'Password' => $this->encryption->encrypt($this->input->post('Password') ) ,
 
         'Preg_1' => $this->input->post('Preg_1'),
         'Res_1' => $this->input->post('Res_1'),
@@ -77,7 +77,7 @@ class Cusuarios extends CI_Controller
 				   );
         //Valida que la contraseña se este actualizando
 				if ($this->input->post('Password') != '') {
-          $usuario['Password'] = $this->encrypt->encode($this->input->post('Password') );
+          $usuario['Password'] = $this->encryption->encrypt( $this->input->post('Password') );
 				}
 
         $res = $this->mregistrousuario->actualizarDatos($usuario,$this->input->post('ID_usuario'));

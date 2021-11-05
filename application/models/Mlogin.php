@@ -8,40 +8,35 @@ class Mlogin extends CI_Model
   function __construct()
   {
     parent::__construct();
-    $this->load->library('encrypt');
+    $this->load->library('encryption');
+
   }
 
-public function ingresar ($usu, $pass){ // Insertar datos de usuario para inicar sesion
+  public function ingresar ($usu, $pass){ // Insertar datos de usuario para inicar sesion
 
+      $this->db->select('*');
+      $this->db->from('usuario');
+      $this->db->where ('Nom_usuario',$usu );
 
-        // HERE MUST GO THE HASHING COMPARING FUNCTIOn
+      $resultado = $this->db->get();
 
-        $this->db->select('*');
-        $this->db->from('usuario');
-        $this->db->where ('Nom_usuario',$usu );
-        $this->db->where ('Password', $this->encrypt->decode($pass) );
+      if ($resultado->num_rows() == 1 ) {
+          $r =$resultado->row();
+          
+          echo $this->encryption->decrypt($r->Password)."==".$pass;
 
-         $resultado = $this->db->get();
-
-        if ($resultado->num_rows() == 1 ) {
-            $r =$resultado->row();
-
+          if ($this->encryption->decrypt($r->Password) == $pass) {
             $session_usuario = array(
-                'session_Nom_usuario' =>$r->Nom_usuario,
-                'session_Password' =>$r->Password,
-                'session_Tipo' => $r->Tipo_cuenta,
-                 );
-
+             'session_Nom_usuario' =>$r->Nom_usuario,
+             'session_Password' =>$r->Password, //wtf?
+             'session_Tipo' => $r->Tipo_cuenta,
+            );
             $this->session->set_userdata('Login',$session_usuario); 
-
             return true;
-        }else {
-            return false;
-
           }
-
-
-    }
+      }
+      return false;
+  }
 
 
 
