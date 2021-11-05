@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database' , 'session', 'env');
+$autoload['libraries'] = array('database' , 'session', 'env', 'encrypt', 'encryption');
 
 /*
 | -------------------------------------------------------------------
@@ -136,4 +136,3 @@ $autoload['model'] = array();
 
 
 
-$config['composer_autoload'] = FCPATH. 'vendor'. DIRECTORY_SEPARATOR . 'autoload.php';
