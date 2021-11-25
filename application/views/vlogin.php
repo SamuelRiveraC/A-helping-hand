@@ -147,10 +147,7 @@
         <!-- /.modal-dialog -->
       </div>
 
-
-
-
-<!-- /.login-box -->
+  <!-- /.login-box -->
   </div>
   <!-- /.content-wrapper -->
  <footer class="login-footer">

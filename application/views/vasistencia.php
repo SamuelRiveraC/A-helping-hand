@@ -49,8 +49,7 @@
              <label for="text" class="col-sm-4 control-label">Asistencia</label>
             <div class="col-sm-10">
               <select class="form-control" id="asistencia" name="asistencia">
-                <option value=""></option>
-                <option value="Asistente">Asistente</option>
+                <option selected value="Asistente">Asistente</option>
                 <option value="Inasistente">Inasistente</option>
               </select>
             </div>
@@ -60,7 +59,6 @@
                <label for="text" class="col-sm-4 control-label">Tipo inasistencia</label>
               <div class="col-sm-10">
                 <select class="form-control" id="tipo_inasistencia" name="tipo_inasistencia">
-                  <option value=""></option>
                   <option value="Justificado">Justificado</option>
                   <option value="No Justificado">No Justificado</option>
                 </select>

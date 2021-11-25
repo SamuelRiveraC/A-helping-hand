@@ -210,10 +210,14 @@ var contadorDetalle = 0;
   });
   //calcular contador para la vista del modal
   function view(contador) {
-    if (contador == 1) {
+    if (contador == 0) {
+      $('#sigPag').show();
+      $('#Guardar').hide();
+      $('#antPag').hide();
+    } else if (contador == 1) {
       $('#antPag').show();
       $('#datosPer').hide();
-      $('#direccion').show();
+      $('#datosPer2').show();
       $('#sigPag').show();
       $('#Guardar').hide();
     } else if (contador == 2) {
@@ -222,15 +226,18 @@ var contadorDetalle = 0;
       $('#direccion').hide();
       $('#formacionAca').show();
       $('#Guardar').show();
-    } else if (contador == 0) {
-      $('#sigPag').show();
-      $('#Guardar').hide();
-      $('#antPag').hide();
-    }
+    } else if (contador == 3) {
+      $('#antPag').show();
+      $('#sigPag').hide();
+      $('#direccion').hide();
+      $('#formacionAca').show();
+      $('#Guardar').show();
+    } 
   }
 //reiniciar la vista del modal
   function reset_view() {
       $('#datosPer').show();
+      $('#datosPer2').hide();
       $('#direccion').hide();
       $('#formacionAca').hide();
       $('#sigPag').show();

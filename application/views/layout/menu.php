@@ -22,6 +22,8 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  
+
           <?php if ($this->session->userdata("Login")['session_Tipo'] == "Administrador"): ?>
           <li class="nav-item has-treeview <?= $datos['menu'] == 'Configuracion' ? 'menu-open' : ''?>">
             <a href="#" class="nav-link <?= $datos['submenu'] == 'Cusuario' ? 'active' : ''?>">
@@ -40,7 +42,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="<?= base_url() ?>cbackup" class="nav-link">
+                <a href="<?= base_url() ?>CBackup" class="nav-link">
                   <i class="fa fa-database"></i>
                   <p>Base de datos</p>
                 </a>
@@ -48,6 +50,8 @@
             </ul>
           </li>
           <?php endif; ?>
+
+
           <li class="nav-item has-treeview <?= $datos['menu'] == 'Personal' ? 'menu-open' : ''?>">
             <a href="#" class="nav-link <?= $datos['submenu'] == 'Cregistropersonal' ? 'active' : ''?>">
              <i class="fa fa-user"></i>
@@ -88,6 +92,37 @@
           </li>
 
         
+
+
+          <li class="nav-item has-treeview" >
+
+            <a href="#" class="nav-link ">
+             <i class="fa fa-bill"></i>
+             <p>
+                Pagos
+               <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview" >
+              <li class="nav-item">
+                <a href="<?= base_url() ?>Morosidad" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Morosidad</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url() ?>Pagos" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pagos</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+
+
+
 
           <li class="nav-item has-treeview <?= $datos['menu'] == 'Asistencia' ? 'menu-open' : ''?>">
             <a href="#" class="nav-link <?= $datos['submenu'] == 'Casistencia' ? 'active' : ''?>">

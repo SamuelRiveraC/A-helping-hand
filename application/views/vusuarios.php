@@ -97,8 +97,6 @@
               <input type="Password" class="form-control" name="confir_pass" id="confir_pass" required placeholder="Confirmar contraseña">
             </div>
           </div>
-
-
           <div class="form-group">
              <label for="text" class="col-sm-4 control-label">Tipo de Cuenta</label>
               <div class="col-sm-10">
