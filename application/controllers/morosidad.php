@@ -1,5 +1,5 @@
 <?php 
-class morosidad extends CI_Controller {
+class Morosidad extends CI_Controller {
   function __construct() {
     parent::__construct();
     $this->load->model("Mmorosidad");

@@ -1,5 +1,5 @@
 <?php 
-class pagos extends CI_Controller {
+class Pagos extends CI_Controller {
   function __construct() {
     parent::__construct();
     $this->load->model("Mpagos");
@@ -9,7 +9,6 @@ class pagos extends CI_Controller {
   public function index() {
     $datos = array('menu' => 'Pagos ', 'submenu' => 'Pagos');
     $menu = array('datos' => $datos);
-
     $data = array("personal"=>$this->Mregistropersonal->listar());
 
     if ($this->session->userdata('Login')) {
