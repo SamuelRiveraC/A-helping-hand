@@ -55,9 +55,6 @@
 
 
 
-
-
-
                         <div id="datosPer">
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Cedula</label>
@@ -120,17 +117,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
                         <div id="datosPer2"  style="display:none">
                             <div class="form-group">
                                 <label for="text" class="col-12 control-label">Tipo de Personal</label>
@@ -144,6 +130,26 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="text" class="col-sm-4 control-label">Correo</label>
+                                <div class="col-12">
+                                    <input type="email" class="form-control" name="Tipo_correo" id="Tipo_correo" placeholder="Ingrese su Correo">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="text" class="col-12 control-label">Codigo area</label>
+                                        <input type="number" class="form-control" name="Area_telf_casa" id="Area_telf_casa" placeholder="Codigo de area de casa">
+                                    </div>
+                                    
+                                    <div class="col-8">
+                                        <label for="text" class="col-12 control-label">Numero</label>
+                                        <input type="number" class="form-control" name="Numero_casa" id="Numero_casa" placeholder="Ingrese su Numero de casa">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="text" class="col-6 control-label">Turno</label>
                                 <label for="text" class="col-6 control-label">Horario</label>
@@ -184,21 +190,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                         <div id="direccion" style="display:none">
                             <div class="form-group">
-                                <label for="text" class="col-sm-4 control-label">Seleccione</label>
+                                <label for="text" class="col-sm-4 control-label">Seleccione Dirección</label>
                                 <div class="col-12">
                                     <select class="form-control" name="seleccione" id="seleccione">
                                         <option value="">Seleccione</option>
@@ -247,6 +241,16 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+
+
+
+
+
+
+
+                        <div id="formacionAca" style="display:none">
                                 <div class="form-group">
                                     <label for="text" class="col-sm-4 control-label">Habilidades extra</label>
                                     <div class="col-12">
@@ -283,20 +287,7 @@
                                         </div>
                                     </div>
                                 </div>
-                        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-                        <div id="formacionAca" style="display:none">
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Nombre Instituto</label>
                                 <div class="col-12">
@@ -349,37 +340,7 @@
                                     <input type="text" class="form-control" name="credencial_titulo" id="credencial_titulo" placeholder="Ingrese su Numero de Credencial">
                                 </div>
                             </div>
-
-
-                            <div class="form-group">
-                                <label for="text" class="col-sm-4 control-label">Correo</label>
-                                <div class="col-12">
-                                    <input type="email" class="form-control" name="Tipo_correo" id="Tipo_correo" placeholder="Ingrese su Correo">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    
-                                    <div class="col-4">
-                                        <label for="text" class="col-12 control-label">Codigo area</label>
-                                        <input type="number" class="form-control" name="Area_telf_casa" id="Area_telf_casa" placeholder="Codigo de area de casa">
-                                    </div>
-                                    
-                                    <div class="col-8">
-                                        <label for="text" class="col-12 control-label">Numero</label>
-                                        <input type="number" class="form-control" name="Numero_casa" id="Numero_casa" placeholder="Ingrese su Numero de casa">
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-
-
-
-
-
-
-
-
 
 
 

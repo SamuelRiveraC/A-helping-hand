@@ -8,7 +8,7 @@ class Mregistropersonal extends CI_Model
 	    parent::__construct();
 	}
 
-	public function listar($id)
+	public function listar($id = null)
 	{
 		$and = "";
 		if ($id != null) {
@@ -16,8 +16,13 @@ class Mregistropersonal extends CI_Model
 		}
 		// Trae las tablas relacionadas con personal 
 		$sql = "SELECT t1.*,t2.nombre_inst,t4.Tipo_correo,t5.*,t6.*,t7.*,t8.*,t9.* FROM personal t1 
-		INNER JOIN instituto t2 INNER JOIN correo t4 INNER JOIN direccion t5 INNER JOIN formacion_academica t6 INNER JOIN horario t7
-		INNER JOIN experiencia_laboral t8 INNER JOIN hijos_personal t9 
+		INNER JOIN instituto t2 
+		INNER JOIN correo t4 
+		INNER JOIN direccion t5 
+		INNER JOIN formacion_academica t6 
+		INNER JOIN horario t7
+		INNER JOIN experiencia_laboral t8
+		INNER JOIN hijos_personal t9 
 		WHERE t1.C_I = t5.C_I AND t5.Cod_dir = t2.Cod_dir AND t4.C_I = t1.C_I AND t1.C_I = t6.C_I AND t1.C_I = t7.C_I AND t1.C_I = t8.C_I AND t1.C_I = t9.C_I $and";
 		$res = $this->db->query($sql);
 		if ($res) {
@@ -103,6 +108,7 @@ class Mregistropersonal extends CI_Model
 
 			}
 			public function datosHijos($param){ // inserta datos de hijos personal 
+
 				if ($this->db->insert('hijos_personal', $param)) {
 					return $this->db->insert_id();
 				} else {

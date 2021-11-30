@@ -64,8 +64,8 @@
               <?php if ($this->session->userdata("Login")['session_Tipo'] == "Administrador"): ?>
               <li class="nav-item">
                 <a href="<?= base_url() ?>cregistropersonal"class="nav-link">
-                  <i class="fa fa-user-plus"></i>
-                  <p>Nuevo Personal</p>
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Personal</p>
                 </a>
               </li>
             <?php endif; ?>
@@ -94,10 +94,10 @@
         
 
 
-          <li class="nav-item has-treeview" >
+          <li class="nav-item has-treeview <?= $datos['menu'] == 'Pagos' ? 'menu-open' : ''?>" >
 
-            <a href="#" class="nav-link ">
-             <i class="fa fa-bill"></i>
+            <a href="#" class="nav-link <?= $datos['menu'] == 'Pagos' ? 'menu-open' : ''?>">
+             <i class="fas fa-file-invoice"></i>
              <p>
                 Pagos
                <i class="right fas fa-angle-left"></i>

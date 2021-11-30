@@ -214,24 +214,31 @@ var contadorDetalle = 0;
       $('#sigPag').show();
       $('#Guardar').hide();
       $('#antPag').hide();
+
+      $("#datosPer,#datosPer2,#direccion,#formacionAca").hide()
+      $('#datosPer').show();
     } else if (contador == 1) {
       $('#antPag').show();
-      $('#datosPer').hide();
-      $('#datosPer2').show();
       $('#sigPag').show();
       $('#Guardar').hide();
+
+      $("#datosPer,#datosPer2,#direccion,#formacionAca").hide()
+      $('#datosPer2').show();
     } else if (contador == 2) {
       $('#antPag').show();
-      $('#sigPag').hide();
-      $('#direccion').hide();
-      $('#formacionAca').show();
-      $('#Guardar').show();
+      $('#sigPag').show();
+      $('#Guardar').hide();
+
+
+      $("#datosPer,#datosPer2,#direccion,#formacionAca").hide()
+      $('#direccion').show();
     } else if (contador == 3) {
       $('#antPag').show();
       $('#sigPag').hide();
-      $('#direccion').hide();
-      $('#formacionAca').show();
       $('#Guardar').show();
+
+      $("#datosPer,#datosPer2,#direccion,#formacionAca").hide()
+      $('#formacionAca').show();
     } 
   }
 //reiniciar la vista del modal
