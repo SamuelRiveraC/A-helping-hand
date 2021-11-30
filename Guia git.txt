@@ -1,0 +1,24 @@
+Configuracion inicial
+	Instalar Git
+	// ir al proyecto
+	> cd c:/xampp/htdocs/prueba_
+	// si tienen el repositorio viejo cambienlo al nuevo
+	> git remote set-url origin https://github.com/samuelriverac/a-helping-hand
+	> git pull origin master
+
+Instrucciones Git Paso por paso
+	
+	// ir al proyecto
+	> cd c:/xampp/htdocs/prueba_
+
+	//siempre pull antes de  trabajar
+	> git pull origin master
+
+	//despues de tu trabajo pushea al repo
+	> git add .
+	> git commit -m "" 
+	> git push origin master
+
+	// magicamente sisca-pp.herokuapps.com ya tiene todo cambiado
+	// PD si al subir el commit les dice algo asi como pull or stash
+	// escriban "git stash" y ya
