@@ -6,7 +6,7 @@
 	    <div class="card py-5 px-5">
     		<h2 class="pb-5">Exportar base de datos</h2>
     		<form id="formExport">
-    		<a href="/Cbackup/export" target="_blank" id="export_btn" class="btn btn-primary">
+    		<a href="/CBackup/export" target="_blank" id="export_btn" class="btn btn-primary">
     			Exportar base de datos
     		</a>
     		</form>
@@ -20,7 +20,7 @@
 	    <div class="card py-5 px-5">
     		<h2 class="pb-5">Importar base de datos</h2>
 
-    		<form enctype="multipart/form-data" method="post" id="formImport" action="/Cbackup/import">
+    		<form enctype="multipart/form-data" method="post" id="formImport" action="/CBackup/import">
 
           <input id="filesql" type="file" name="mysqlfile" label="Importar base de datos">
     			<input id="import_btn" type="submit" class="btn btn-primary" value="Importar base de datos">
