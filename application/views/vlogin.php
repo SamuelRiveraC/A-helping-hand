@@ -150,9 +150,8 @@
   <!-- /.login-box -->
   </div>
   <!-- /.content-wrapper -->
- <footer class="login-footer">
-    <strong>Copyright &copy; 2019 SISCA.PP by MSS</a>.</strong>
-    All rights reserved.
+ <footer class="login-footer text-center">
+    <strong>Copyright &copy; <?php echo date("Y") ?> SISCA.PP by MSS</a>.</strong>  All rights reserved.
     </div>
   </footer>
 <!-- jQuery -->
