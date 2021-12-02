@@ -93,9 +93,9 @@ class Pagos extends CI_Controller {
                 #caja {
                   background-color: #4b545c;
                   position: absolute;
-                  top: -58;
+                  top: 0;
                   width: 80mm;
-                  height: 40.7mm;
+                  height: 40mm;
                   float:left;
                   border-radius: 0mm 45mm 0mm 0mm;
                   z-index: 10;
@@ -126,6 +126,7 @@ class Pagos extends CI_Controller {
         </head>
 
         <body>
+          <div id='franja'></div>
           <div id='caja'>
             <h1>SISCA.PP</h1>
           </div>
@@ -135,7 +136,6 @@ class Pagos extends CI_Controller {
              <h2>Factura #$res->cod_pago</h2>
              <small> Pago: #$res->num_pago </small>
             </div>
-            <div id='franja'></div>
           </div>
           
   

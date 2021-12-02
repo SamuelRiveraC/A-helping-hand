@@ -57,9 +57,9 @@ class Impresiones extends CI_controller {
             <meta charset='utf-8'>
             <title>Vista pdf</title>
             <style>
-            html {
-                margin: 0;
-                padding: 0;
+                html {
+                  margin: 0;
+                  padding: 0;
                 }
                 body {
                   color: #001028;
@@ -95,9 +95,9 @@ class Impresiones extends CI_controller {
                   #caja {
                     background-color: #4b545c;
                     position: absolute;
-                    top: -58;
+                    top: 0;
                     width: 80mm;
-                    height: 40.7mm;
+                    height: 40mm;
                     float:left;
                     border-radius: 0mm 45mm 0mm 0mm;
                     z-index: 10;
@@ -109,24 +109,23 @@ class Impresiones extends CI_controller {
                     width: 100%;
                     height: 40mm;
                     z-index: 0;
-
                   }
-                    .tablita{
-                        text-align:left;
-                        margin-left: 30;
-                        padding: 0;
-                        position: relative;
-                    }
+                  .tablita{
+                    text-align:left;
+                    margin-left: 30;
+                    padding: 0;
+                    position: relative;
+                  }
             </style>
           </head>
           <body>
+          <div id='franja'></div>
           <div id='caja'>
-          <h1>SISCA.PP</h1>
+            <h1>SISCA.PP</h1>
           </div>
+  
           <div id='title'>
-          <h3>Lista de asistencias</h3>
-          </div>
-          <div id='franja'>
+            <h3>Lista de asistencias</h3>
           </div>
 
           
