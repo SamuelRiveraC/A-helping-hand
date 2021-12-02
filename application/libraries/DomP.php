@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-require_once APPPATH.'/libraries/dompdf/autoload.inc.php';
+require_once FCPATH.'/vendor/dompdf/dompdf/src/Autoloader.php';
 
   use Dompdf\Dompdf;
 
