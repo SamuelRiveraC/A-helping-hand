@@ -26,6 +26,7 @@ $(function() {
     opens: 'left',
     singleDatePicker: true,
     showDropdowns: true,
+    maxDate: new Date(),
     locale: {
       format: 'DD/MM/YYYY',
     }

@@ -61,7 +61,7 @@
             </div>
           </div>
           <div class="form-group">
-             <label for="text" class="col-sm-4 control-label">Numero del pago</label>
+             <label for="text" class="col-sm-4 control-label">Numero del factura</label>
             <div class="col-sm-10">
               <input class="form-control" type="number" min="0" name="num_pago" id="num_pago">
             </div>

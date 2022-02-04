@@ -431,9 +431,9 @@ var contadorDetalle = 0;
           <td>${item.Tipo_pers}</td>
           <td>${item.Sexo}</td>
           <td>${item.fecha_ingreso}</td>
-          <td class="ver_registro" idr="${item.C_I}"><i class="fa fa-eye"></i></td>
-          <td class="edi_registro" idr="${item.C_I}"><i class="fa fa-cog"></i></td>
-          <td class="bor_registro" idr="${item.C_I}"><i class="fa fa-trash"></i></td>
+          <td class="ver_registro" idr="${item.C_I}"><i idr="${item.C_I}" class="fa fa-eye"></i></td>
+          <td class="edi_registro" idr="${item.C_I}"><i idr="${item.C_I}" class="fa fa-cog"></i></td>
+          <td class="bor_registro" idr="${item.C_I}"><i idr="${item.C_I}" class="fa fa-trash"></i></td>
 
         </tr>
         `;

@@ -73,7 +73,7 @@ class Mregistropersonal extends CI_Model
 	   }
 
 	   public function eliminarDatos($ci){ // elimina los datos de personal
-			 $this->db->where('C_I',$ci);
+			 $this->db->where('C_I', $ci);
 			 if ($this->db->delete('personal')) {
 				 return true;
 			 } else {

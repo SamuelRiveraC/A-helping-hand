@@ -119,7 +119,7 @@
           <td>${item.dias_perm}</td>
           <td>${item.fecha_inicio}</td>
           <td>${item.fecha_culm}</td>
-          <td class="edi_registro" idr="${item.Cod_perm}"> <i class="fa fa-cog"></i> </td>
+          <td class="edi_registro" idr="${item.Cod_perm}"> <i class="fa fa-cog" idr="${item.Cod_perm}"></i> </td>
         </tr>
         `;
       })

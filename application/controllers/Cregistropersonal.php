@@ -50,9 +50,20 @@ class Cregistropersonal extends CI_Controller
 			$hoy = date("Y-m-d");
 			$hoy = explode('-',$hoy);
 			$fn = explode('-',$this->input->post('Fecha_n'));
-			$edad = "";
-			$edad = $hoy[0] - $fn[0];
+			if ( $fn[0] === "") {
+				$edad = 23;
+			} else {
+				$edad = $hoy[0] - $fn[0];
+			}
+
+
+
 			if($edad > 23 && $edad < 68){ // Rango permitido de edad
+				$res = array(
+					'exito' => false,
+					'mensaje' => 'No se permite registrar personal que no este entre la edad de 23 y 68',
+				); 
+			} else {
 				$param = array( //Datos de Personal
 					'P_nombre' => $this->input->post('P_nombre'),
 					'S_nombre' => $this->input->post('S_nombre'),
@@ -150,16 +161,26 @@ class Cregistropersonal extends CI_Controller
 					'exito' => true,
 					'mensaje' => 'Exito al momento de registar al personal',
 				);
-			} else {
-				$res = array(
-					'exito' => false,
-					'mensaje' => 'No se permite registrar personal que no este entre la edad de 23 y 68',
-				); 
 			}
-			$this->output->set_content_type('application/json')
-			->set_output(json_encode($res));
+
+
+			$this->output->set_content_type('application/json')->set_output(json_encode($res));
 
 	 }
+	 
+
+
+
+
+
+
+
+
+
+
+
+
+
 	 
 	public function actualizarDatos(){ // Actualiza los datos de Personal
 
@@ -263,15 +284,14 @@ class Cregistropersonal extends CI_Controller
     }
 
     public function eliminarDatos(){ //Elimina los Datos de personal
-		$res = '';
+
 		$res = $this->Mregistropersonal->eliminarDatos($this->input->post('idr'));
-		if ($res == 1) {
-			$res = array('exito' => true,'mensaje' => 'Exito al borrar');
+		if ($res) {
+			$res = array('exito' => true,'mensaje' => 'Exito al borrar '.$this->input->post('idr'));
 		} else {
 			$res = array('exito' => false,'mensaje' => 'Ocurrio un error al borrar');
 		}
-		$this->output->set_content_type('application/json')
-		->set_output(json_encode($res));
+		$this->output->set_content_type('application/json')->set_output(json_encode($res));
 
 	}
 }

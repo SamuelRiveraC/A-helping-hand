@@ -105,7 +105,7 @@
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Fecha de Nacimiento</label>
                                 <div class="col-12">
-                                    <input type="date" class="form-control" name="Fecha_n" id="Fecha_n" required>
+                                    <input type="date" class="form-control" name="Fecha_n" id="Fecha_n">
                                 </div>
                             </div>
                         </div>
@@ -291,25 +291,25 @@
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Nombre Instituto</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" name="Nombre_inst" required id="Nombre_inst" placeholder="Instituto">
+                                    <input type="text" class="form-control" name="Nombre_inst" id="Nombre_inst" placeholder="Instituto">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Titulo</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" name="Titulo" required id="Titulo" placeholder="Titulo">
+                                    <input type="text" class="form-control" name="Titulo" id="Titulo" placeholder="Titulo">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Año de formacion</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" name="Año_for_a" required id="Año_for_a" placeholder="Año de formacion">
+                                    <input type="text" class="form-control" name="Año_for_a" id="Año_for_a" placeholder="Año de formacion">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Nivel curso</label>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" name="Nivel_curso" required id="Nivel_curso" placeholder="Nivel curso">
+                                    <input type="text" class="form-control" name="Nivel_curso" id="Nivel_curso" placeholder="Nivel curso">
                                 </div>
                             </div>
                             <div class="form-group">
