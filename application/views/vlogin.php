@@ -22,10 +22,16 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 </head>
+<style>
+  .login-page {
+    background-image: url("<?php echo base_url();?>assets/bg.jpeg");
+    background-size: cover;
+  }
+</style>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href=""><b>SISCA.</b>PP</a>
+    <img src="<?php echo base_url();?>/assets/siscapp.png" alt="logo" width="256px">
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -150,9 +156,10 @@
   <!-- /.login-box -->
   </div>
   <!-- /.content-wrapper -->
- <footer class="login-footer text-center">
-    <strong>Copyright &copy; <?php echo date("Y") ?> SISCA.PP by MSS</a>.</strong>  All rights reserved.
-    </div>
+ <footer class="login-footer text-center text-light">
+    <strong>Copyright &copy; <?php echo date("Y") ?> SISCA.PP by MSSN</a>.</strong>  All rights reserved.
+    <br>  <img src="<?php echo base_url();?>/assets/ueppp.png" alt="logo" width="128px">
+  </div>
   </footer>
 <!-- jQuery -->
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.min.js"></script>

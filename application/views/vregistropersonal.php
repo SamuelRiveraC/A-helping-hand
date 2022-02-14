@@ -105,7 +105,7 @@
                             <div class="form-group">
                                 <label for="text" class="col-sm-4 control-label">Fecha de Nacimiento</label>
                                 <div class="col-12">
-                                    <input type="date" class="form-control" name="Fecha_n" id="Fecha_n">
+                                    <input type="date" min="1900-01-01" max="<?php echo date("Y-m-d") ?>" class="form-control" name="Fecha_n" id="Fecha_n">
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?php echo base_url() ?>chome" class="brand-link">
-      <img src="<?php echo base_url();?>assets/dist/img/logo.jpg" alt="SISCA Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="<?php echo base_url();?>assets/siscapp.png" alt="SISCA Logo" class="brand-image img-circle elevation-3">
       <span class="brand-text font-weight-light">SISCA.PP</span>
     </a>
 
@@ -21,34 +21,6 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
   
-
-          <?php if ($this->session->userdata("Login")['session_Tipo'] == "Administrador"): ?>
-          <li class="nav-item has-treeview <?= $datos['menu'] == 'Configuracion' ? 'menu-open' : ''?>">
-            <a href="#" class="nav-link <?= $datos['submenu'] == 'Cusuario' ? 'active' : ''?>">
-              <i class="fa fa-cog"></i>
-              <p>
-                Configuracion
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?= base_url() ?>cusuarios" class="nav-link">
-                  <i class="fa fa-users"></i>
-                  <p>Usuarios</p>
-                </a>
-              </li>
-
-              <li class="nav-item">
-                <a href="<?= base_url() ?>CBackup" class="nav-link">
-                  <i class="fa fa-database"></i>
-                  <p>Base de datos</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <?php endif; ?>
-
 
           <li class="nav-item has-treeview <?= $datos['menu'] == 'Personal' ? 'menu-open' : ''?>">
             <a href="#" class="nav-link <?= $datos['submenu'] == 'Cregistropersonal' ? 'active' : ''?>">
@@ -70,7 +42,7 @@
               <li class="nav-item">
                 <a href="<?= base_url() ?>Cjustificacion" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Justificacion</p>
+                  <p>Justificativo</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -145,22 +117,34 @@
               </li>
             </ul>
           </li>
-          <!-- <li class="nav-item">
-            <a href="<?= base_url() ?>Creportes" class="nav-link">
-              <i class="fa fa-print"></i>
+          
+
+          <?php if ($this->session->userdata("Login")['session_Tipo'] == "Administrador"): ?>
+          <li class="nav-item has-treeview <?= $datos['menu'] == 'Configuracion' ? 'menu-open' : ''?>">
+            <a href="#" class="nav-link <?= $datos['submenu'] == 'Cusuario' ? 'active' : ''?>">
+              <i class="fa fa-cog"></i>
               <p>
-                Reportes
+                Configuracion
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url() ?>cusuarios" class="nav-link">
+                  <i class="fa fa-users"></i>
+                  <p>Usuarios</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="<?= base_url() ?>CBackup" class="nav-link">
+                  <i class="fa fa-database"></i>
+                  <p>Base de datos</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Acerca de
-              </p>
-            </a>
-          </li> -->
+          <?php endif; ?>
         </ul>
       </nav>
 

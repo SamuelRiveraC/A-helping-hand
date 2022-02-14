@@ -67,7 +67,7 @@
           <div class="form-group">
              <label for="text" class="col-sm-4 control-label">Tiempo de cuando tuvo que haber hecho el pago</label>
             <div class="col-sm-10">
-              <input class="form-control"  type="date" name="Tiempo_retraso" id="Tiempo_retraso">
+              <input class="form-control"  type="date" min="2000-01-01" max="<?php echo date("Y-m-d") ?>" name="Tiempo_retraso" id="Tiempo_retraso">
             </div>
           </div>
 

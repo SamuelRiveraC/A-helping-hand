@@ -14,6 +14,7 @@ class Masistencia extends CI_Model
 	  NOT IN(SELECT (SELECT t8.C_I FROM personal_solicita_permiso t8 WHERE t8.Cod_perm = t9.Cod_perm) as C_permiso
     FROM permiso t9 WHERE '$hoy' BETWEEN t9.fecha_inicio AND t9.fecha_culm )
      AND t1.C_I = t2.C_I"; 
+
     $res = $this->db->query($sql);
     if ($res) {
       return $res->result();

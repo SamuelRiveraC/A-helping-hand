@@ -60,7 +60,7 @@
           <div class="form-group">
              <label for="text" class="col-sm-4 control-label">Fecha</label>
             <div class="col-sm-10">
-              <input type="date" class="form-control" name="Fecha_perm" id="Fecha_perm" required placeholder="Contraseña">
+              <input type="date" min="2000-01-01" max="<?php echo date("Y-m-d") ?>" class="form-control" name="Fecha_perm" id="Fecha_perm" required placeholder="Contraseña">
             </div>
           </div>
 
@@ -80,23 +80,23 @@
              </div>
 
              <div class="form-group">
-               <label for="text" class="col-sm-4 control-label">Dias permiso</label>
+               <label for="text" class="col-sm-4 control-label">Dias de permiso</label>
                <div class="col-sm-10">
-                 <input type="number"  class="form-control" name="dias_perm" id="dias_perm"  required>
+                 <input type="number"  class="form-control" name="dias_perm" id="dias_perm" min="1" max="21" required>
                </div>
              </div>
 
              <div class="form-group">
                <label for="text" class="col-sm-4 control-label">Fecha inicio</label>
                <div class="col-sm-10">
-                 <input type="date"  class="form-control" name="fecha_inicio" id="fecha_inicio"  required>
+                 <input type="date"  min="2000-01-01" max="<?php echo date("Y-m-d") ?>" class="form-control" name="fecha_inicio" id="fecha_inicio"  required>
                </div>
              </div>
 
              <div class="form-group">
                <label for="text" class="col-sm-4 control-label">Fecha culminacion</label>
                <div class="col-sm-10">
-                 <input type="date"  class="form-control" name="fecha_culm" id="fecha_culm"  required>
+                 <input type="date"  min="2000-01-01" max="<?php echo date("Y-m-d") ?>" class="form-control" name="fecha_culm" id="fecha_culm"  required>
                </div>
              </div>
 
