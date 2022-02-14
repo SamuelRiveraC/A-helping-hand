@@ -1,8 +1,14 @@
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Justificaciones</h3>
-
+      <div class="row">
+        <div class="col-6">
+          <h3 class="card-title">Justificativo</h3>
+        </div>
+        <div class="col-6 text-right">
+          <a class="btn btn-info btn-sm" href="/Cjustificacion/reporte" target="_blank"> Imprimir Reporte </a>
+        </div>
+      </div>
     </div>
 
     <!-- /.card-header -->

@@ -80,5 +80,88 @@ class Cpermisos extends CI_Controller
   }
 
 
+
+
+  
+  public function reporte() {
+    $res = $this->Mpermisos->listar(null);
+    $table="";
+    
+    foreach ($res as $r) {
+      $table .= "<tr>";
+      $table .= " <td>$r->C_I</td>";
+      $table .= " <td>$r->Tipo_perm</td>";
+      $table .= " <td>$r->Observ_perm</td>";
+      $table .= " <td>$r->fecha_inicio</td>";
+      $table .= " <td>$r->fecha_culm</td>";
+      $table .= " <td>".($r->dias_perm == "1" ? "1 dia" : $r->dias_perm." dias")." </td>";
+      $table .= " <td>$r->Fecha_perm</td>";
+      $table .= "</tr>";
+    }
+
+    $html = "
+    <!DOCTYPE html>
+    <html lang='en' dir='ltr'>
+      <head>
+        <meta charset='utf-8'>
+        <title>Vista pdf</title>
+        <style>
+              body {
+                color: #001028;
+                background: #FFFFFF;
+                margin: 20mm 0mm 0mm 0mm;
+                text-align: justify;
+                font-family: Arial, sans-serif;
+                font-family: Arial;
+              }
+              table {
+                width: 100%; border:1px solid #ddd; border-collapse: collapse;
+              }
+              th, td {
+                text-align: left;padding: 8px; border:1px solid #ddd;
+              }
+              tr:nth-child(even) {
+                background-color: #f2f2f2;
+              } 
+
+        </style>
+      </head>
+
+      <body>
+        <div style='width:100%; text-align:center;'>
+          <p> REPUBLICA BOLIVARIANA DE VENEZUELA </p>
+          <p> MINISTERIO DEL PODER POPULAR PARA LA EDUCACION </p>
+          <p> INSCRITO EN EL M.P.P.E COD. DEA PD02350320 </p>
+          <p> UNIDAD EDUCATIVA PRIVADA FRANCESCO FORGIORE PADRE PIO </p>
+          <p> EL TIGRE - ESTADO ANZOATEGUI – VENEZUELA </p>
+        </div>
+
+        <div> 
+          <table>
+            <tr>
+              <th>Cedula</th>
+              <th>Tipo de permiso</th>
+              <th>Observaciones</th>
+              <th>Fecha de inicio</th>
+              <th>Fecha de culminacion</th>
+              <th>Duracion en dias</th>
+              <th>Fecha de emision</th>
+            </tr>
+
+            $table
+
+          </table>
+        </div> 
+      </body>
+    </html>
+    ";
+
+    $this->load->library('DomP');
+    $this->domp->loadHtml($html);
+    $this->domp->setPaper('A4', 'portrait');
+    $this->domp->render();
+    $this->domp->stream('documentos',array("Attachment" => false));
+    return $html;
+  }
 }
- ?>
+?>

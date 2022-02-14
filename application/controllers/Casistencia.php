@@ -126,6 +126,11 @@ class Casistencia extends CI_Controller
           'tipo_inasist' => $this->input->post('tipo_inasistencia'),
         );
         $res = $this->Masistencia->ins_datos_inasistencia($datos);
+
+        
+        // IF 3 more INASISTENCIAS 
+
+
         }
       }
     }
