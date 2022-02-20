@@ -23,8 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://sisca.localhost/';
-#$config['base_url'] = 'https://sisca-pp.herokuapp.com/';
+$config['base_url'] = 'http://siscapp.localhost/';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -380,7 +379,7 @@ $config['encryption_key'] = $_ENV['ENCRYPTIONKEY'] ?: 'SISCA.PP';
 */
 $config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = 3600; // CAMBIAR A 0 SI SE QUIERE QUE LA SESSION CERRAR COMO BANCO
 $config['sess_save_path'] = 'ci_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;

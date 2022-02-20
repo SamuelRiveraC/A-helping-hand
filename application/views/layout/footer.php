@@ -4,7 +4,9 @@
   <footer class="main-footer" style="line-height:64px">
      <span> <img src="<?php echo base_url();?>/assets/ueppp.png" alt="logo" width="64px">
      </span>
-     <strong>Copyright &copy; <?php echo date("Y") ?> SISCA.PP by <a href="<?php echo base_url() ?>nosotros"> MSSN </a>.</strong> All rights reserved. <a href="<?php echo base_url() ?>nosotros/manualDeUsuario"> Manual del usuario </a>
+     <strong>Copyright &copy; <?php echo date("Y") ?> SISCA.PP by <a href="<?php echo base_url() ?>nosotros"> MSSN </a>.</strong> All rights reserved. 
+     <a href="<?php echo base_url() ?>nosotros/manualDeUsuario"> Manual del usuario </a> &
+     <a href="<?php echo base_url() ?>nosotros/manualDeProgramador"> Manual del Programador </a>
   </footer>
 </div>
 <!-- ./wrapper -->
