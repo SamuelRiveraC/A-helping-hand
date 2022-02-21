@@ -76,10 +76,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => $_ENV["DB_SERV"] ?: 'localhost',
-	'username' => $_ENV["DB_USER"] ?: 'root',
-	'password' => $_ENV["DB_PASS"] ?: '',
-	'database' => $_ENV["DB_NAME"] ?: 'sistema',
+	'hostname' => 'localhost',#$_ENV["DB_SERV"] ?: 'localhost',
+	'username' => 'root',#$_ENV["DB_USER"] ?: 'root',
+	'password' => '',#$_ENV["DB_PASS"] ?: '',
+	'database' => 'sistema', #$_ENV["DB_NAME"] ?: 'sistema',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
