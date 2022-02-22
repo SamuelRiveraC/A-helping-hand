@@ -102,7 +102,8 @@
              <div class="form-group">
                <label for="text" class="col-sm-4 control-label">Fecha culminacion</label>
                <div class="col-sm-10">
-                 <input type="date"  min="2000-01-01" max="<?php echo date("Y-m-d") ?>" class="form-control" name="fecha_culm" id="fecha_culm"  required>
+                 <input type="date"  min="<?php echo date("Y-m-d")  ?>"
+                 max="<?php echo date("Y-m-d", strtotime("+1 month"))?>" class="form-control" name="fecha_culm" id="fecha_culm"  required>
                </div>
              </div>
 

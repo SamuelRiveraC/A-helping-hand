@@ -21,7 +21,7 @@
       <table id="amonestacion" class="table table-bordered table-hover">
         <thead>
         <tr>
-          <th>Codigo amonestacion</th>
+          <th>Numero de amonestacion</th>
           <th>Fecha</th>
           <th>Emisor</th>
           <th>Motivo</th>
@@ -108,7 +108,7 @@ $(function () {
       e.preventDefault()
       $('#Act').attr('disabled',true);
       $.ajax({
-        url:`${base_url}pagos/insert`,
+        url:`${base_url}Camonestacion/ins_Amonestacion`,
         data : $('#form1').serialize(),
         type: 'POST',
         success:function(data){
