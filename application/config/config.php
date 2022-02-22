@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://siscapp.localhost/';
+$config['base_url'] = 'https://sisca-pp.herokuapp.com/';
 /*
 |--------------------------------------------------------------------------
 | Index File
