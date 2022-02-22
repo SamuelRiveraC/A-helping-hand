@@ -45,7 +45,7 @@
       <div class="modal-body">
         <form id='form1'>
           <div class="form-group">
-             <label for="text" class="col-sm-4 control-label">Personal moroso</label>
+             <label for="text" class="col-sm-4 control-label">Personal Pago</label>
             <div class="col-sm-10">
               <select class="form-control" name="C_I">
                 <?php foreach($personal as $persona) {
@@ -76,7 +76,7 @@
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary" id='Act'>Actualizar</button>
+        <button type="submit" class="btn btn-primary" id='Act'>Guardar</button>
       </div>
 
     </form>
@@ -92,14 +92,14 @@
 <script type="text/javascript">
 $(function () {
   $('#btnNew').click(function() {
-    $("#form1 input").val(""); // Nueva Amonestacion 
+    $("#form1 input").val(""); // Nueva pago 
       comboselect(null, base_url+'Cpermisos/usuarios_select','Seleccione Personal', 'item.C_I','item.P_nombre','form1','C_I')
     $('#modal-overlay').modal('show');
   })
 
   jalar_data();
 
-  $('#form1').submit(function(e) { //Enviar datos Nueva Amonestacion
+  $('#form1').submit(function(e) { //Enviar datos Nueva pago
       e.preventDefault()
       $('#Act').attr('disabled',true);
       $.ajax({
@@ -121,7 +121,7 @@ $(function () {
 })
 
 
-function jalar_data() { // Trae los datos de amonestacion
+function jalar_data() { // Trae los datos de pago
   var content_asistentes = ''
   $('#tabla').DataTable().destroy();
   $.getJSON(base_url+'pagos/listar',function(data) {

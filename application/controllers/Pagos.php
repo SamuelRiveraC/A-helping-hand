@@ -67,7 +67,7 @@ class Pagos extends CI_Controller {
       <html lang='en' dir='ltr'>
         <head>
           <meta charset='utf-8'>
-          <title>Vista pdf</title>
+          <title>Control de Pago</title>
           <style>
                 html {
                   margin: 0;

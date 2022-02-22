@@ -6,7 +6,13 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Personal</h3>
+      <div class="row">
+        <div class="col-6">
+          <h3 class="card-title">Personal</h3>
+        </div>
+        <div class="col-6 text-right">
+          <a class="btn btn-info btn-sm" href="/cregistropersonal/reporte" target="_blank"> Imprimir Reporte </a>
+        </div>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -47,13 +53,6 @@
                         <input type="hidden" name="idr" id="idr" value="">
                         <input type="hidden" name="accion" id='accion' value="">
                         <input type="hidden" name="cod_dir" id="cod_dir" value="">
-
-
-
-
-
-
-
 
                         <div id="datosPer">
                             <div class="form-group">

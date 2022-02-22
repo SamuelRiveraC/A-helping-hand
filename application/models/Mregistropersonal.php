@@ -12,18 +12,22 @@ class Mregistropersonal extends CI_Model
 	{
 		$and = "";
 		if ($id != null) {
-			$and = "AND t1.C_I = '$id'";
+			$and = "WHERE t1.C_I = '$id'";
 		}
 		// Trae las tablas relacionadas con personal 
-		$sql = "SELECT t1.*,t2.nombre_inst,t4.Tipo_correo,t5.*,t6.*,t7.*,t8.*,t9.* FROM personal t1 
-		INNER JOIN instituto t2 
-		INNER JOIN correo t4 
-		INNER JOIN direccion t5 
-		INNER JOIN formacion_academica t6 
-		INNER JOIN horario t7
-		INNER JOIN experiencia_laboral t8
-		INNER JOIN hijos_personal t9 
-		WHERE t1.C_I = t5.C_I AND t5.Cod_dir = t2.Cod_dir AND t4.C_I = t1.C_I AND t1.C_I = t6.C_I AND t1.C_I = t7.C_I AND t1.C_I = t8.C_I AND t1.C_I = t9.C_I $and";
+		$sql = "
+		SELECT t1.*,t2.nombre_inst,t4.Tipo_correo,t5.*,t6.*,t7.*,t8.*,t9.*
+		FROM personal t1 
+		LEFT JOIN direccion t5 ON t1.C_I = t5.C_I
+		LEFT JOIN instituto t2 ON t5.Cod_dir = t2.Cod_dir
+		LEFT JOIN correo t4  ON t4.C_I = t1.C_I
+		LEFT JOIN formacion_academica t6  ON t1.C_I = t6.C_I
+		LEFT JOIN horario t7 ON t1.C_I = t7.C_I
+		LEFT JOIN experiencia_laboral t8 ON t1.C_I = t8.C_I
+		LEFT JOIN hijos_personal t9  ON t1.C_I = t9.C_I
+		$and
+		ORDER BY Tipo_pers ASC";
+
 		$res = $this->db->query($sql);
 		if ($res) {
 			return $res->result();

@@ -294,6 +294,104 @@ class Cregistropersonal extends CI_Controller
 		$this->output->set_content_type('application/json')->set_output(json_encode($res));
 
 	}
+
+	
+
+
+
+
+
+
+
+
+
+
+	public function reporte() {
+
+	$res = $this->Mregistropersonal->listar(null);
+
+    $table = "";
+
+    foreach ($res as $r) {
+      $table .= "<tr>";
+      $table .= " <td>$r->C_I</td>";
+      $table .= " <td>$r->P_nombre $r->S_nombre</td>";
+      $table .= " <td>$r->P_apellido $r->S_apellido</td>";
+      $table .= " <td>$r->Sexo</td>";
+      $table .= " <td>$r->Estado_civil</td>";
+      $table .= " <td>$r->Edad</td>";
+      $table .= " <td>$r->Fecha_n</td>";
+      $table .= " <td>$r->Tipo_pers</td>";
+      $table .= " <td>$r->fecha_ingreso</td>";
+      $table .= "</tr>";
+    }
+    
+    $html = "
+      <!DOCTYPE html>
+      <html lang='en' dir='ltr'>
+        <head>
+          <meta charset='utf-8'>
+          <title>Vista pdf</title>
+          <style>
+                body {
+                  color: #001028;
+                  background: #FFFFFF;
+                  margin: 20mm 0mm 0mm 0mm;
+                  text-align: justify;
+                  font-family: Arial, sans-serif;
+                  font-family: Arial;
+                }
+                table {
+                  width: 100%; border:1px solid #ddd; border-collapse: collapse;
+                }
+                th, td {
+                  text-align: left;padding: 8px; border:1px solid #ddd;
+                }
+                tr:nth-child(even) {
+                  background-color: #f2f2f2;
+                } 
+
+          </style>
+        </head>
+
+        <body>
+          <div style='width:100%; text-align:center;'>
+            <p> REPUBLICA BOLIVARIANA DE VENEZUELA </p>
+            <p> MINISTERIO DEL PODER POPULAR PARA LA EDUCACION </p>
+            <p> INSCRITO EN EL M.P.P.E COD. DEA PD02350320 </p>
+            <p> UNIDAD EDUCATIVA PRIVADA FRANCESCO FORGIORE PADRE PIO </p>
+            <p> EL TIGRE - ESTADO ANZOATEGUI – VENEZUELA </p>
+          </div>
+
+          <div> 
+            <table>
+              <tr>
+                <th>Cedula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Sexo</th>
+                <th>Estado civil</th>
+                <th>Edad</th>
+                <th>Fecha de nacimiento</th>
+                <th>Tipo de personal</th>
+                <th>Fecha de Ingreso</th>
+              </tr>
+
+              $table
+
+            </table>
+          </div> 
+        </body>
+      </html>
+    ";
+
+    $this->load->library('DomP');
+    $this->domp->loadHtml($html);
+    $this->domp->setPaper('A4', 'portrait');
+    $this->domp->render();
+    $this->domp->stream('documentos',array("Attachment" => false));
+    return $html;
+  }
 }
 
 

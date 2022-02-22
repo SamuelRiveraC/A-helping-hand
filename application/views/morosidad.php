@@ -5,8 +5,14 @@
   </div>
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Moroso</h3>
-
+      <div class="row">
+        <div class="col-6">
+          <h3 class="card-title">Amonestacion</h3>
+        </div>
+        <div class="col-6 text-right">
+          <a class="btn btn-info btn-sm" href="/Morosidad/reporte" target="_blank"> Imprimir Reporte </a>
+        </div>
+      </div>
     </div>
 
     <!-- /.card-header -->
@@ -74,7 +80,7 @@
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary" id='Act'>Actualizar</button>
+        <button type="submit" class="btn btn-primary" id='Act'>Guardar</button>
       </div>
 
     </form>

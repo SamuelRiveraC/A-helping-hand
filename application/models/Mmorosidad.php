@@ -16,6 +16,16 @@
    } else {
      return false;
    }
+}
+ public function reporte() {
+   $sql = "SELECT * FROM moroso m INNER JOIN personal p ON p.C_I = m.cod_moroso";
+
+   $res = $this->db->query($sql);
+   if ($res) {
+     return $res->result();
+   } else {
+     return false;
+   }
  }
 
 } ?>

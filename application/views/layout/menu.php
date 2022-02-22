@@ -69,7 +69,7 @@
             <a href="#" class="nav-link <?= $datos['menu'] == 'Pagos' ? 'menu-open' : ''?>">
              <i class="fas fa-file-invoice"></i>
              <p>
-                Pagos
+                Pago y Morosidad
                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -78,13 +78,13 @@
               <li class="nav-item">
                 <a href="<?= base_url() ?>Morosidad" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Morosidad</p>
+                  <p>Registro de Morosidad</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?= base_url() ?>Pagos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Pagos</p>
+                  <p>Registro de Pagos</p>
                 </a>
               </li>
             </ul>
@@ -132,7 +132,7 @@
               <li class="nav-item">
                 <a href="<?= base_url() ?>cusuarios" class="nav-link">
                   <i class="fa fa-users"></i>
-                  <p>Usuarios</p>
+                  <p>Registro de Usuarios</p>
                 </a>
               </li>
 
