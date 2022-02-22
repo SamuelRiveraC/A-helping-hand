@@ -296,13 +296,13 @@ INSERT INTO `justificacion` (`Cod_just`, `Num_just`, `Motivo_just`, `Fecha_just`
 --
 -- Estructura de tabla para la tabla `moroso`
 --
-
 CREATE TABLE `moroso` (
   `tiempo_retraso` varchar(90) NOT NULL,
   `monto_mora` varchar(90) NOT NULL,
   `nro_factura_mora` varchar(90) NOT NULL,
   `cod_moroso` int(90) NOT NULL,
-  `cod_representante` int(90) NOT NULL
+  `cod_representante` int(90) NOT NULL,
+  `cod_personal` int(90) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -316,7 +316,8 @@ CREATE TABLE `pago` (
   `cod_pago` int(11) NOT NULL,
   `control_pago` varchar(90) NOT NULL,
   `cod_representante` int(90) NOT NULL,
-  `abono` varchar(25) DEFAULT NULL
+  `abono` varchar(25) DEFAULT NULL,
+  `cod_personal` int(90) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
